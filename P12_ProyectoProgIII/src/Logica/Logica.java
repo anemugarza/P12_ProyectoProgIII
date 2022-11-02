@@ -1,6 +1,7 @@
 package Logica;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import Clases.Usuario;
@@ -49,6 +50,11 @@ public class Logica implements Serializable{
 			this.usuario=Logica.usuariosRegistrados.get(email);
 			return Logica.usuariosRegistrados.get(email);
 		}else return null;
+	}
+	
+	public void crearUsuario(String nombre, String email, String contrasenya) {
+		Usuario u1= new Usuario(nombre, email,contrasenya ); //falta el codigo
+		Logica.usuariosRegistrados.put(u1.getEmail(),u1);
 	}
 
 }

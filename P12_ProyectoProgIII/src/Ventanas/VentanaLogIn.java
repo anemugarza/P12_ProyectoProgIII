@@ -142,5 +142,31 @@ public class VentanaLogIn extends JFrame{
 					txtcontrasenya.setText("");
 				}
 			});
+			
+			guardarDatos.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(logica.existeUsuario(txtemail.getText())) {
+						JOptionPane.showMessageDialog(null, "ERROR: Ya existe una cuenta con ese email. Utilice otro");
+						txtemailRegistro.setText("");
+					}
+					if (!txtemailRegistro.getText().equals("")  && !txtcontrasenyaRegistro.getText().equals("") ){
+						logica.crearUsuario(txtemailRegistro.getText(), txtcontrasenyaRegistro.getText()); //falta el codigo
+						//Después de que se guarden todos los datos, vuelve a la ventana del Log In para poder entrar con la cuenta creada
+						txtemailRegistro.setText("");
+						txtcontrasenyaRegistro.setText("");
+						getContentPane().removeAll();
+						setSize(400,200);
+						setTitle("DEUSTOSHOP LOG IN");
+						getContentPane().setLayout(new GridLayout(2,1));
+						panelCentral.setLayout(new GridLayout(2,2));
+						getContentPane().add(panelCentral);
+						getContentPane().add(botonera);
+						//logica.guardarUsuarios("Usuarios.dat");
+						setVisible(true);
+					}else JOptionPane.showMessageDialog(null, "ERROR: Rellene todos los campos");
+				}
+			});
 		}
 }
