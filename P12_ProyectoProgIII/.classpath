@@ -2,5 +2,13 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/Users/anemugarza/Downloads/Programas/UNI/Libreria externas Java/vlcj-4.7.1/vlcj-4.7.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/anemugarza/Downloads/Programas/UNI/Libreria externas Java/vlcj-4.7.1/jna-5.2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/anemugarza/Downloads/Programas/UNI/Libreria externas Java/vlcj-4.7.1/jna-platform-5.2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/anemugarza/Downloads/Programas/UNI/Libreria externas Java/vlcj-4.7.1/vlcj-4.7.1-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/anemugarza/Downloads/Programas/UNI/Libreria externas Java/vlcj-4.7.1/vlcj-4.7.1-test-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/anemugarza/Downloads/Programas/UNI/Libreria externas Java/vlcj-4.7.1/vlcj-4.7.1-tests.jar"/>
+	<classpathentry kind="lib" path="/Users/anemugarza/Downloads/Programas/UNI/Libreria externas Java/vlcj-4.7.1/vlcj-4.7.1.jar"/>
+	<classpathentry kind="lib" path="/Users/anemugarza/Downloads/Programas/UNI/Libreria externas Java/vlcj-4.7.1/vlcj-natives-4.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
