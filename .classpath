@@ -6,6 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="P12_ProyectoProgIII/src"/>
+	<classpathentry kind="src" path="media"/>
 	<classpathentry kind="lib" path="P12_ProyectoProgIII/lib/video-output-E123C096-1D4C-44AF-8D28-BD7F67B7509B.MOV"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
