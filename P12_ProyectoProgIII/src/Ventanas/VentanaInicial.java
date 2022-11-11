@@ -3,6 +3,9 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import uk.co.caprica.vlcj.player.base.MediaPlayer;
+import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
+
 
 public class VentanaInicial extends JFrame{
 
