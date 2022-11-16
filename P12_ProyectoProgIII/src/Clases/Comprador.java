@@ -5,19 +5,19 @@ import java.util.List;
 
 public class Comprador extends Usuario {
 	double monedero;
-	public Cesta cesta;
-	public List<Articulo> wl = new ArrayList<>();
+	public List<Producto> cesta = new ArrayList<>();
+	public List<Producto> wl = new ArrayList<>();
 	
-	public Comprador(int codigoUsuario, String nomUsuario, String email, String contrasenya, double monedero,
-			Cesta cesta, List<Articulo> wl) {
-		super(codigoUsuario, nomUsuario, email, contrasenya);
+	public Comprador(int id, String nomUsuario, String email, String contrasenya, double monedero,
+			List<Producto> cesta, List<Producto> wl) {
+		super(id, nomUsuario, email, contrasenya);
 		this.monedero = monedero;
 		this.cesta = cesta;
 		this.wl = wl;
 	}
 
-	public Comprador(int codigoUsuario, String nomUsuario, String email, String contrasenya) {
-		super(codigoUsuario, nomUsuario, email, contrasenya);
+	public Comprador(int id, String nomUsuario, String email, String contrasenya) {
+		super(id, nomUsuario, email, contrasenya);
 	}
 
 	public double getMonedero() {
@@ -28,19 +28,19 @@ public class Comprador extends Usuario {
 		this.monedero = monedero;
 	}
 
-	public Cesta getCesta() {
+	public List<Producto> getCesta() {
 		return cesta;
 	}
 
-	public void setCesta(Cesta cesta) {
+	public void setCesta(List<Producto> cesta) {
 		this.cesta = cesta;
 	}
 
-	public List<Articulo> getWl() {
+	public List<Producto> getWl() {
 		return wl;
 	}
 
-	public void setWl(List<Articulo> wl) {
+	public void setWl(List<Producto> wl) {
 		this.wl = wl;
 	}
 
@@ -48,6 +48,7 @@ public class Comprador extends Usuario {
 	public String toString() {
 		return "Comprador [monedero=" + monedero + ", cesta=" + cesta + ", wl=" + wl + "]";
 	}
+	
 	
 	
 }

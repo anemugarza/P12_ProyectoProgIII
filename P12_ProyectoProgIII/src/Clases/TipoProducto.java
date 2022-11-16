@@ -1,5 +1,5 @@
 package Clases;
 
-public enum TipoArticulo {
+public enum TipoProducto {
 	ELECTRONICA, ROPA, MATERIAL_ESCOLAR;
 }

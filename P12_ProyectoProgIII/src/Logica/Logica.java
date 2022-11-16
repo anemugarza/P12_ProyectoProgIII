@@ -3,12 +3,17 @@ package Logica;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import Clases.Comprador;
+import Clases.Producto;
 import Clases.Usuario;
 
 public class Logica implements Serializable{
 	private Usuario usuario;
-	public static HashMap<String,Usuario> usuariosRegistrados = new HashMap<>();
+	public List<Producto> productosHistoricos = new ArrayList<>();
+
 	
 	public Logica(Usuario usuario) {
 		super();
@@ -27,10 +32,6 @@ public class Logica implements Serializable{
 		this.usuario = usuario;
 	}
 
-	public static HashMap<String, Usuario> getUsuariosRegistrados() {
-		return usuariosRegistrados;
-	}
-
 	public static void setUsuariosRegistrados(HashMap<String, Usuario> usuariosRegistrados) {
 		usuariosRegistrados = usuariosRegistrados;
 	}
@@ -41,20 +42,20 @@ public class Logica implements Serializable{
 	}
 	
 	public boolean existeUsuario(String email) {
-		if(Logica.usuariosRegistrados.containsKey(email)) return true;
+		if(BaseDeDatos.getUsuarios().containsKey(email)) return true;
 		else return false;
 	}
 	
 	public Usuario usuarioCorrecto(String email, String contrasenya) {
-		if(Logica.usuariosRegistrados.get(email).getContrasenya().equals(contrasenya)){
-			this.usuario=Logica.usuariosRegistrados.get(email);
-			return Logica.usuariosRegistrados.get(email);
+		if(BaseDeDatos.getUsuarios().get(email).getContrasenya().equals(contrasenya)){
+			this.usuario=BaseDeDatos.getUsuarios().get(email);
+			return BaseDeDatos.getUsuarios().get(email);
 		}else return null;
 	}
 	
 	public void crearUsuario(String nombre, String email, String contrasenya) {
-		Usuario u1= new Usuario(nombre, email,contrasenya ); //falta el codigo
-		Logica.usuariosRegistrados.put(u1.getEmail(),u1);
+		Comprador c1= new Comprador(0, nombre, email,contrasenya ); 
+		BaseDeDatos.getUsuarios().put(c1.getEmail(),c1);
 	}
 
 }

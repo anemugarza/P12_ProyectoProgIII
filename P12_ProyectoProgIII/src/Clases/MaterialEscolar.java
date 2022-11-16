@@ -1,5 +1,6 @@
 package Clases;
 
-public class MaterialEscolar extends Articulo{
-
+public class MaterialEscolar extends Producto {
+	
+	
 }

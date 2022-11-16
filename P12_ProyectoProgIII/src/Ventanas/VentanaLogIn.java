@@ -39,6 +39,8 @@ public class VentanaLogIn extends JFrame{
 		
 		//Componentes del registro, de momento ocultos
 		private JLabel infoCuenta;
+		private JLabel nombreRegistro;
+		private JTextField txtnombreRegistro;
 		private JLabel emailRegistro;
 		private JTextField txtemailRegistro;
 		private JLabel contrasenyaRegistro;
@@ -65,6 +67,8 @@ public class VentanaLogIn extends JFrame{
 			registrarse.setFont(new Font("Serif", Font.PLAIN, 20));
 			entrar.setFont(new Font("Serif", Font.PLAIN, 20));
 			infoCuenta=new JLabel("DATOS DE LA CUENTA");
+			nombreRegistro= new JLabel("Nombre: ");
+			txtnombreRegistro= new JTextField(25);
 			emailRegistro= new JLabel("Email: ");
 			txtemailRegistro= new JTextField(25);
 			contrasenyaRegistro= new JLabel("Contraseña: ");
@@ -83,6 +87,8 @@ public class VentanaLogIn extends JFrame{
 			botonera.add(entrar);
 			
 			//Dejamos añadidos los elementos a los paneles que visibilizaremos después
+			datosCuenta.add(nombreRegistro);
+			datosCuenta.add(txtnombreRegistro);
 			datosCuenta.add(emailRegistro);
 			datosCuenta.add(txtemailRegistro);
 			datosCuenta.add(contrasenyaRegistro);
@@ -128,16 +134,14 @@ public class VentanaLogIn extends JFrame{
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-						if(!txtemail.getText().equals("") && !txtcontrasenya.getText().equals("")) {
-							if(logica.existeUsuario(txtemail.getText())) {
-								if(logica.usuarioCorrecto(txtemail.getText(), txtcontrasenya.getText())!=null){
-									VentanaPrincipal ventana= new VentanaPrincipal(); //aqui falta pasarle la logica a la ventana principal
-									dispose();
-								}else JOptionPane.showMessageDialog(null, "ERROR: Contraseña incorrecta. Vuelva a intentarlo");
-							}else {
-								JOptionPane.showMessageDialog(null, "ERROR: No existe ninguna cuenta con ese email. REGISTRESE");
-							}
-						} else JOptionPane.showMessageDialog(null, "ERROR: Rellene todos los datos");
+					if(!txtemail.getText().equals("") && !txtcontrasenya.getText().equals("")) {
+						if(logica.existeUsuario(txtemail.getText())) {
+							if(logica.usuarioCorrecto(txtemail.getText(), txtcontrasenya.getText())!=null){
+								VentanaPrincipal ventana= new VentanaPrincipal(); //aqui falta pasarle la logica a la ventana principal
+								dispose();
+							}else JOptionPane.showMessageDialog(null, "ERROR: Contraseña incorrecta. Vuelva a intentarlo");
+						}else JOptionPane.showMessageDialog(null, "ERROR: No existe ninguna cuenta con ese email. REGISTRESE");
+					}else JOptionPane.showMessageDialog(null, "ERROR: Rellene todos los datos");
 					txtemail.setText("");
 					txtcontrasenya.setText("");
 				}
@@ -152,7 +156,7 @@ public class VentanaLogIn extends JFrame{
 						txtemailRegistro.setText("");
 					}
 					if (!txtemailRegistro.getText().equals("")  && !txtcontrasenyaRegistro.getText().equals("") ){
-						logica.crearUsuario(txtemailRegistro.getText(), txtcontrasenyaRegistro.getText()); //falta el codigo
+						logica.crearUsuario(txtnombreRegistro.getText(),txtemailRegistro.getText(), txtcontrasenyaRegistro.getText()); //falta el codigo
 						//Después de que se guarden todos los datos, vuelve a la ventana del Log In para poder entrar con la cuenta creada
 						txtemailRegistro.setText("");
 						txtcontrasenyaRegistro.setText("");
@@ -163,7 +167,6 @@ public class VentanaLogIn extends JFrame{
 						panelCentral.setLayout(new GridLayout(2,2));
 						getContentPane().add(panelCentral);
 						getContentPane().add(botonera);
-						//logica.guardarUsuarios("Usuarios.dat");
 						setVisible(true);
 					}else JOptionPane.showMessageDialog(null, "ERROR: Rellene todos los campos");
 				}
