@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 import Clases.Administrador;
 import Clases.Comprador;
+import Clases.Producto;
 import Clases.Usuario;
 
 
@@ -21,6 +22,7 @@ public class BaseDeDatos {
 	private static Connection conexion;
 	private static Logger logger = Logger.getLogger( "BaseDeDatos" );
 	private static HashMap<String,Usuario> users = new HashMap<String, Usuario>();
+	private static HashMap<String,Producto> prods = new HashMap<String, Producto>();
 	
 	/** Abre conexión con la base de datos
 	 * @param nombreBD	Nombre del fichero de base de datos
@@ -115,8 +117,8 @@ public class BaseDeDatos {
 			while( rs.next() ) { // Leer el resultset
 				int id = rs.getInt("id");
 				String nombre = rs.getString("nombre");
-				String email = rs.getString("nombre");
-				String constrasenya = rs.getString("nombre");
+				String email = rs.getString("email");
+				String constrasenya = rs.getString("contrasenya");
 				if(rs.getInt("admin")==1) users.put(email, new Administrador( id, nombre, email, constrasenya ) );		
 				else users.put(email,new Comprador(id, nombre, email, constrasenya ) );
 				}
@@ -127,4 +129,24 @@ public class BaseDeDatos {
 			return null;
 		}
 	}
+
+	
+	/*PRODUCTO COMO VAMOS A GUARDARLO EN UN .dat o csv NOSE SI HACE FALTA ESTO
+	 * public static HashMap<String,Producto> getProductos(){
+		try (Statement statement = conexion.createStatement()){
+			
+			String sent = "select * from producto;";
+			logger.log( Level.INFO, "Statement: " + sent );
+			ResultSet rs = statement.executeQuery( sent );
+			while( rs.next() ) { // Leer el resultset
+				int id = rs.getInt("id");
+				String clase = rs.getString("clase");
+			}
+			return prods;
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.log( Level.SEVERE, "Excepción", e );
+			return null;
+		}
+	}*/
 }

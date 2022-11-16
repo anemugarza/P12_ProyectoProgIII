@@ -26,7 +26,7 @@ public class VentanaLogIn extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	
-	//Componentes del Log In
+		//Componentes del Log In
 		private JLabel email;
 		private JTextField txtemail;
 		private JLabel contrasenya;
@@ -66,7 +66,7 @@ public class VentanaLogIn extends JFrame{
 			botonera= new JPanel();
 			registrarse.setFont(new Font("Serif", Font.PLAIN, 20));
 			entrar.setFont(new Font("Serif", Font.PLAIN, 20));
-			infoCuenta=new JLabel("DATOS DE LA CUENTA");
+			infoCuenta=new JLabel("DATOS DE LA CUENTA COMPRADOR");
 			nombreRegistro= new JLabel("Nombre: ");
 			txtnombreRegistro= new JTextField(25);
 			emailRegistro= new JLabel("Email: ");
@@ -99,7 +99,8 @@ public class VentanaLogIn extends JFrame{
 			botoneraRegistro.setLayout(new GridLayout(1,2));
 			
 			//Caracteristicas de la ventana
-			setSize(400,200);
+			setSize(500,200);
+			setLocationRelativeTo(null);
 			setTitle("DEUSTOSHOP LOG IN");
 			getContentPane().setLayout(new GridLayout(2,1));
 			panelCentral.setLayout(new GridLayout(2,2));

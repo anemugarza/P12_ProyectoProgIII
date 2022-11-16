@@ -2,41 +2,88 @@ package Ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import Clases.TipoProducto;
+import Logica.Logica;
 
 public class VentanaPersonal extends JFrame {
 
-	private JPanel contentPane;
-
 	/**
-	 * Launch the application.
+	 * 
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaPersonal frame = new VentanaPersonal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	private static final long serialVersionUID = 1L;
+	private JLabel info;
+	private JLabel totalPrecio;
+	private JButton bwl;
+	private JButton bcesta;
+	private JButton bcompra;
+	private JPanel pNorte;
+	private JPanel pCentral;
+	private JPanel pbotonera;
+	private Logica logica;
+	private DefaultTableModel mProductos = new DefaultTableModel(
+			new Object[] { "Nombre", "Código", "Tipo", "Precio" }, 0
+		);
+	private JTable tproductos;
+
+	
+	public VentanaPersonal()  {
+		inicializar();
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public VentanaPersonal() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+	private void inicializar() {
+		// TODO Auto-generated method stub
+		info = new JLabel("LISTA");
+		totalPrecio = new JLabel("PRECIO");
+		bwl = new JButton("WISHLIST");
+		bcesta = new JButton("CESTA");
+		bcompra = new JButton("COMPRAR");
+		logica = new Logica();
+		pCentral = new JPanel();
+		pNorte = new JPanel();
+		pbotonera = new JPanel();
+		tproductos = new JTable(mProductos);
+		
+		pbotonera.add(bwl);
+		pbotonera.add(bcesta);
+		pbotonera.add(bcompra);
+		pNorte.add(info, BorderLayout.WEST);
+		pNorte.add(totalPrecio, BorderLayout.EAST);
+		pCentral.add(tproductos);
+		this.add(pNorte);
+		this.add(pCentral);
+		this.add(pbotonera);
+		
+		pNorte.setBounds(100, 100, 100, 30);
+		pNorte.setLayout(new GridLayout(1,2));
+		pbotonera.setBounds(100, 100, 100, 30);
+				
+		//Caracteristicas de la ventana
+		setSize(700,600);
+		setLocationRelativeTo(null);
+		setTitle("DEUSTOSHOP");
+		getContentPane().setLayout(new GridLayout(3,1));
+		setVisible(true);		
+				
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.out.println("Cerrando");
+				System.exit(0);
+			}
+		});
 	}
 
 }

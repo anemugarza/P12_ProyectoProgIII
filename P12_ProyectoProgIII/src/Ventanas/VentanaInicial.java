@@ -11,6 +11,11 @@ import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 
 public class VentanaInicial extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public VentanaInicial() {
 		this.setSize(1000, 600);
 		this.setLocationRelativeTo(null);
@@ -27,6 +32,11 @@ public class VentanaInicial extends JFrame{
 	public static void main(String[] args) {
 		VentanaInicial v = new VentanaInicial();
 		EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
+		/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 		public void finished(MediaPlayer mediaPlayer) {
 			v.dispose();
 			VentanaLogIn vl = new VentanaLogIn();
