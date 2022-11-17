@@ -45,7 +45,7 @@ public class VentanaInicial extends JFrame{
 		};
 		v.setContentPane(comp);
 		v.setVisible(true);
-		comp.mediaPlayer().media().play("gfx/Intro.mp4");
+		comp.mediaPlayer().media().play("VideoInicial.mp4");
 		v.addKeyListener(new KeyAdapter() {
 		@Override
 		public void keyPressed(KeyEvent e) {

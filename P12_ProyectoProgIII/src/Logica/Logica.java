@@ -1,5 +1,10 @@
 package Logica;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +16,10 @@ import Clases.Producto;
 import Clases.Usuario;
 
 public class Logica implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Usuario usuario;
 	public List<Producto> productosHistoricos = new ArrayList<>();
 
@@ -58,4 +67,30 @@ public class Logica implements Serializable{
 		BaseDeDatos.getUsuarios().put(c1.getEmail(),c1);
 	}
 
+	public void guardarProductos(String nombreFic) {
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nombreFic));
+			oos.writeObject(productosHistoricos);
+			System.out.println("guardar");
+			oos.close();
+		}catch(IOException e){
+			System.out.println("ERROR EN ESCRITURA de fichero: " + nombreFic);
+			System.out.println(e);
+		}
+	}
+	
+	public void cargarProductos(String nombreFic) {
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nombreFic));
+			@SuppressWarnings("unchecked")
+			List<Producto> cCargado = (ArrayList<Producto>) ois.readObject();
+			System.out.println("cargado");
+			productosHistoricos=cCargado;
+			ois.close();
+		} catch (IOException | ClassNotFoundException e) {
+			System.out.println("ERROR EN LA CARGA de fichero: " + nombreFic);
+			System.out.println(e);
+		}
+	}
+	
 }
