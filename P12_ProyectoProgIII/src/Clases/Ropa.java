@@ -4,14 +4,14 @@ public class Ropa extends Producto{
 	String descripcion;
 	Talla talla;
 	
-	public Ropa(String nomP, double precio, String descripcion, Talla talla) {
-		super(nomP, precio);
+	public Ropa(String nomP, double precio, String descripcion, Talla talla,String foto) {
+		super(nomP, precio, foto);
 		this.descripcion = descripcion;
 		this.talla = talla;
 	}
 
-	public Ropa(String nomP, double precio) {
-		super(nomP, precio);
+	public Ropa(String nomP, double precio, String foto) {
+		super(nomP, precio,foto);
 	}
 
 	public String getDescripcion() {
