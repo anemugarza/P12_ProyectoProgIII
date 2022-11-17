@@ -132,7 +132,7 @@ public class VentanaLogIn extends JFrame{
 			});
 			
 			entrar.addActionListener(new ActionListener() {
-
+				//si es admin entre a la ventana del admin
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(!txtemail.getText().equals("") && !txtcontrasenya.getText().equals("")) {

@@ -3,6 +3,8 @@ package Ventanas;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -11,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
@@ -59,7 +62,6 @@ public class VentanaPersonal extends JFrame {
 		
 		pbotonera.add(bwl);
 		pbotonera.add(bcesta);
-		pbotonera.add(bcompra);
 		pNorte.add(info, BorderLayout.WEST);
 		pNorte.add(totalPrecio, BorderLayout.EAST);
 		pCentral.add(tproductos);
@@ -74,7 +76,7 @@ public class VentanaPersonal extends JFrame {
 		//Caracteristicas de la ventana
 		setSize(700,600);
 		setLocationRelativeTo(null);
-		setTitle("DEUSTOSHOP");
+		setTitle("TU VENTANA PERSONAL");
 		getContentPane().setLayout(new GridLayout(3,1));
 		setVisible(true);		
 				
@@ -82,6 +84,17 @@ public class VentanaPersonal extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				System.out.println("Cerrando");
 				System.exit(0);
+			}
+		});
+		
+		bcesta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pbotonera.add(bcompra);
+				getContentPane().remove(pbotonera);
+				getContentPane().add(pbotonera);
+
 			}
 		});
 	}
