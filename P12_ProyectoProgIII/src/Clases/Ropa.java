@@ -1,6 +1,10 @@
 package Clases;
 
 public class Ropa extends Producto{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String descripcion;
 	Talla talla;
 	

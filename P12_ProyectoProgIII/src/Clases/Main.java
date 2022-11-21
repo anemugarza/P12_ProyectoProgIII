@@ -3,6 +3,7 @@ package Clases;
 import java.util.ArrayList;
 
 import Logica.BaseDeDatos;
+import Logica.Logica;
 import Ventanas.VentanaLogIn;
 import Ventanas.VentanaPersonal;
 import Ventanas.VentanaPrincipal;
@@ -10,10 +11,9 @@ import Ventanas.VentanaProducto;
 import Ventanas.VentanaPrincipal;
 
 public class Main {
-
 	public static void main(String[] args) {
-		
-		Ropa ropa1 = new Ropa("Camiseta blanca hombre", 12.95 , "Camiseta blanca de algodón con pequeño logo de Deusto", Talla.M,"CamisetaBlancaHombre.JPEG");
+		Logica log = new Logica();
+		/*Ropa ropa1 = new Ropa("Camiseta blanca hombre", 12.95 , "Camiseta blanca de algodón con pequeño logo de Deusto", Talla.M,"CamisetaBlancaHombre.JPEG");
 		Ropa ropa2 = new Ropa("Camiseta blanca mujer", 12.95 , "Camiseta blanca de algodón con pequeño logo de Deusto", Talla.M,"CamisetaBlancaMujer.JPEG");
 		Ropa ropa3 = new Ropa("sudadera blanca ", 17.95 , "Sudadera blanca de algodón  con pequeño logo de Deusto", Talla.M, "SudaderaBlanca.JPEG");
 		Ropa ropa4 = new Ropa("sudadera gris letras", 17.95 , "Sudadera gris de algodón con Deusto escrito", Talla.M,"SudaderaGris.JPEG");
@@ -39,8 +39,36 @@ public class Main {
 		Electronica electronica5 = new Electronica("Disco duro", 45, "DiscoDuro.jpeg", "Disco duro externo 1TB 3.0");
 		Electronica electronica6 = new Electronica("Raton", 29.25, "raton.jpeg", "Microsoft Bluetooth Mobile Mouse 3600 Negro");
 		Electronica electronica7 = new Electronica("Pendrive", 25.99, "raton.jpeg", "Memoria Externa USB 256GB Almacenamiento de Datos Extern Flash Drive para PC,Tabletas y Otros Dispositivos.");
-		ArrayList<Producto> listaProductos = new ArrayList<Producto>();
 		
+		log.getProductosHistoricos().add(ropa1);
+		log.getProductosHistoricos().add(ropa2);
+		log.getProductosHistoricos().add(ropa3);
+		log.getProductosHistoricos().add(ropa4);
+		log.getProductosHistoricos().add(ropa5);
+		log.getProductosHistoricos().add(ropa6);
+		log.getProductosHistoricos().add(ropa7);
+		log.getProductosHistoricos().add(ropa8);
+		log.getProductosHistoricos().add(ropa9);
+		log.getProductosHistoricos().add(ropa10);
+		log.getProductosHistoricos().add(ropa11);
+		log.getProductosHistoricos().add(material1);
+		log.getProductosHistoricos().add(material2);
+		log.getProductosHistoricos().add(material3);
+		log.getProductosHistoricos().add(material4);
+		log.getProductosHistoricos().add(material5);
+		log.getProductosHistoricos().add(material6);
+		log.getProductosHistoricos().add(material7);
+		log.getProductosHistoricos().add(material8);
+		log.getProductosHistoricos().add(electronica1);
+		log.getProductosHistoricos().add(electronica2);
+		log.getProductosHistoricos().add(electronica3);
+		log.getProductosHistoricos().add(electronica4);
+		log.getProductosHistoricos().add(electronica5);
+		log.getProductosHistoricos().add(electronica6);
+		log.getProductosHistoricos().add(electronica7);*/
+		
+		log.cargarProductos("Productos.dat");
+		System.out.println(log.productosHistoricos);
 
 		
 	}

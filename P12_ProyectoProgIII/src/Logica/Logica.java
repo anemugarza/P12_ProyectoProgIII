@@ -21,7 +21,7 @@ public class Logica implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Usuario usuario;
-	public List<Producto> productosHistoricos = new ArrayList<>();
+	public static List<Producto> productosHistoricos = new ArrayList<>();
 
 	
 	public Logica(Usuario usuario) {
@@ -41,8 +41,12 @@ public class Logica implements Serializable{
 		this.usuario = usuario;
 	}
 
-	public static void setUsuariosRegistrados(HashMap<String, Usuario> usuariosRegistrados) {
-		usuariosRegistrados = usuariosRegistrados;
+	public List<Producto> getProductosHistoricos() {
+		return productosHistoricos;
+	}
+
+	public void setProductosHistoricos(List<Producto> productosHistoricos) {
+		this.productosHistoricos = productosHistoricos;
 	}
 
 	@Override

@@ -1,6 +1,11 @@
 package Clases;
 
 public class Electronica extends Producto {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	String descripcion;
 
 

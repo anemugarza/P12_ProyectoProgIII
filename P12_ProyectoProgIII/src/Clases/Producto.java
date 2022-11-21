@@ -1,9 +1,13 @@
 package Clases;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serializable;
 
-public class Producto {
+public class Producto implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	int codigoP;
 	static int cont=0;
 	String nomP;
