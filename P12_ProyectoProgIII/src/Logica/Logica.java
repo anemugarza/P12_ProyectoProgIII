@@ -1,5 +1,7 @@
 package Logica;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,8 +13,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 import Clases.Comprador;
+import Clases.Electronica;
+import Clases.MaterialEscolar;
 import Clases.Producto;
+import Clases.Ropa;
 import Clases.Usuario;
 
 public class Logica implements Serializable{
@@ -88,7 +97,6 @@ public class Logica implements Serializable{
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nombreFic));
 			@SuppressWarnings("unchecked")
 			List<Producto> cCargado = (ArrayList<Producto>) ois.readObject();
-			System.out.println("cargado");
 			productosHistoricos=cCargado;
 			ois.close();
 		} catch (IOException | ClassNotFoundException e) {
@@ -96,5 +104,4 @@ public class Logica implements Serializable{
 			System.out.println(e);
 		}
 	}
-	
 }

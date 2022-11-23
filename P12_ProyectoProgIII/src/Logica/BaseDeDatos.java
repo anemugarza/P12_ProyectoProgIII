@@ -37,13 +37,13 @@ public class BaseDeDatos {
 			conexion = DriverManager.getConnection("jdbc:sqlite:" + nombreBD );
 			if (reiniciaBD) {
 				Statement statement = conexion.createStatement();
-				String sent = "DROP TABLE IF EXISTS producto";
+				/*String sent = "DROP TABLE IF EXISTS producto";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "CREATE TABLE producto (id INTEGER PRIMARY KEY AUTOINCREMENT, clase varchar(100));";
+				sent = "CREATE TABLE producto (id INTEGER PRIMARY KEY, clase varchar(100));";
 				logger.log( Level.INFO, "Statement: " + sent );
-				statement.executeUpdate( sent );
-				sent = "DROP TABLE IF EXISTS usuario";
+				statement.executeUpdate( sent );*/
+				String sent = "DROP TABLE IF EXISTS usuario";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				sent = "CREATE TABLE usuario (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre varchar(10), email varchar(25), contrasenya varchar(25), admin int);";
@@ -67,28 +67,6 @@ public class BaseDeDatos {
 				sent = "CREATE TABLE cestas (id INTEGER PRIMARY KEY AUTOINCREMENT, idProducto INTEGER REFERENCES producto (id), idUsuario INTEGER REFERENCES usuario(id), totalPrecio int(10));";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				/*try {
-					Scanner scanner = new Scanner( BaseDeDatos.class.getResourceAsStream("productos-inic.txt") );
-					while (scanner.hasNextLine()) {
-						String linea = scanner.nextLine();
-						String[] datos = linea.split( "\t" );
-						sent = "insert into producto (id, nombre, precio) values (" + datos[0] + ",'" + datos[1] + "'," + datos[2] + ");";
-						logger.log( Level.INFO, "Statement: " + sent );
-						statement.executeUpdate( sent );
-					}
-					scanner.close();
-					scanner = new Scanner( BaseDeDatos.class.getResourceAsStream("compras-inic.txt") );
-					while (scanner.hasNextLine()) {
-						String linea = scanner.nextLine();
-						String[] datos = linea.split( "\t" );
-						sent = "insert into compra (id, idProducto, cliente, fecha, cantidad) values (" + datos[0] + "," + datos[1] + ",'" + datos[2] + "'," + datos[3] + "," + datos[4] + ");";
-						logger.log( Level.INFO, "Statement: " + sent );
-						statement.executeUpdate( sent );
-					}
-					scanner.close();
-				} catch(Exception e) {
-					logger.log( Level.SEVERE, "Excepción", e );
-				}*/
 			}
 			return true;
 		} catch(Exception e) {
@@ -129,24 +107,33 @@ public class BaseDeDatos {
 			return null;
 		}
 	}
-
+	//Los usuarios administradores hay que añadirlos directamente a la base de datos
+	public static void añadirUsuario(int id, String nombre, String email, String contrasenya) {
+		String sent="";
+		try(Statement statement = conexion.createStatement()) {
+			sent = "insert into usuario (id, nombre, email, contrasenya, admin) values (" + id + ", '" + nombre +"', '" + email + "', '" + contrasenya + "', 0);";
+			logger.log( Level.INFO, "Lanzada actualización a base de datos: " + sent );
+			int val = statement.executeUpdate( sent );
+			logger.log( Level.INFO, "Añadida " + val + " fila a base de datos\t" + sent );
+		} catch (SQLException e) {
+			logger.log( Level.SEVERE, "Error en inserción de base de datos\t" + e );
+		}
+	}
 	
-	/*PRODUCTO COMO VAMOS A GUARDARLO EN UN .dat o csv NOSE SI HACE FALTA ESTO
-	 * public static HashMap<String,Producto> getProductos(){
+	public static String filtrarId(int id){
 		try (Statement statement = conexion.createStatement()){
-			
-			String sent = "select * from producto;";
+			String sent = "select clase from producto where id = "+ id+ ";";
 			logger.log( Level.INFO, "Statement: " + sent );
 			ResultSet rs = statement.executeQuery( sent );
+			String clase = "";
 			while( rs.next() ) { // Leer el resultset
-				int id = rs.getInt("id");
-				String clase = rs.getString("clase");
+				clase = rs.getString("clase");
 			}
-			return prods;
+			return clase;
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.log( Level.SEVERE, "Excepción", e );
 			return null;
 		}
-	}*/
+	}
 }

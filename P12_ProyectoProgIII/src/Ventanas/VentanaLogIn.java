@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Logica.BaseDeDatos;
 import Logica.Logica;
 
 public class VentanaLogIn extends JFrame{
@@ -36,6 +37,7 @@ public class VentanaLogIn extends JFrame{
 		private JPanel panelCentral;
 		private JPanel botonera;
 		private Logica logica;
+		private BaseDeDatos bd;
 		
 		//Componentes del registro, de momento ocultos
 		private JLabel infoCuenta;
@@ -77,6 +79,7 @@ public class VentanaLogIn extends JFrame{
 			botoneraRegistro= new JPanel();
 			guardarDatos= new JButton("Registrarse");
 			logica= new Logica();
+			bd = new BaseDeDatos();
 			
 			//Añadimos a la ventana
 			panelCentral.add(email);
@@ -157,7 +160,9 @@ public class VentanaLogIn extends JFrame{
 						txtemailRegistro.setText("");
 					}
 					if (!txtemailRegistro.getText().equals("")  && !txtcontrasenyaRegistro.getText().equals("") ){
-						logica.crearUsuario(txtnombreRegistro.getText(),txtemailRegistro.getText(), txtcontrasenyaRegistro.getText()); //falta el codigo
+						logica.crearUsuario(txtnombreRegistro.getText(),txtemailRegistro.getText(), txtcontrasenyaRegistro.getText()); 
+						//aqui hay que añadir el codigo tanto arriba como abajo
+						BaseDeDatos.añadirUsuario(0,txtnombreRegistro.getText(),txtemailRegistro.getText(), txtcontrasenyaRegistro.getText());
 						//Después de que se guarden todos los datos, vuelve a la ventana del Log In para poder entrar con la cuenta creada
 						txtemailRegistro.setText("");
 						txtcontrasenyaRegistro.setText("");

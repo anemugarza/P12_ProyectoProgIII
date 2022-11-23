@@ -9,7 +9,7 @@ public class Producto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	int codigoP;
-	static int cont=0;
+	static int cont=1;
 	String nomP;
 	double precio;
 	private String foto;
@@ -58,6 +58,8 @@ public class Producto implements Serializable{
 		this.precio = precio;
 	}
 
+	
+	
 	@Override
 	public String toString() {
 		return "Producto [codigoP=" + codigoP + ", nomP=" + nomP + ", precio=" + precio + "]";
