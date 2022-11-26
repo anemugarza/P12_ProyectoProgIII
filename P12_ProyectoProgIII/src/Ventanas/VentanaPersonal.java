@@ -19,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Clases.Producto;
 import Clases.TipoProducto;
 import Logica.Logica;
 
@@ -60,8 +61,14 @@ public class VentanaPersonal extends JFrame {
 		pbotonera = new JPanel();
 		tproductos = new JTable(mProductos);
 		
+		for(Producto p : logica.getUsuario().getWL()) {
+			mProductos.addRow(p);
+		}
+		
 		pbotonera.add(bwl);
 		pbotonera.add(bcesta);
+		pbotonera.add(bcompra);
+		bcompra.setVisible(false);
 		pNorte.add(info, BorderLayout.WEST);
 		pNorte.add(totalPrecio, BorderLayout.EAST);
 		pCentral.add(tproductos);
@@ -91,10 +98,8 @@ public class VentanaPersonal extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				pbotonera.add(bcompra);
-				getContentPane().remove(pbotonera);
-				getContentPane().add(pbotonera);
-
+				bcompra.setVisible(true);
+				
 			}
 		});
 	}

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -43,7 +44,7 @@ public class VentanaPrincipal extends JFrame {
 	private JComboBox<TipoProducto> seleccion;
 	private JButton bpersonal;
 	private JPanel pCentral;
-	private JScrollBar scroll;
+	private JScrollPane scroll;
 	//private JList<Object> productos;
 	//private DefaultListModel<Object> dlm;
 	public VentanaPrincipal()  {
@@ -57,10 +58,11 @@ public class VentanaPrincipal extends JFrame {
 		seleccion.setModel(new DefaultComboBoxModel<TipoProducto>(TipoProducto.values()));
 		bpersonal = new JButton("PERSONAL");
 		pCentral = new JPanel();
-		pCentral.setSize(650,550);
-		scroll = new JScrollBar();
-		scroll.setBounds(5, 112, 360, pCentral.getHeight());
-		/*for(Producto p : Logica.productosHistoricos) {
+		scroll = new JScrollPane(pCentral);
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setBounds(50, 30, 300, 50);
+		for(Producto p : Logica.productosHistoricos) {
 			JPanel pProducto = new JPanel();
 			JPanel pfoto = new JPanel();
 			JLabel lNom = new JLabel(p.getNomP());
@@ -72,11 +74,11 @@ public class VentanaPrincipal extends JFrame {
 			pProducto.add(lNom, BorderLayout.SOUTH);
 			pCentral.add(pProducto);
 			pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
-		}*/
-	
+		}
+		
+		
 		this.add(seleccion, BorderLayout.NORTH);
-		pCentral.add(scroll, BorderLayout.WEST);
-		this.add(pCentral, BorderLayout.CENTER);
+		this.add(scroll, BorderLayout.CENTER);
 		this.add(bpersonal, BorderLayout.SOUTH);
 		
 	
@@ -105,9 +107,13 @@ public class VentanaPrincipal extends JFrame {
 						for (Producto p : Logica.productosHistoricos) {
 							if(p instanceof Electronica) {
 								JPanel pProducto = new JPanel();
+								JPanel pfoto = new JPanel();
 								JLabel lNom = new JLabel(p.getNomP());
-								JLabel lfoto = new JLabel(p.getFoto());
-								pProducto.add(lfoto, BorderLayout.NORTH);
+								ImageIcon foto = new ImageIcon((String) p.getFoto());
+								JLabelAjustado lfoto = new JLabelAjustado(foto);
+								lfoto.setPreferredSize( new Dimension( 200, 200 ) );
+								pfoto.add(lfoto);
+								pProducto.add(pfoto, BorderLayout.NORTH);
 								pProducto.add(lNom, BorderLayout.SOUTH);
 								pCentral.add(pProducto);
 								pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
@@ -118,9 +124,13 @@ public class VentanaPrincipal extends JFrame {
 						for (Producto p : Logica.productosHistoricos) {
 							if(p instanceof Ropa) {
 								JPanel pProducto = new JPanel();
+								JPanel pfoto = new JPanel();
 								JLabel lNom = new JLabel(p.getNomP());
-								JLabel lfoto = new JLabel(p.getFoto());
-								pProducto.add(lfoto, BorderLayout.NORTH);
+								ImageIcon foto = new ImageIcon((String) p.getFoto());
+								JLabelAjustado lfoto = new JLabelAjustado(foto);
+								lfoto.setPreferredSize( new Dimension( 200, 200 ) );
+								pfoto.add(lfoto);
+								pProducto.add(pfoto, BorderLayout.NORTH);
 								pProducto.add(lNom, BorderLayout.SOUTH);
 								pCentral.add(pProducto);
 								pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
@@ -131,9 +141,13 @@ public class VentanaPrincipal extends JFrame {
 						for (Producto p : Logica.productosHistoricos) {
 							if(p instanceof MaterialEscolar) {
 								JPanel pProducto = new JPanel();
+								JPanel pfoto = new JPanel();
 								JLabel lNom = new JLabel(p.getNomP());
-								JLabel lfoto = new JLabel(p.getFoto());
-								pProducto.add(lfoto, BorderLayout.NORTH);
+								ImageIcon foto = new ImageIcon((String) p.getFoto());
+								JLabelAjustado lfoto = new JLabelAjustado(foto);
+								lfoto.setPreferredSize( new Dimension( 200, 200 ) );
+								pfoto.add(lfoto);
+								pProducto.add(pfoto, BorderLayout.NORTH);
 								pProducto.add(lNom, BorderLayout.SOUTH);
 								pCentral.add(pProducto);
 								pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
