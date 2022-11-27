@@ -86,5 +86,13 @@ public class VentanaProducto extends JFrame{
 				dispose();	
 			}
 		});
+		
+		bañadirCESTA.addActionListener(new ActionListener() {
+			//si es admin entre a la ventana del admin
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 	}
 }

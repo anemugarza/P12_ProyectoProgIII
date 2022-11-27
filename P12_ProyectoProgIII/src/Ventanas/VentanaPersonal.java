@@ -19,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Clases.Comprador;
 import Clases.Producto;
 import Clases.TipoProducto;
 import Logica.Logica;
@@ -39,7 +40,7 @@ public class VentanaPersonal extends JFrame {
 	private JPanel pbotonera;
 	private Logica logica;
 	private DefaultTableModel mProductos = new DefaultTableModel(
-			new Object[] { "Nombre", "Código", "Tipo", "Precio" }, 0
+			new Object[] { "Nombre", "Código", "Tipo", "Precio", "Foto" }, 0
 		);
 	private JTable tproductos;
 
@@ -61,8 +62,9 @@ public class VentanaPersonal extends JFrame {
 		pbotonera = new JPanel();
 		tproductos = new JTable(mProductos);
 		
-		for(Producto p : logica.getUsuario().getWL()) {
-			mProductos.addRow(p);
+		Comprador c1 = (Comprador) logica.getUsuario();
+		for(Producto p : c1.getWl()) {
+			 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass(),p.getPrecio(), p.getFoto()});
 		}
 		
 		pbotonera.add(bwl);
@@ -99,6 +101,16 @@ public class VentanaPersonal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				bcompra.setVisible(true);
+				
+			}
+		});
+		
+		bcompra.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
+
 				
 			}
 		});

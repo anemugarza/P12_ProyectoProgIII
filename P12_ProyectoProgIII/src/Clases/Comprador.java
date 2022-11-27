@@ -49,6 +49,11 @@ public class Comprador extends Usuario {
 		return "Comprador [monedero=" + monedero + ", cesta=" + cesta + ", wl=" + wl + "]";
 	}
 	
+	public void anyadirWL(Producto p) {
+		wl.add(p);
+	}
 	
-	
+	public void anyadirCesta(Producto p) {
+		cesta.add(p);
+	}
 }

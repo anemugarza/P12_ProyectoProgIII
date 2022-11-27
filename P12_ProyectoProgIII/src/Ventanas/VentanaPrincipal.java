@@ -12,6 +12,7 @@ import java.awt.RenderingHints;
 import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -65,13 +66,16 @@ public class VentanaPrincipal extends JFrame {
 		for(Producto p : Logica.productosHistoricos) {
 			JPanel pProducto = new JPanel();
 			JPanel pfoto = new JPanel();
+			JPanel pnom = new JPanel();
 			JLabel lNom = new JLabel(p.getNomP());
 			ImageIcon foto = new ImageIcon((String) p.getFoto());
 			JLabelAjustado lfoto = new JLabelAjustado(foto);
 			lfoto.setPreferredSize( new Dimension( 200, 200 ) );
 			pfoto.add(lfoto);
+			pnom.add(lNom);
 			pProducto.add(pfoto, BorderLayout.NORTH);
-			pProducto.add(lNom, BorderLayout.SOUTH);
+			pProducto.add(pnom, BorderLayout.SOUTH);
+			pProducto.setLayout(new GridLayout(2,1));
 			pCentral.add(pProducto);
 			pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
 		}
@@ -157,6 +161,7 @@ public class VentanaPrincipal extends JFrame {
 				}
 			}
 		});
+		
 		bpersonal.addActionListener(new ActionListener() {
 
 			@Override
@@ -165,6 +170,8 @@ public class VentanaPrincipal extends JFrame {
 				dispose();
 			}
 		});
+		
+		
 		
 	}
 	
