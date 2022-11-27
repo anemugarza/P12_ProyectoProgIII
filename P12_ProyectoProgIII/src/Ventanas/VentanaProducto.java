@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Clases.Comprador;
+import Clases.TipoProducto;
 import Logica.Logica;
 
 public class VentanaProducto extends JFrame{
@@ -39,9 +40,9 @@ public class VentanaProducto extends JFrame{
 	
 	private void inicializar() {
 		//Inicializamos elementos 
-		nombreProd= new JLabel("Nombre");
-		precioProd= new JLabel("Precio");
-		descripcionProd= new JLabel("Descrip");
+		nombreProd= new JLabel("Nombre:" + VentanaPrincipal.getProdSeleccionado().getNomP());
+		precioProd= new JLabel("Precio:"+ VentanaPrincipal.getProdSeleccionado().getPrecio());
+		descripcionProd= new JLabel("Descripcion:" );
 		pNorte= new JPanel();
 		pCentral= new JPanel();
 		pbotonera= new JPanel();
@@ -94,7 +95,7 @@ public class VentanaProducto extends JFrame{
 			//si es admin entre a la ventana del admin
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				c1.anyadirCesta(p);
+				c1.anyadirCesta(VentanaPrincipal.getProdSeleccionado());
 			}
 		});
 		
@@ -102,7 +103,7 @@ public class VentanaProducto extends JFrame{
 			//si es admin entre a la ventana del admin
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				c1.anyadirWL(p);
+				c1.anyadirWL(VentanaPrincipal.getProdSeleccionado());
 			}
 		});
 	}
