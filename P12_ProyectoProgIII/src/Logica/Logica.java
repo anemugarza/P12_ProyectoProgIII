@@ -31,13 +31,6 @@ public class Logica implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Usuario usuario;
 	public static List<Producto> productosHistoricos = new ArrayList<>();
-	
-	/*if( usuario instanceof Comprador) {
-		Comprador c1 = (Comprador) usuario;
-	}else {
-		Administrador a1 = (Administrador) usuario;
-	}*/
-	
 
 	
 	public Logica(Usuario usuario) {

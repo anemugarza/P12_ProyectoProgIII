@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Clases.Comprador;
 import Logica.Logica;
 
 public class VentanaProducto extends JFrame{
@@ -48,6 +49,8 @@ public class VentanaProducto extends JFrame{
 		bañadirWL = new JButton("AÑADIR WL");
 		bvolver = new JButton("ATRAS");
 		logica= new Logica();
+		Comprador c1 = (Comprador) logica.getUsuario();
+
 		
 		//Añadimos a la ventana
 		pCentral.add(nombreProd);
@@ -91,7 +94,15 @@ public class VentanaProducto extends JFrame{
 			//si es admin entre a la ventana del admin
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				c1.anyadirCesta(p);
+			}
+		});
+		
+		bañadirWL.addActionListener(new ActionListener() {
+			//si es admin entre a la ventana del admin
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				c1.anyadirWL(p);
 			}
 		});
 	}
