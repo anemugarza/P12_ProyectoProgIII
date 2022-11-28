@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Clases.Comprador;
+import Clases.Producto;
 import Logica.Logica;
 
 public class VentanaProducto extends JFrame{
@@ -31,17 +32,18 @@ public class VentanaProducto extends JFrame{
 	private JPanel pCentral;
 	private JPanel pbotonera;
 	private Logica logica;
+	private Producto p;
 
 	
-	public VentanaProducto()  {
+	public VentanaProducto(Producto p)  {
 		inicializar();
 	}
 	
 	private void inicializar() {
 		//Inicializamos elementos 
-		nombreProd= new JLabel("Nombre");
-		precioProd= new JLabel("Precio");
-		descripcionProd= new JLabel("Descrip");
+		nombreProd= new JLabel("Nombre: " + p.getNomP());
+		precioProd= new JLabel("Precio: " + p.getPrecio());
+		descripcionProd= new JLabel("Descripción: ");
 		pNorte= new JPanel();
 		pCentral= new JPanel();
 		pbotonera= new JPanel();
@@ -49,6 +51,7 @@ public class VentanaProducto extends JFrame{
 		bañadirWL = new JButton("AÑADIR WL");
 		bvolver = new JButton("ATRAS");
 		logica= new Logica();
+		p = new Producto();
 		Comprador c1 = (Comprador) logica.getUsuario();
 
 		

@@ -72,7 +72,8 @@ public class Main {
 		*/
 		log.cargarProductos("Productos.dat");
 
-		VentanaInicial v = new VentanaInicial();
+		//VentanaInicial v = new VentanaInicial();
+		VentanaPrincipal v = new VentanaPrincipal();
 	}
 
 }
