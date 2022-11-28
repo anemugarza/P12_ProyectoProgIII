@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import Clases.Comprador;
 import Clases.Producto;
+import Clases.TipoProducto;
 import Logica.Logica;
 
 public class VentanaProducto extends JFrame{
