@@ -101,7 +101,22 @@ public class VentanaPersonal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				bcompra.setVisible(true);
-				
+				//falta borrar los productos que hay dentro
+				for(Producto p : c1.getCesta()) {
+					 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass(),p.getPrecio(), p.getFoto()});
+				}
+			}
+		});
+		
+		bwl.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				bcompra.setVisible(true);
+				//falta borrar los productos que hay dentro
+				for(Producto p : c1.getWl()) {
+					 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass(),p.getPrecio(), p.getFoto()});
+				}
 			}
 		});
 		
