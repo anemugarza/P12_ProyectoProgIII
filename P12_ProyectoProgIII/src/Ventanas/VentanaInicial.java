@@ -19,7 +19,7 @@ public class VentanaInicial extends JFrame{
 	public VentanaInicial() {
 		this.setSize(1000, 600);
 		this.setLocationRelativeTo(null);
-		this.setTitle("Fut Draft & Pack Opener 23");
+		this.setTitle("BIENVENIDO A DEUSTOSHOP");
 		
 		this.addWindowListener(new WindowAdapter() {
 			@Override
@@ -45,7 +45,7 @@ public class VentanaInicial extends JFrame{
 		};
 		v.setContentPane(comp);
 		v.setVisible(true);
-		comp.mediaPlayer().media().play("VideoInicial.mp4");
+		comp.mediaPlayer().media().play("Media/VideoInicial.MP4");
 		v.addKeyListener(new KeyAdapter() {
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -57,7 +57,5 @@ public class VentanaInicial extends JFrame{
 			} 
 			}
 		});
-		
-		
 	}
 }

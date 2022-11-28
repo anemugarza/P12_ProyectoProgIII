@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import Logica.BaseDeDatos;
 import Logica.Logica;
+import Ventanas.VentanaInicial;
 import Ventanas.VentanaLogIn;
 import Ventanas.VentanaPersonal;
 import Ventanas.VentanaPrincipal;
@@ -71,7 +72,7 @@ public class Main {
 		*/
 		log.cargarProductos("Productos.dat");
 
-		VentanaProducto v = new VentanaProducto();
+		VentanaInicial v = new VentanaInicial();
 	}
 
 }
