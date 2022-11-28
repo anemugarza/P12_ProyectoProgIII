@@ -1,12 +1,17 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,8 +29,8 @@ public class VentanaProducto extends JFrame{
 	//Componentes del Log In
 	private JLabel nombreProd;
 	private JLabel precioProd;
-	private JLabel descripcionProd;
-	//falta foto del producto
+	private ImageIcon foto;
+	private JLabelAjustado lfoto;
 	private JButton bvolver;
 	private JButton bañadirWL;
 	private JButton bañadirCESTA;
@@ -37,14 +42,15 @@ public class VentanaProducto extends JFrame{
 
 	
 	public VentanaProducto(Producto p)  {
-		inicializar();
+		inicializar(p);
 	}
 	
-	private void inicializar() {
+	private void inicializar(Producto p) {
 		//Inicializamos elementos 
 		nombreProd= new JLabel("Nombre: " + p.getNomP());
 		precioProd= new JLabel("Precio: " + p.getPrecio());
-		descripcionProd= new JLabel("Descripción: ");
+		foto = new ImageIcon(p.getFoto());
+		lfoto= new JLabelAjustado(foto);
 		pNorte= new JPanel();
 		pCentral= new JPanel();
 		pbotonera= new JPanel();
@@ -52,17 +58,16 @@ public class VentanaProducto extends JFrame{
 		bañadirWL = new JButton("AÑADIR WL");
 		bvolver = new JButton("ATRAS");
 		logica= new Logica();
-		p = new Producto();
 		Comprador c1 = (Comprador) logica.getUsuario();
 
 		
 		//Añadimos a la ventana
+		pCentral.add(lfoto);
 		pCentral.add(nombreProd);
 		pCentral.add(precioProd);
-		pCentral.add(descripcionProd);
-		pNorte.add(bvolver, BorderLayout.WEST);
-		pbotonera.add(bañadirCESTA, BorderLayout.SOUTH);
-		pbotonera.add(bañadirWL, BorderLayout.SOUTH);
+		pNorte.add(bvolver);
+		pbotonera.add(bañadirCESTA);
+		pbotonera.add(bañadirWL);
 		
 		//Caracteristicas de la ventana
 		setSize(700,600);
@@ -73,9 +78,9 @@ public class VentanaProducto extends JFrame{
 		getContentPane().setLayout(new GridLayout(3,1));
 		pCentral.setLayout(new GridLayout(3,1));
 		
-		this.add(pNorte);
+		this.add(pNorte, BorderLayout.WEST);
 		this.add(pCentral);
-		this.add(pbotonera);
+		this.add(pbotonera, BorderLayout.SOUTH);
 		setVisible(true);
 		
 		this.addWindowListener(new WindowAdapter() {
@@ -99,6 +104,7 @@ public class VentanaProducto extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				c1.anyadirCesta(p);
+				JOptionPane.showMessageDialog(null, "¡Producto añadido a tu cesta!");
 			}
 		});
 		
@@ -107,7 +113,54 @@ public class VentanaProducto extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				c1.anyadirWL(p);
+				JOptionPane.showMessageDialog(null, "¡Producto añadido a tu wishlist!");
 			}
 		});
+	}
+	private static class JLabelAjustado extends JLabel {
+		private ImageIcon imagen; 
+		private int tamX;
+		private int tamY;
+		/** Crea un jlabel que ajusta una imagen cualquiera con fondo blanco a su tamaño (a la que ajuste más de las dos escalas, horizontal o vertical)
+		 * @param imagen	Imagen a visualizar en el label
+		 */
+		public JLabelAjustado( ImageIcon imagen ) {
+			setImagen( imagen );
+		}
+		/** Modifica la imagen
+		 * @param imagen	Nueva imagen a visualizar en el label
+		 */
+		public void setImagen( ImageIcon imagen ) {
+			this.imagen = imagen;
+			if (imagen==null) {
+				tamX = 0;
+				tamY = 0;
+			} else {
+				this.tamX = imagen.getIconWidth();
+				this.tamY = imagen.getIconHeight();
+			}
+		}
+		protected void paintComponent(Graphics g) {
+			Graphics2D g2 = (Graphics2D) g;  // El Graphics realmente es Graphics2D
+			g2.setColor( Color.WHITE );
+			g2.fillRect( 0, 0, getWidth(), getHeight() );
+			if (imagen!=null && tamX>0 && tamY>0) {
+				g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+				g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);	
+				double escalaX = 1.0 * getWidth() / tamX;
+				double escalaY = 1.0 * getHeight() / tamY;
+				double escala = escalaX;
+				int x = 0;
+				int y = 0;
+				if (escalaY < escala) {
+					escala = escalaY;
+					x = (int) ((getWidth() - (tamX * escala)) / 2);
+				} else {
+					y = (int) ((getHeight() - (tamY * escala)) / 2);
+				}
+		        g2.drawImage( imagen.getImage(), x, y, (int) (tamX*escala), (int) (tamY*escala), null );
+			}
+		}
 	}
 }

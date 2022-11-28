@@ -133,7 +133,7 @@ public class VentanaPrincipal extends JFrame {
 								pProducto.add(lNom, BorderLayout.SOUTH);
 								pCentral.add(pProducto);
 								pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
-								/*pProducto.addMouseListener(new MouseAdapter() {
+								pProducto.addMouseListener(new MouseAdapter() {
 									
 									@Override
 									public void mouseClicked(MouseEvent e) {
@@ -142,7 +142,7 @@ public class VentanaPrincipal extends JFrame {
 											VentanaProducto vp = new VentanaProducto(p);
 										}
 									}
-								});*/
+								});
 							}
 						}
 					}
@@ -160,7 +160,7 @@ public class VentanaPrincipal extends JFrame {
 								pProducto.add(lNom, BorderLayout.SOUTH);
 								pCentral.add(pProducto);
 								pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
-								/*pProducto.addMouseListener(new MouseAdapter() {
+								pProducto.addMouseListener(new MouseAdapter() {
 									
 									@Override
 									public void mouseClicked(MouseEvent e) {
@@ -169,7 +169,7 @@ public class VentanaPrincipal extends JFrame {
 											VentanaProducto vp = new VentanaProducto(p);
 										}
 									}
-								});*/
+								});
 							}
 						}
 					}
@@ -187,7 +187,7 @@ public class VentanaPrincipal extends JFrame {
 								pProducto.add(lNom, BorderLayout.SOUTH);
 								pCentral.add(pProducto);
 								pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
-								/*pProducto.addMouseListener(new MouseAdapter() {
+								pProducto.addMouseListener(new MouseAdapter() {
 									
 									@Override
 									public void mouseClicked(MouseEvent e) {
@@ -196,7 +196,7 @@ public class VentanaPrincipal extends JFrame {
 											VentanaProducto vp = new VentanaProducto(p);
 										}
 									}
-								});*/
+								});
 							}
 						}
 					}
