@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -36,9 +38,10 @@ public class VentanaPersonal extends JFrame {
 	private JButton bcesta;
 	private JButton bcompra;
 	private JPanel pNorte;
-	private JPanel pCentral;
+	private JButton bvolver;
 	private JPanel pbotonera;
-	private Logica logica;
+
+	Comprador c1 = (Comprador) Logica.getUsuario();
 	private DefaultTableModel mProductos = new DefaultTableModel(
 			new Object[] { "Nombre", "Código", "Tipo", "Precio", "Foto" }, 0
 		);
@@ -51,42 +54,37 @@ public class VentanaPersonal extends JFrame {
 
 	private void inicializar() {
 		// TODO Auto-generated method stub
-		info = new JLabel("LISTA");
-		totalPrecio = new JLabel("PRECIO");
+		info = new JLabel("LISTA: Wish List");
+		totalPrecio = new JLabel("PRECIO: "); //falta hacer la funcion del precio total de la lista
 		bwl = new JButton("WISHLIST");
 		bcesta = new JButton("CESTA");
+		bvolver = new JButton("VOLVER");
 		bcompra = new JButton("COMPRAR");
-		logica = new Logica();
-		pCentral = new JPanel();
 		pNorte = new JPanel();
 		pbotonera = new JPanel();
 		tproductos = new JTable(mProductos);
 		
-		Comprador c1 = (Comprador) logica.getUsuario();
-		/*for(Producto p : c1.getWl()) {
-			 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass(),p.getPrecio(), p.getFoto()});
-		}*/
-		
+		actualizarLista(1);
+		tproductos.setModel(mProductos);
 		pbotonera.add(bwl);
 		pbotonera.add(bcesta);
 		pbotonera.add(bcompra);
 		bcompra.setVisible(false);
+		pNorte.add(bvolver, BorderLayout.WEST);
 		pNorte.add(info, BorderLayout.WEST);
 		pNorte.add(totalPrecio, BorderLayout.EAST);
-		pCentral.add(tproductos);
-		this.add(pNorte);
-		this.add(pCentral);
-		this.add(pbotonera);
+		this.add(pNorte,BorderLayout.NORTH);
+		this.add(tproductos, BorderLayout.CENTER);
+		this.add(pbotonera, BorderLayout.SOUTH);
 		
 		pNorte.setBounds(100, 100, 100, 30);
-		pNorte.setLayout(new GridLayout(1,2));
+		pNorte.setLayout(new GridLayout(1,3));
 		pbotonera.setBounds(100, 100, 100, 30);
 				
 		//Caracteristicas de la ventana
 		setSize(700,600);
 		setLocationRelativeTo(null);
 		setTitle("TU VENTANA PERSONAL");
-		getContentPane().setLayout(new GridLayout(3,1));
 		setVisible(true);		
 				
 		this.addWindowListener(new WindowAdapter() {
@@ -96,15 +94,21 @@ public class VentanaPersonal extends JFrame {
 			}
 		});
 		
+		bvolver.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaPrincipal ventana= new VentanaPrincipal(); 
+				dispose();	
+			}
+		});
+		
 		bcesta.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				bcompra.setVisible(true);
-				//falta borrar los productos que hay dentro
-				for(Producto p : c1.getCesta()) {
-					 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass(),p.getPrecio(), p.getFoto()});
-				}
+				info.setText("LISTA: Cesta");
+				actualizarLista(0);
 			}
 		});
 		
@@ -113,10 +117,8 @@ public class VentanaPersonal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				bcompra.setVisible(false);
-				//falta borrar los productos que hay dentro
-				for(Producto p : c1.getWl()) {
-					 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass(),p.getPrecio(), p.getFoto()});
-				}
+				info.setText("LISTA: WishList");
+				actualizarLista(1);
 			}
 		});
 		
@@ -130,5 +132,23 @@ public class VentanaPersonal extends JFrame {
 			}
 		});
 	}
+	public void actualizarLista(int type) {
+		mProductos = new DefaultTableModel(
+				new Object[] { "Nombre", "Código", "Tipo", "Precio", "Foto" }, 0
+			);
+		switch (type) {
+		case 0:
+			for(Producto p : c1.getCesta()) {
+				 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass(),p.getPrecio(), p.getFoto()});
+			}
+			break;
 
+		default:
+			for(Producto p : c1.getWl()) {
+				 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass(),p.getPrecio(), p.getFoto()});
+			}
+			break;
+		}
+		tproductos.setModel(mProductos);
+	}
 }

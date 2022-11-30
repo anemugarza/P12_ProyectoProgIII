@@ -2,6 +2,7 @@ package Ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -17,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import Clases.Comprador;
 import Clases.Producto;
@@ -34,10 +36,8 @@ public class VentanaProducto extends JFrame{
 	private JButton bvolver;
 	private JButton bañadirWL;
 	private JButton bañadirCESTA;
-	private JPanel pNorte;
 	private JPanel pCentral;
 	private JPanel pbotonera;
-	private Logica logica;
 	private Producto p;
 
 	
@@ -51,35 +51,31 @@ public class VentanaProducto extends JFrame{
 		precioProd= new JLabel("Precio: " + p.getPrecio());
 		foto = new ImageIcon(p.getFoto());
 		lfoto= new JLabelAjustado(foto);
-		pNorte= new JPanel();
 		pCentral= new JPanel();
 		pbotonera= new JPanel();
 		bañadirCESTA = new JButton("AÑADIR CESTA");
 		bañadirWL = new JButton("AÑADIR WL");
-		bvolver = new JButton("ATRAS");
-		logica= new Logica();
-		Comprador c1 = (Comprador) logica.getUsuario();
+		bvolver = new JButton("VOLVER");
+		Comprador c1 = (Comprador) Logica.getUsuario();
 
 		
 		//Añadimos a la ventana
 		pCentral.add(lfoto);
 		pCentral.add(nombreProd);
 		pCentral.add(precioProd);
-		pNorte.add(bvolver);
+		pCentral.setLayout(new GridLayout(3,0));
 		pbotonera.add(bañadirCESTA);
 		pbotonera.add(bañadirWL);
 		
 		//Caracteristicas de la ventana
 		setSize(700,600);
 		setLocationRelativeTo(null);
-		setTitle("PRODUCTO");
-		pNorte.setBounds(100, 100, 30, 30);
-		pbotonera.setBounds(100, 100, 30, 30);
-		getContentPane().setLayout(new GridLayout(3,1));
-		pCentral.setLayout(new GridLayout(3,1));
+		setTitle("PRODUCTO: " + p.getNomP());
 		
-		this.add(pNorte, BorderLayout.WEST);
-		this.add(pCentral);
+		pbotonera.setBounds(100, 100, 30, 30);
+		
+		this.add(bvolver, BorderLayout.NORTH);
+		this.add(pCentral, BorderLayout.CENTER);
 		this.add(pbotonera, BorderLayout.SOUTH);
 		setVisible(true);
 		
@@ -91,10 +87,9 @@ public class VentanaProducto extends JFrame{
 		});
 		
 		bvolver.addActionListener(new ActionListener() {
-			//si es admin entre a la ventana del admin
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaPrincipal ventana= new VentanaPrincipal(); //aqui falta pasarle la logica a la ventana principal
+				VentanaPrincipal ventana= new VentanaPrincipal(); 
 				dispose();	
 			}
 		});

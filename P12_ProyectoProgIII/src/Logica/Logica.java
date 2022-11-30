@@ -29,25 +29,25 @@ public class Logica implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Usuario usuario;
+	private static Usuario usuario;
 	public static List<Producto> productosHistoricos = new ArrayList<>();
 
 	
 	public Logica(Usuario usuario) {
 		super();
-		this.usuario = usuario;
+		Logica.usuario = usuario;
 	}
 
 	public Logica() {
 		super();
 	}
 
-	public Usuario getUsuario() {
+	public static Usuario getUsuario() {
 		return usuario;
 	}
 
 	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+		Logica.usuario = usuario;
 	}
 
 	public List<Producto> getProductosHistoricos() {
@@ -55,7 +55,7 @@ public class Logica implements Serializable{
 	}
 
 	public void setProductosHistoricos(List<Producto> productosHistoricos) {
-		this.productosHistoricos = productosHistoricos;
+		Logica.productosHistoricos = productosHistoricos;
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class Logica implements Serializable{
 	
 	public Usuario usuarioCorrecto(String email, String contrasenya) {
 		if(BaseDeDatos.getUsuarios().get(email).getContrasenya().equals(contrasenya)){
-			this.usuario=BaseDeDatos.getUsuarios().get(email);
+			Logica.usuario=BaseDeDatos.getUsuarios().get(email);
 			return BaseDeDatos.getUsuarios().get(email);
 		}else return null;
 	}

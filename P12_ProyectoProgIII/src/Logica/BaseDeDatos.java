@@ -85,7 +85,6 @@ public class BaseDeDatos {
 	
 	public static HashMap<String,Usuario> getUsuarios(){
 		try (Statement statement = conexion.createStatement()){
-			
 			String sent = "select * from usuario;";
 			logger.log( Level.INFO, "Statement: " + sent );
 			ResultSet rs = statement.executeQuery( sent );
@@ -104,6 +103,7 @@ public class BaseDeDatos {
 			return null;
 		}
 	}
+	
 	//Los usuarios administradores hay que añadirlos directamente a la base de datos
 	public static void añadirUsuario(int id, String nombre, String email, String contrasenya) {
 		String sent="";
