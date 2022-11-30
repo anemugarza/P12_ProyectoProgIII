@@ -12,14 +12,11 @@ import java.awt.RenderingHints;
 import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -38,16 +35,15 @@ import Clases.MaterialEscolar;
 import Clases.Producto;
 import Clases.Ropa;
 import Clases.TipoProducto;
-import Logica.BaseDeDatos;
 import Logica.Logica;
 
 public class VentanaPrincipal extends JFrame {
 
 	/**
-	 * 
-	 */
+	* 
+	*/
 	private static final long serialVersionUID = 1L;
-
+	
 	private JComboBox<TipoProducto> seleccion;
 	private JButton bpersonal;
 	private JPanel pCentral;
@@ -57,20 +53,19 @@ public class VentanaPrincipal extends JFrame {
 	public VentanaPrincipal()  {
 		inicializar();
 	}
-
-
+	
+	
 	private void inicializar() {
 		// TODO Auto-generated method stub
 		seleccion = new JComboBox<>();
 		seleccion.setModel(new DefaultComboBoxModel<TipoProducto>(TipoProducto.values()));
 		bpersonal = new JButton("PERSONAL");
 		pCentral = new JPanel();
-		/*scroll = new JScrollPane(pCentral);
+		scroll = new JScrollPane(pCentral);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(50, 30, 300, 50);
-		*/
-		/*for(Producto p : Logica.productosHistoricos) {
+		for(Producto p : Logica.productosHistoricos) {
 			JPanel pProducto = new JPanel();
 			JPanel pfoto = new JPanel();
 			JPanel pnom = new JPanel();
@@ -85,8 +80,9 @@ public class VentanaPrincipal extends JFrame {
 			pProducto.setLayout(new GridLayout(2,1));
 			pCentral.add(pProducto);
 			pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
+			
 			pProducto.addMouseListener(new MouseAdapter() {
-				
+		
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					// TODO Auto-generated method stub
@@ -95,27 +91,21 @@ public class VentanaPrincipal extends JFrame {
 					}
 				}
 			});
-		}*/
-		pCentral.setLayout(new GridLayout(0, 2));
-		ArrayList<Producto> al = BaseDeDatos.getProductos();
-		for(Producto p: al) {
-			ImageIcon im = new ImageIcon("media/"+p.getFoto());
-			JLabel lblProducto = new JLabel(im);
-			pCentral.add(lblProducto);
 		}
 		
+		
 		this.add(seleccion, BorderLayout.NORTH);
-		this.add(pCentral, BorderLayout.CENTER);
+		this.add(scroll, BorderLayout.CENTER);
 		this.add(bpersonal, BorderLayout.SOUTH);
 		
-	
-				
+		
+		
 		//Caracteristicas de la ventana
 		setSize(700,600);
 		setLocationRelativeTo(null);
 		setTitle("DEUSTOSHOP");
-		setVisible(true);		
-				
+		setVisible(true); 
+		
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.out.println("Cerrando");
@@ -123,50 +113,14 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		
-		seleccion.addItemListener(new ItemListener() {
-			
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				pCentral.removeAll();
-				pCentral.updateUI();
-				TipoProducto tp = (TipoProducto) seleccion.getSelectedItem();
-				if(tp.equals(TipoProducto.ROPA)) {
-					ArrayList<Ropa> al = BaseDeDatos.getProductosTipoRopa();
-					for(Ropa r: al) {
-						ImageIcon im = new ImageIcon("media/"+r.getFoto());
-						JLabel lblProducto = new JLabel(im);
-						pCentral.add(lblProducto);
-					}
-				}else if(tp.equals(TipoProducto.ELECTRONICA)) {
-					
-				}else if(tp.equals(TipoProducto.MATERIAL_ESCOLAR)) {
-					
-				}
-				pCentral.updateUI();
-				
-				
-			}
-		});
+		seleccion.addActionListener(new ActionListener() {
 		
-		/*seleccion.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(seleccion.getSelectedItem()!=null) {
 					pCentral.removeAll();
-					pCentral.updateUI();
 					TipoProducto tp = (TipoProducto) seleccion.getSelectedItem();
-					if(tp.equals(TipoProducto.ROPA.toString())) {
-						System.out.println("ROPA");
-						ArrayList<Ropa> al = BaseDeDatos.getProductosTipoRopa();
-						for(Ropa r: al) {
-							ImageIcon im = new ImageIcon("media/"+r.getFoto());
-							JLabel lblProducto = new JLabel(im);
-							pCentral.add(lblProducto);
-						}
-					}
-					pCentral.updateUI();
-					/*if(tp.equals(TipoProducto.ELECTRONICA)) {
+					if(tp.equals(TipoProducto.ELECTRONICA)) {
 						for (Producto p : Logica.productosHistoricos) {
 							if(p instanceof Electronica) {
 								JPanel pProducto = new JPanel();
@@ -180,8 +134,9 @@ public class VentanaPrincipal extends JFrame {
 								pProducto.add(lNom, BorderLayout.SOUTH);
 								pCentral.add(pProducto);
 								pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
+								
 								pProducto.addMouseListener(new MouseAdapter() {
-									
+						
 									@Override
 									public void mouseClicked(MouseEvent e) {
 										// TODO Auto-generated method stub
@@ -207,8 +162,9 @@ public class VentanaPrincipal extends JFrame {
 								pProducto.add(lNom, BorderLayout.SOUTH);
 								pCentral.add(pProducto);
 								pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
+								
 								pProducto.addMouseListener(new MouseAdapter() {
-									
+								
 									@Override
 									public void mouseClicked(MouseEvent e) {
 										// TODO Auto-generated method stub
@@ -235,7 +191,7 @@ public class VentanaPrincipal extends JFrame {
 								pCentral.add(pProducto);
 								pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
 								pProducto.addMouseListener(new MouseAdapter() {
-									
+								
 									@Override
 									public void mouseClicked(MouseEvent e) {
 										// TODO Auto-generated method stub
@@ -247,22 +203,19 @@ public class VentanaPrincipal extends JFrame {
 							}
 						}
 					}
-					//pCentral.revalidate();
+					pCentral.revalidate();
 				}
 			}
-		});*/
+		});
 		
 		bpersonal.addActionListener(new ActionListener() {
-
+		
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VentanaPersonal ventana= new VentanaPersonal(); //aqui falta pasarle la logica a la ventana principal
 				dispose();
 			}
 		});
-		
-	
-		
 	}
 	
 	private static class JLabelAjustado extends JLabel {
@@ -270,14 +223,14 @@ public class VentanaPrincipal extends JFrame {
 		private int tamX;
 		private int tamY;
 		/** Crea un jlabel que ajusta una imagen cualquiera con fondo blanco a su tamaño (a la que ajuste más de las dos escalas, horizontal o vertical)
-		 * @param imagen	Imagen a visualizar en el label
-		 */
+		* @param imagen Imagen a visualizar en el label
+		*/
 		public JLabelAjustado( ImageIcon imagen ) {
 			setImagen( imagen );
 		}
 		/** Modifica la imagen
-		 * @param imagen	Nueva imagen a visualizar en el label
-		 */
+		* @param imagen Nueva imagen a visualizar en el label
+		*/
 		public void setImagen( ImageIcon imagen ) {
 			this.imagen = imagen;
 			if (imagen==null) {
@@ -295,7 +248,7 @@ public class VentanaPrincipal extends JFrame {
 			if (imagen!=null && tamX>0 && tamY>0) {
 				g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 				g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
-				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);	
+				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON); 
 				double escalaX = 1.0 * getWidth() / tamX;
 				double escalaY = 1.0 * getHeight() / tamY;
 				double escala = escalaX;
@@ -307,7 +260,7 @@ public class VentanaPrincipal extends JFrame {
 				} else {
 					y = (int) ((getHeight() - (tamY * escala)) / 2);
 				}
-		        g2.drawImage( imagen.getImage(), x, y, (int) (tamX*escala), (int) (tamY*escala), null );
+				g2.drawImage( imagen.getImage(), x, y, (int) (tamX*escala), (int) (tamY*escala), null );
 			}
 		}
 	}

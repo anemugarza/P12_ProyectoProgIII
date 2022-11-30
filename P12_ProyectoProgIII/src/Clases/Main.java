@@ -1,12 +1,16 @@
 package Clases;
 
+import Logica.Logica;
 import Ventanas.VentanaLogIn;
+import Ventanas.VentanaPersonal;
+import Ventanas.VentanaPrincipal;
 
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("HOLA");
-		VentanaLogIn vl = new VentanaLogIn();
+		Logica log = new Logica();
+		log.cargarProductos("Productos.dat");
+		VentanaPrincipal vl = new VentanaPrincipal();
 	}
 
 }
