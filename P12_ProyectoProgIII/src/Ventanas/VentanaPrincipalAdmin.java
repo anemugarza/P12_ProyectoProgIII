@@ -2,32 +2,25 @@ package Ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.RenderingHints;
-import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 import Clases.Electronica;
@@ -37,18 +30,19 @@ import Clases.Ropa;
 import Clases.TipoProducto;
 import Logica.Logica;
 
-public class VentanaPrincipal extends JFrame {
-
+public class VentanaPrincipalAdmin extends JFrame{
 	/**
 	* 
 	*/
 	private static final long serialVersionUID = 1L;
 	
 	private JComboBox<TipoProducto> seleccion;
-	private JButton bpersonal;
+	private JButton banyadirProd;
+	private JButton bestadistica;
 	private JPanel pCentral;
+	private JPanel pbotonera;
 	private JScrollPane scroll;
-	public VentanaPrincipal()  {
+	public VentanaPrincipalAdmin()  {
 		inicializar();
 	}
 	
@@ -57,8 +51,10 @@ public class VentanaPrincipal extends JFrame {
 		// TODO Auto-generated method stub
 		seleccion = new JComboBox<>();
 		seleccion.setModel(new DefaultComboBoxModel<TipoProducto>(TipoProducto.values()));
-		bpersonal = new JButton("PERSONAL");
+		banyadirProd = new JButton("AÑADIR PRODUCTO");
+		bestadistica = new JButton("ESTADISTICAS");
 		pCentral = new JPanel();
+		pbotonera = new JPanel();
 		scroll = new JScrollPane(pCentral);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -85,23 +81,24 @@ public class VentanaPrincipal extends JFrame {
 				public void mouseClicked(MouseEvent e) {
 					// TODO Auto-generated method stub
 					if (e.getClickCount() == 2) {
-						VentanaProducto vp = new VentanaProducto(p);
+						VentanaModificarProd vp = new VentanaModificarProd(p);
 					}
 				}
 			});
 		}
 		
-		
+		pbotonera.add(banyadirProd);
+		pbotonera.add(bestadistica);
 		this.add(seleccion, BorderLayout.NORTH);
 		this.add(scroll, BorderLayout.CENTER);
-		this.add(bpersonal, BorderLayout.SOUTH);
+		this.add(pbotonera, BorderLayout.SOUTH);
 		
 		
 		
 		//Caracteristicas de la ventana
 		setSize(700,600);
 		setLocationRelativeTo(null);
-		setTitle("DEUSTOSHOP");
+		setTitle("DEUSTOSHOP ADMINISTRADOR");
 		setVisible(true); 
 		
 		this.addWindowListener(new WindowAdapter() {
@@ -139,7 +136,7 @@ public class VentanaPrincipal extends JFrame {
 									public void mouseClicked(MouseEvent e) {
 										// TODO Auto-generated method stub
 										if (e.getClickCount() == 2) {
-											VentanaProducto vp = new VentanaProducto(p);
+											VentanaModificarProd vp = new VentanaModificarProd(p);
 										}
 									}
 								});
@@ -167,7 +164,7 @@ public class VentanaPrincipal extends JFrame {
 									public void mouseClicked(MouseEvent e) {
 										// TODO Auto-generated method stub
 										if (e.getClickCount() == 2) {
-											VentanaProducto vp = new VentanaProducto(p);
+											VentanaModificarProd vp = new VentanaModificarProd(p);
 										}
 									}
 								});
@@ -194,7 +191,7 @@ public class VentanaPrincipal extends JFrame {
 									public void mouseClicked(MouseEvent e) {
 										// TODO Auto-generated method stub
 										if (e.getClickCount() == 2) {
-											VentanaProducto vp = new VentanaProducto(p);
+											VentanaModificarProd vp = new VentanaModificarProd(p);
 										}
 									}
 								});
@@ -206,17 +203,29 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		
-		bpersonal.addActionListener(new ActionListener() {
+		bestadistica.addActionListener(new ActionListener() {
 		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaPersonal ventana= new VentanaPersonal(); //aqui falta pasarle la logica a la ventana principal
+				VentanaEstadistica ventana= new VentanaEstadistica(); 
 				dispose();
+			}
+		});
+		
+		banyadirProd.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//falta codificar esto
 			}
 		});
 	}
 	
 	private static class JLabelAjustado extends JLabel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private ImageIcon imagen; 
 		private int tamX;
 		private int tamY;
