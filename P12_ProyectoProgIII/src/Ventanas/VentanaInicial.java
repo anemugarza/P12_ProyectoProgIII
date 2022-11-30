@@ -58,7 +58,7 @@ public class VentanaInicial extends JFrame{
 	
 	public static void main(String[] args) {
 		VentanaInicial v = new VentanaInicial();
-		/*EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
+		EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
 			private static final long serialVersionUID = 1L;
 
 			public void finished(MediaPlayer mediaPlayer) {
@@ -80,7 +80,7 @@ public class VentanaInicial extends JFrame{
 				vl.setVisible(true);
 			} 
 			}
-		});*/
+		});
 		v.setVisible(true);
 		
 	}
