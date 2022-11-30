@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.regex.Pattern;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -160,22 +161,30 @@ public class VentanaLogIn extends JFrame{
 						txtemailRegistro.setText("");
 					}
 					if (!txtemailRegistro.getText().equals("")  && !txtcontrasenyaRegistro.getText().equals("") ){
-						logica.crearUsuario(txtnombreRegistro.getText(),txtemailRegistro.getText(), txtcontrasenyaRegistro.getText()); 
-						//aqui hay que añadir el codigo tanto arriba como abajo
-						BaseDeDatos.añadirUsuario(0,txtnombreRegistro.getText(),txtemailRegistro.getText(), txtcontrasenyaRegistro.getText());
-						//Después de que se guarden todos los datos, vuelve a la ventana del Log In para poder entrar con la cuenta creada
-						txtemailRegistro.setText("");
-						txtcontrasenyaRegistro.setText("");
-						getContentPane().removeAll();
-						setSize(400,200);
-						setTitle("DEUSTOSHOP LOG IN");
-						getContentPane().setLayout(new GridLayout(2,1));
-						panelCentral.setLayout(new GridLayout(2,2));
-						getContentPane().add(panelCentral);
-						getContentPane().add(botonera);
-						setVisible(true);
+						String er = "{1,}[a-zA-Z]@{1,}[a-zA-Z].{2,}[a-z]";
+						String email = txtemailRegistro.getText();
+						if(Pattern.matches(er, email)) {
+							logica.crearUsuario(txtnombreRegistro.getText(),txtemailRegistro.getText(), txtcontrasenyaRegistro.getText()); 
+							//aqui hay que añadir el codigo tanto arriba como abajo
+							BaseDeDatos.añadirUsuario(0,txtnombreRegistro.getText(),txtemailRegistro.getText(), txtcontrasenyaRegistro.getText());
+							//Después de que se guarden todos los datos, vuelve a la ventana del Log In para poder entrar con la cuenta creada
+							txtemailRegistro.setText("");
+							txtcontrasenyaRegistro.setText("");
+							getContentPane().removeAll();
+							setSize(400,200);
+							setTitle("DEUSTOSHOP LOG IN");
+							getContentPane().setLayout(new GridLayout(2,1));
+							panelCentral.setLayout(new GridLayout(2,2));
+							getContentPane().add(panelCentral);
+							getContentPane().add(botonera);
+							setVisible(true);
+						}
+						else
+							JOptionPane.showMessageDialog(null, "ERROR: El formato del email no es correcto");
 					}else JOptionPane.showMessageDialog(null, "ERROR: Rellene todos los campos");
 				}
 			});
+			setVisible(true);
 		}
+		
 }

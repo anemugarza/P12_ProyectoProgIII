@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 import Clases.Administrador;
 import Clases.Comprador;
 import Clases.Producto;
+import Clases.Ropa;
+import Clases.Talla;
 import Clases.Usuario;
 
 
@@ -43,30 +45,38 @@ public class BaseDeDatos {
 				sent = "CREATE TABLE producto (id INTEGER PRIMARY KEY, clase varchar(100));";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );*/
-				String sent = "DROP TABLE IF EXISTS usuario";
+				/*String sent = "DROP TABLE IF EXISTS usuario";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "CREATE TABLE usuario (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre varchar(10), email varchar(25), contrasenya varchar(25), admin int);";
+				*/
+				String sent = "CREATE TABLE IF NOT EXISTS usuario(id INTEGER PRIMARY KEY AUTOINCREMENT, nombre varchar(10), email varchar(25), contrasenya varchar(25), admin int);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "DROP TABLE IF EXISTS wl";
+				//sent = "DROP TABLE IF EXISTS wl";
+				//logger.log( Level.INFO, "Statement: " + sent );
+				//statement.executeUpdate( sent );
+				sent = "CREATE TABLE IF NOT EXISTS wl (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario (id), idProducto INTEGER REFERENCES producto(id));";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "CREATE TABLE wl (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario (id), idProducto INTEGER REFERENCES producto(id));";
+				//sent = "DROP TABLE IF EXISTS analisis";
+				//logger.log( Level.INFO, "Statement: " + sent );
+				//statement.executeUpdate( sent );
+				sent = "CREATE TABLE IF NOT EXISTS analisis (id INTEGER PRIMARY KEY AUTOINCREMENT, fecha bigint, datos varchar(100), idUsuario KEY REFERENCES usuario (id));";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "DROP TABLE IF EXISTS analisis";
+				//sent = "DROP TABLE IF EXISTS cestas";
+				//logger.log( Level.INFO, "Statement: " + sent );
+				//statement.executeUpdate( sent );
+				sent = "CREATE TABLE IF NOT EXISTS cestas (id INTEGER PRIMARY KEY AUTOINCREMENT, idProducto INTEGER REFERENCES producto (id), idUsuario INTEGER REFERENCES usuario(id), totalPrecio int(10));";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "CREATE TABLE analisis (id INTEGER PRIMARY KEY AUTOINCREMENT, fecha bigint, datos varchar(100), idUsuario KEY REFERENCES usuario (id));";
+				//sent = "DROP TABLE IF EXISTS productos";
+				//logger.log( Level.INFO, "Statement: " + sent );
+				//statement.executeUpdate( sent );
+				sent = "CREATE TABLE IF NOT EXISTS productos (idProducto INTEGER PRIMARY KEY AUTOINCREMENT, nombreProducto String, precioProducto double, fotoProducto String, descripcion String, talla String, tipo String);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "DROP TABLE IF EXISTS cestas";
-				logger.log( Level.INFO, "Statement: " + sent );
-				statement.executeUpdate( sent );
-				sent = "CREATE TABLE cestas (id INTEGER PRIMARY KEY AUTOINCREMENT, idProducto INTEGER REFERENCES producto (id), idUsuario INTEGER REFERENCES usuario(id), totalPrecio int(10));";
-				logger.log( Level.INFO, "Statement: " + sent );
-				statement.executeUpdate( sent );
+				
 			}
 			return true;
 		} catch(Exception e) {
@@ -135,5 +145,48 @@ public class BaseDeDatos {
 			logger.log( Level.SEVERE, "Excepción", e );
 			return null;
 		}
+	}
+	public static ArrayList<Producto> getProductos(){
+		ArrayList<Producto> al = new ArrayList<>();
+		try (Statement statement = conexion.createStatement()){
+			String sent = "select * from productos;";
+			logger.log( Level.INFO, "Statement: " + sent );
+			ResultSet rs = statement.executeQuery( sent );
+			while( rs.next() ) { // Leer el resultset
+				String nom = rs.getString("nombreProducto");
+				double precio = rs.getDouble("precioProducto");
+				String foto = rs.getString("fotoProducto");
+				Producto p =  new Producto(nom, precio, foto);
+				al.add(p);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.log( Level.SEVERE, "Excepción", e );
+			return null;
+		}
+		return al;
+	}
+	
+	public static ArrayList<Ropa> getProductosTipoRopa(){
+		ArrayList<Ropa> al = new ArrayList<>();
+		try (Statement statement = conexion.createStatement()){
+			String sent = "select * from productos where tipo = 'R';";
+			logger.log( Level.INFO, "Statement: " + sent );
+			ResultSet rs = statement.executeQuery( sent );
+			while( rs.next() ) { // Leer el resultset
+				String nom = rs.getString("nombreProducto");
+				double precio = rs.getDouble("precioProducto");
+				String foto = rs.getString("fotoProducto");
+				Talla t = Talla.valueOf(rs.getString("talla"));
+				String desc = rs.getString("descripcion");
+				Ropa r = new Ropa(nom, precio, desc, t, foto);
+				al.add(r);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.log( Level.SEVERE, "Excepción", e );
+			return null;
+		}
+		return al;
 	}
 }

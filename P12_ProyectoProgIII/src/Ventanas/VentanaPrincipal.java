@@ -12,11 +12,14 @@ import java.awt.RenderingHints;
 import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -35,6 +38,7 @@ import Clases.MaterialEscolar;
 import Clases.Producto;
 import Clases.Ropa;
 import Clases.TipoProducto;
+import Logica.BaseDeDatos;
 import Logica.Logica;
 
 public class VentanaPrincipal extends JFrame {
@@ -61,11 +65,12 @@ public class VentanaPrincipal extends JFrame {
 		seleccion.setModel(new DefaultComboBoxModel<TipoProducto>(TipoProducto.values()));
 		bpersonal = new JButton("PERSONAL");
 		pCentral = new JPanel();
-		scroll = new JScrollPane(pCentral);
+		/*scroll = new JScrollPane(pCentral);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(50, 30, 300, 50);
-		for(Producto p : Logica.productosHistoricos) {
+		*/
+		/*for(Producto p : Logica.productosHistoricos) {
 			JPanel pProducto = new JPanel();
 			JPanel pfoto = new JPanel();
 			JPanel pnom = new JPanel();
@@ -90,11 +95,17 @@ public class VentanaPrincipal extends JFrame {
 					}
 				}
 			});
+		}*/
+		pCentral.setLayout(new GridLayout(0, 2));
+		ArrayList<Producto> al = BaseDeDatos.getProductos();
+		for(Producto p: al) {
+			ImageIcon im = new ImageIcon("media/"+p.getFoto());
+			JLabel lblProducto = new JLabel(im);
+			pCentral.add(lblProducto);
 		}
 		
-		
 		this.add(seleccion, BorderLayout.NORTH);
-		this.add(scroll, BorderLayout.CENTER);
+		this.add(pCentral, BorderLayout.CENTER);
 		this.add(bpersonal, BorderLayout.SOUTH);
 		
 	
@@ -112,14 +123,50 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		
-		seleccion.addActionListener(new ActionListener() {
+		seleccion.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				pCentral.removeAll();
+				pCentral.updateUI();
+				TipoProducto tp = (TipoProducto) seleccion.getSelectedItem();
+				if(tp.equals(TipoProducto.ROPA)) {
+					ArrayList<Ropa> al = BaseDeDatos.getProductosTipoRopa();
+					for(Ropa r: al) {
+						ImageIcon im = new ImageIcon("media/"+r.getFoto());
+						JLabel lblProducto = new JLabel(im);
+						pCentral.add(lblProducto);
+					}
+				}else if(tp.equals(TipoProducto.ELECTRONICA)) {
+					
+				}else if(tp.equals(TipoProducto.MATERIAL_ESCOLAR)) {
+					
+				}
+				pCentral.updateUI();
+				
+				
+			}
+		});
+		
+		/*seleccion.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(seleccion.getSelectedItem()!=null) {
 					pCentral.removeAll();
+					pCentral.updateUI();
 					TipoProducto tp = (TipoProducto) seleccion.getSelectedItem();
-					if(tp.equals(TipoProducto.ELECTRONICA)) {
+					if(tp.equals(TipoProducto.ROPA.toString())) {
+						System.out.println("ROPA");
+						ArrayList<Ropa> al = BaseDeDatos.getProductosTipoRopa();
+						for(Ropa r: al) {
+							ImageIcon im = new ImageIcon("media/"+r.getFoto());
+							JLabel lblProducto = new JLabel(im);
+							pCentral.add(lblProducto);
+						}
+					}
+					pCentral.updateUI();
+					/*if(tp.equals(TipoProducto.ELECTRONICA)) {
 						for (Producto p : Logica.productosHistoricos) {
 							if(p instanceof Electronica) {
 								JPanel pProducto = new JPanel();
@@ -200,10 +247,10 @@ public class VentanaPrincipal extends JFrame {
 							}
 						}
 					}
-					pCentral.revalidate();
+					//pCentral.revalidate();
 				}
 			}
-		});
+		});*/
 		
 		bpersonal.addActionListener(new ActionListener() {
 
@@ -214,7 +261,7 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		
-		
+	
 		
 	}
 	
