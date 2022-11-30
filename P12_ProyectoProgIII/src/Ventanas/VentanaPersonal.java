@@ -63,9 +63,9 @@ public class VentanaPersonal extends JFrame {
 		tproductos = new JTable(mProductos);
 		
 		Comprador c1 = (Comprador) logica.getUsuario();
-		for(Producto p : c1.getWl()) {
+		/*for(Producto p : c1.getWl()) {
 			 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass(),p.getPrecio(), p.getFoto()});
-		}
+		}*/
 		
 		pbotonera.add(bwl);
 		pbotonera.add(bcesta);
@@ -112,7 +112,7 @@ public class VentanaPersonal extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				bcompra.setVisible(true);
+				bcompra.setVisible(false);
 				//falta borrar los productos que hay dentro
 				for(Producto p : c1.getWl()) {
 					 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass(),p.getPrecio(), p.getFoto()});

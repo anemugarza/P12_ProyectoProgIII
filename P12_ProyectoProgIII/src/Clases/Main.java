@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) {
 		Logica log = new Logica();
 		log.cargarProductos("Productos.dat");
-		VentanaPrincipal vl = new VentanaPrincipal();
+		VentanaLogIn vl = new VentanaLogIn();
 	}
 
 }
