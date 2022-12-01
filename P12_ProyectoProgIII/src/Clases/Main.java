@@ -20,7 +20,7 @@ public class Main {
 		Logica log = new Logica();
 		log.cargarProductos("Productos.dat");
 		log.setUsuario(new Comprador(0, "a", "a", "a"));
-		VentanaInicial v = new VentanaInicial();
+		/*VentanaInicial v = new VentanaInicial();
 		EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
 			private static final long serialVersionUID = 1L;
 
@@ -44,12 +44,9 @@ public class Main {
 			} 
 			}
 		});
-		v.setVisible(true);
+		v.setVisible(true);*/
 		BaseDeDatos.abrirConexion("MiBD.db", false);
-		//VentanaPrincipal vl = new VentanaPrincipal();
-		
-		//VentanaPrincipalAdmin v = new VentanaPrincipalAdmin();
-		//VentanaInicial v3 = new VentanaInicial();
+		VentanaPrincipal v = new VentanaPrincipal();
 	}
 
 }

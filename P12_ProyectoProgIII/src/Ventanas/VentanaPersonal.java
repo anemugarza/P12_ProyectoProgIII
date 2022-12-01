@@ -5,12 +5,19 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -40,11 +47,11 @@ public class VentanaPersonal extends JFrame {
 	private JPanel pNorte;
 	private JButton bvolver;
 	private JPanel pbotonera;
+	private boolean tipolista; //false es wl y true es cesta
 
 	Comprador c1 = (Comprador) Logica.getUsuario();
-	private DefaultTableModel mProductos = new DefaultTableModel(
-			new Object[] { "Nombre", "Código", "Tipo", "Precio", "Foto" }, 0
-		);
+	Vector <String> cabecera = new Vector <String> (Arrays.asList("NOMBRE","CÓDIDO","TIPO PRODUCTO", "PRECIO", "CANTIDAD"));
+	private DefaultTableModel mProductos = new DefaultTableModel(new Vector<Vector<Object>>(), cabecera);
 	private JTable tproductos;
 
 	
@@ -54,8 +61,8 @@ public class VentanaPersonal extends JFrame {
 
 	private void inicializar() {
 		// TODO Auto-generated method stub
+		tipolista = false;
 		info = new JLabel("LISTA: Wish List");
-		totalPrecio = new JLabel("PRECIO: "); //falta hacer la funcion del precio total de la lista
 		bwl = new JButton("WISHLIST");
 		bcesta = new JButton("CESTA");
 		bvolver = new JButton("VOLVER");
@@ -65,6 +72,7 @@ public class VentanaPersonal extends JFrame {
 		tproductos = new JTable(mProductos);
 		
 		actualizarLista(1);
+		totalPrecio = new JLabel("PRECIO TOTAL: " + actualizarPrecio(c1.getWl())+ "€");
 		tproductos.setModel(mProductos);
 		pbotonera.add(bwl);
 		pbotonera.add(bcesta);
@@ -109,6 +117,8 @@ public class VentanaPersonal extends JFrame {
 				bcompra.setVisible(true);
 				info.setText("LISTA: Cesta");
 				actualizarLista(0);
+				totalPrecio.setText("PRECIO TOTAL: " + actualizarPrecio(c1.getCesta())+ "€");
+				tipolista = true;
 			}
 		});
 		
@@ -119,6 +129,8 @@ public class VentanaPersonal extends JFrame {
 				bcompra.setVisible(false);
 				info.setText("LISTA: WishList");
 				actualizarLista(1);
+				totalPrecio.setText("PRECIO TOTAL: " + actualizarPrecio(c1.getWl()) + "€");
+				tipolista = false;
 			}
 		});
 		
@@ -127,28 +139,54 @@ public class VentanaPersonal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
-
+				//Hay que registrar la compra
 				
 			}
 		});
+		
+		KeyListener kl = new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_DELETE) {
+					int pos= tproductos.getSelectedRow();
+					if(tipolista == true) {
+						c1.getCesta().remove(pos);
+						actualizarLista(0);
+					}else {
+						c1.getWl().remove(pos);
+						actualizarLista(1);
+					}
+					
+				}
+			}
+		};
+		tproductos.addKeyListener( kl );
 	}
 	public void actualizarLista(int type) {
-		mProductos = new DefaultTableModel(
-				new Object[] { "Nombre", "Código", "Tipo", "Precio", "Foto" }, 0
-			);
+		Vector <String> cabecera = new Vector <String> (Arrays.asList("NOMBRE","CÓDIDO","TIPO PRODUCTO", "PRECIO", "CANTIDAD"));
+		DefaultTableModel mProductos = new DefaultTableModel(new Vector<Vector<Object>>(), cabecera);
 		switch (type) {
 		case 0:
 			for(Producto p : c1.getCesta()) {
-				 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio(), p.getFoto()});
+				 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€", p.getFoto()});
 			}
 			break;
 
 		default:
 			for(Producto p : c1.getWl()) {
-				 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio(), p.getFoto()});
+				 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€", p.getFoto()});
 			}
 			break;
 		}
 		tproductos.setModel(mProductos);
+	}
+	
+	public String actualizarPrecio(List<Producto> lista) {
+		double precioT = 0.0;
+		DecimalFormat df = new DecimalFormat("#.00");
+		for(Producto p : lista) {
+			precioT += p.getPrecio();
+		}
+		return df.format(precioT);
 	}
 }

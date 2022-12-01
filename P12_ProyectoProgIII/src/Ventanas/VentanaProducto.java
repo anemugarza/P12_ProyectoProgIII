@@ -55,7 +55,7 @@ public class VentanaProducto extends JFrame{
 		pInfo= new JPanel();
 		pbotonera= new JPanel();
 		bañadirCESTA = new JButton("AÑADIR CESTA");
-		bañadirWL = new JButton("AÑADIR WL");
+		bañadirWL = new JButton("AÑADIR WISHLIST");
 		bvolver = new JButton("VOLVER");
 		Comprador c1 = (Comprador) Logica.getUsuario();
 
