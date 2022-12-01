@@ -7,6 +7,8 @@ import Logica.BaseDeDatos;
 import Logica.Logica;
 import Ventanas.VentanaInicial;
 import Ventanas.VentanaLogIn;
+import Ventanas.VentanaModificarProd;
+import Ventanas.VentanaModificarProd;
 import Ventanas.VentanaPersonal;
 import Ventanas.VentanaPrincipal;
 import Ventanas.VentanaPrincipalAdmin;
@@ -16,7 +18,7 @@ import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 public class Main {
 
 	public static void main(String[] args) {
-		
+		Producto prod1 = new Producto("Cuaderno", 12, "Algoritmia.jpeg");
 		Logica log = new Logica();
 		log.cargarProductos("Productos.dat");
 		log.setUsuario(new Comprador(0, "a", "a", "a"));
@@ -46,7 +48,7 @@ public class Main {
 		});
 		v.setVisible(true);*/
 		BaseDeDatos.abrirConexion("MiBD.db", false);
-		VentanaPrincipal v = new VentanaPrincipal();
+		VentanaPrincipalAdmin v = new VentanaPrincipalAdmin();
 	}
 
 }

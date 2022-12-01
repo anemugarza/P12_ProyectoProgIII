@@ -76,12 +76,12 @@ public class VentanaPrincipalAdmin extends JFrame{
 			pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
 			
 			pProducto.addMouseListener(new MouseAdapter() {
-		
+				
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					// TODO Auto-generated method stub
 					if (e.getClickCount() == 2) {
-						VentanaModificarProd vp = new VentanaModificarProd(p);
+						VentanaModificarProd v = new VentanaModificarProd(p);
 					}
 				}
 			});
