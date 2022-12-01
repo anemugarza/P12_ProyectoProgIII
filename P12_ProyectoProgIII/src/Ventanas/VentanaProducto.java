@@ -37,6 +37,7 @@ public class VentanaProducto extends JFrame{
 	private JButton bañadirWL;
 	private JButton bañadirCESTA;
 	private JPanel pCentral;
+	private JPanel pInfo;
 	private JPanel pbotonera;
 	private Producto p;
 
@@ -46,28 +47,27 @@ public class VentanaProducto extends JFrame{
 	}
 	
 	private void inicializar(Producto p) {
-		//Inicializamos elementos 
 		nombreProd= new JLabel("Nombre: " + p.getNomP());
 		precioProd= new JLabel("Precio: " + p.getPrecio());
 		foto = new ImageIcon(p.getFoto());
 		lfoto= new JLabelAjustado(foto);
 		pCentral= new JPanel();
+		pInfo= new JPanel();
 		pbotonera= new JPanel();
 		bañadirCESTA = new JButton("AÑADIR CESTA");
 		bañadirWL = new JButton("AÑADIR WL");
 		bvolver = new JButton("VOLVER");
 		Comprador c1 = (Comprador) Logica.getUsuario();
 
-		
-		//Añadimos a la ventana
-		pCentral.add(lfoto);
-		pCentral.add(nombreProd);
-		pCentral.add(precioProd);
-		pCentral.setLayout(new GridLayout(3,0));
+		pCentral.setLayout(new BorderLayout());
+		pCentral.add(lfoto, BorderLayout.CENTER);
+		pInfo.setLayout(new BorderLayout());
+		pInfo.add(nombreProd, BorderLayout.NORTH);
+		pInfo.add(precioProd, BorderLayout.SOUTH);
+		pCentral.add(pInfo, BorderLayout.SOUTH);
 		pbotonera.add(bañadirCESTA);
 		pbotonera.add(bañadirWL);
 		
-		//Caracteristicas de la ventana
 		setSize(700,600);
 		setLocationRelativeTo(null);
 		setTitle("PRODUCTO: " + p.getNomP());

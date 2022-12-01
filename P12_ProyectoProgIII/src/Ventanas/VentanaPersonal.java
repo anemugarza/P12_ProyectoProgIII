@@ -139,13 +139,13 @@ public class VentanaPersonal extends JFrame {
 		switch (type) {
 		case 0:
 			for(Producto p : c1.getCesta()) {
-				 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass(),p.getPrecio(), p.getFoto()});
+				 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio(), p.getFoto()});
 			}
 			break;
 
 		default:
 			for(Producto p : c1.getWl()) {
-				 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass(),p.getPrecio(), p.getFoto()});
+				 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio(), p.getFoto()});
 			}
 			break;
 		}
