@@ -98,7 +98,10 @@ public class VentanaProducto extends JFrame{
 			//si es admin entre a la ventana del admin
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				c1.anyadirCesta(p);
+				if(!c1.getCesta().contains(p)) {
+					c1.anyadirCesta(p);
+					//aqui hay que cambiar la cantidad
+				}
 				JOptionPane.showMessageDialog(null, "¡Producto añadido a tu cesta!");
 			}
 		});
@@ -107,7 +110,10 @@ public class VentanaProducto extends JFrame{
 			//si es admin entre a la ventana del admin
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				c1.anyadirWL(p);
+				if(!c1.getWl().contains(p)) {
+					c1.anyadirWL(p);
+					//aqui hay que cambiar la cantidad
+				}
 				JOptionPane.showMessageDialog(null, "¡Producto añadido a tu wishlist!");
 			}
 		});

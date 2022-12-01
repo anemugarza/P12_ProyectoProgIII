@@ -189,4 +189,8 @@ public class VentanaPersonal extends JFrame {
 		}
 		return df.format(precioT);
 	}
+	
+	public void calcularCantidad(List<Producto> lista) {
+		//calcular cantidad y que no se añada a la lista dos veces el producto si no que se cambie la cantidad
+	}
 }
