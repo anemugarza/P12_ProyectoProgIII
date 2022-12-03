@@ -21,8 +21,8 @@ public class Main {
 		Producto prod1 = new Producto("Cuaderno", 12, "Algoritmia.jpeg");
 		Logica log = new Logica();
 		log.cargarProductos("Productos.dat");
-		log.setUsuario(new Comprador(0, "a", "a", "a"));
-		/*VentanaInicial v = new VentanaInicial();
+		/*log.setUsuario(new Comprador(0, "a", "a", "a"));
+		VentanaInicial v = new VentanaInicial();
 		EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
 			private static final long serialVersionUID = 1L;
 
@@ -45,10 +45,10 @@ public class Main {
 				vl.setVisible(true);
 			} 
 			}
-		});
-		v.setVisible(true);*/
-		BaseDeDatos.abrirConexion("MiBD.db", false);
+		});*/
 		VentanaPrincipalAdmin v = new VentanaPrincipalAdmin();
+		v.setVisible(true);
+		BaseDeDatos.abrirConexion("MiBD.db", false);
 	}
 
 }

@@ -95,6 +95,7 @@ public class VentanaModificarProd extends JFrame{
 		bvolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				VentanaPrincipalAdmin v = new VentanaPrincipalAdmin();
 				dispose();	
 			}
 		});
@@ -102,7 +103,7 @@ public class VentanaModificarProd extends JFrame{
 		bNombre.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaCambioNombre ventana= new VentanaCambioNombre(p); 
+				VentanaCambioNombre vn= new VentanaCambioNombre(p); 
 			}
 		});
 		
@@ -110,7 +111,7 @@ public class VentanaModificarProd extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaCambioPrecio ventana= new VentanaCambioPrecio(p); 
+				VentanaCambioPrecio vp= new VentanaCambioPrecio(p); 
 			}
 		});
 		
@@ -118,7 +119,7 @@ public class VentanaModificarProd extends JFrame{
 					
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaCambioFoto ventana= new VentanaCambioFoto(p); 
+				VentanaCambioFoto vf= new VentanaCambioFoto(p); 
 			}
 		});
 

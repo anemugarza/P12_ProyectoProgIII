@@ -64,7 +64,6 @@ public class VentanaCambioFoto extends JFrame{
 		bcancelar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaModificarProd ventana= new VentanaModificarProd(p); 
 				dispose();	
 			}
 		});

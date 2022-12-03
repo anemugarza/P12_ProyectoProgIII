@@ -192,6 +192,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 										// TODO Auto-generated method stub
 										if (e.getClickCount() == 2) {
 											VentanaModificarProd vp = new VentanaModificarProd(p);
+											dispose();
 										}
 									}
 								});

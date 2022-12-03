@@ -84,6 +84,7 @@ public class VentanaCambioPrecio extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				p.setPrecio(Double.parseDouble(txtPrecio.getText()));
 				Logica.guardarProductos("Productos.dat");
+				VentanaModificarProd ventana= new VentanaModificarProd(p); 
 				dispose();	
 			}
 		});

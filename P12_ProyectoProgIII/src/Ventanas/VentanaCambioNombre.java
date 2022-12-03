@@ -84,6 +84,7 @@ public class VentanaCambioNombre extends JFrame{
 				public void actionPerformed(ActionEvent e) {
 					p.setNomP(txtNombre.getText());
 					Logica.guardarProductos("Productos.dat");
+					VentanaModificarProd ventana= new VentanaModificarProd(p); 
 					dispose();	
 				}
 			});
