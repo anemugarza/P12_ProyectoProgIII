@@ -216,7 +216,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//falta codificar esto
+				VentanaAnyadirP vap = new VentanaAnyadirP();
 			}
 		});
 	}

@@ -80,7 +80,7 @@ public class Logica implements Serializable{
 		BaseDeDatos.getUsuarios().put(c1.getEmail(),c1);
 	}
 
-	public void guardarProductos(String nombreFic) {
+	public static void guardarProductos(String nombreFic) {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nombreFic));
 			oos.writeObject(productosHistoricos);

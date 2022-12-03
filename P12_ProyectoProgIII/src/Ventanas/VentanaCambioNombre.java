@@ -30,15 +30,11 @@ public class VentanaCambioNombre extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 		//Componentes del Log In
-		private JLabel NombreAhora;
-		private JLabel Nombre;
+		private JLabel nombreN;
 		private JTextField txtNombre;
-		private JButton guardarDatos;
-		private JPanel panelCentral;
-		private JPanel botonera;
-		private Logica logica;
-		private BaseDeDatos bd;
-		private Producto p;
+		private JButton bcancelar;
+		private JButton bguardarDatos;
+		private JPanel pbotonera;
 		
 
 		
@@ -48,32 +44,25 @@ public class VentanaCambioNombre extends JFrame{
 		
 		private void inicializar(Producto p) {
 			//Inicializamos elementos 
-			NombreAhora= new JLabel("Nombre actual: " + p.getNomP()+ ".");
-			Nombre= new JLabel("Introduzca el nuevo nombre: ");
+			nombreN= new JLabel("Introduzca el nuevo nombre: ");
 			txtNombre= new JTextField(25);
-			guardarDatos= new JButton("Guardar cambios");
-			panelCentral= new JPanel();
-			botonera= new JPanel();
-			guardarDatos.setFont(new Font("Serif", Font.PLAIN, 20));
-			logica= new Logica();
-			bd = new BaseDeDatos();
+			bguardarDatos= new JButton("GUARDAR CAMBIOS");
+			bcancelar= new JButton("CANCELAR");
+			pbotonera = new JPanel();
 			
 			//Añadimos a la ventana
-			panelCentral.add(NombreAhora);
-			panelCentral.add(Nombre);
-			panelCentral.add(txtNombre);
-			botonera.add(guardarDatos);
+			pbotonera.add(bcancelar);
+			pbotonera.add(bguardarDatos);
+			this.setLayout(new BorderLayout());
+			this.add(nombreN, BorderLayout.NORTH);
+			this.add(txtNombre, BorderLayout.CENTER);
+			this.add(pbotonera, BorderLayout.SOUTH);
 			
-
 			
 			//Caracteristicas de la ventana
 			setSize(500,200);
 			setLocationRelativeTo(null);
 			setTitle("CAMBIO DE NOMBRE");
-			getContentPane().setLayout(new GridLayout(2,1));
-			panelCentral.setLayout(new GridLayout(2,2));
-			this.add(panelCentral);
-			this.add(botonera);
 			setVisible(true);
 			
 			this.addWindowListener(new WindowAdapter() {
@@ -82,11 +71,23 @@ public class VentanaCambioNombre extends JFrame{
 					System.exit(0);
 				}
 			});
-		
 			
-		
+			bcancelar.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					dispose();	
+				}
+			});
 			
-			setVisible(true);
+			bguardarDatos.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					p.setNomP(txtNombre.getText());
+					Logica.guardarProductos("Productos.dat");
+					dispose();	
+				}
+			});
+	
 		}
 		
 }

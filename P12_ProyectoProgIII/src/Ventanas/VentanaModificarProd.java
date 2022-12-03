@@ -51,7 +51,7 @@ public class VentanaModificarProd extends JFrame{
 	
 	private void inicializar(Producto p) {
 		nombreProd= new JLabel("Nombre: " + p.getNomP());
-		precioProd= new JLabel("Precio: " + p.getPrecio());
+		precioProd= new JLabel("Precio: " + p.getPrecio() + "€");
 		foto = new ImageIcon(p.getFoto());
 		lfoto= new JLabelAjustado(foto);
 		pCentral= new JPanel();
@@ -61,7 +61,6 @@ public class VentanaModificarProd extends JFrame{
 		bNombre = new JButton("MODIFICAR NOMBRE");
 		bFoto = new JButton("MODIFICAR FOTO");
 		bvolver = new JButton("VOLVER");
-		Comprador c1 = (Comprador) Logica.getUsuario();
 
 		pCentral.setLayout(new BorderLayout());
 		pCentral.add(lfoto, BorderLayout.CENTER);
@@ -96,32 +95,33 @@ public class VentanaModificarProd extends JFrame{
 		bvolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaPrincipal ventana= new VentanaPrincipal(); 
 				dispose();	
 			}
 		});
 		
-		bNombre.addMouseListener(new MouseAdapter() {
+		bNombre.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if (e.getClickCount() == 2) {
-					VentanaCambioNombre vp = new VentanaCambioNombre (p);
-				}
+			public void actionPerformed(ActionEvent e) {
+				VentanaCambioNombre ventana= new VentanaCambioNombre(p); 
 			}
 		});
 		
-		bPrecio.addMouseListener(new MouseAdapter() {
+		bPrecio.addActionListener(new ActionListener() {
 			
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if (e.getClickCount() == 2) {
-					VentanaCambioPrecio vp = new VentanaCambioPrecio(p);
-				}
+			public void actionPerformed(ActionEvent e) {
+				VentanaCambioPrecio ventana= new VentanaCambioPrecio(p); 
 			}
 		});
 		
+		bFoto.addActionListener(new ActionListener() {
+					
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaCambioFoto ventana= new VentanaCambioFoto(p); 
+			}
+		});
+
 		
 	}
 	private static class JLabelAjustado extends JLabel {

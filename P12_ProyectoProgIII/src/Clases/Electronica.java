@@ -12,6 +12,10 @@ public class Electronica extends Producto {
 		this.descripcion = descripcion;
 	}
 
+	public Electronica(String nomP, double precio, String foto) {
+		super(nomP, precio, foto);
+	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
