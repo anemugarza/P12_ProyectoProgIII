@@ -8,12 +8,14 @@ public class Producto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+
 	int codigoP;
 	static int cont=1;
 	String nomP;
 	double precio;
 	private String foto;
 	
+
 	public Producto(String nomP, double precio, String foto) {
 		super();
 		this.codigoP = cont++;
@@ -29,6 +31,7 @@ public class Producto implements Serializable{
 	public int getCodigoP() {
 		return codigoP;
 	}
+	
 
 	public void setCodigoP(int codigoP) {
 		this.codigoP = codigoP;

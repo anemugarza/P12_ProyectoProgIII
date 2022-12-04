@@ -168,13 +168,27 @@ public class VentanaPersonal extends JFrame {
 		switch (type) {
 		case 0:
 			for(Producto p : c1.getCesta()) {
-				 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€", p.getFoto()});
+				int cont=0;
+				 for (int i = 0; i < mProductos.getRowCount(); i++) {
+					 if(mProductos.getValueAt(i, 1).toString().equals(p.getNomP())){
+						cont= cont+1;
+						mProductos.removeRow(i);
+					 } 
+				 }
+				mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€",cont });
 			}
 			break;
 
 		default:
 			for(Producto p : c1.getWl()) {
-				 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€", p.getFoto()});
+					int cont=1;
+					 for (int i = 0; i < mProductos.getRowCount(); i++) {
+						 if(mProductos.getValueAt(i, 0).toString().equals(p.getNomP())){
+							cont= cont+1;
+							mProductos.removeRow(i);
+						 }
+					 }
+				 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€", cont});
 			}
 			break;
 		}
