@@ -19,12 +19,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		Logica log = new Logica();
-		Administrador a1 = new Administrador(1, "a", "a1@a.com", "a");
-		Comprador c1 = new Comprador(0, "a", "c1@a.com", "a");
 		BaseDeDatos.abrirConexion("MiBD.db", false);
 		log.cargarProductos("Productos.dat");
-		log.setUsuario(new Comprador(0, "a", "a", "a"));
-		VentanaInicial v = new VentanaInicial();
+		//log.setUsuario(new Comprador(0, "a", "a", "a"));
+		VentanaLogIn v = new VentanaLogIn();
 
 		/*VentanaInicial v = new VentanaInicial();
 		EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {

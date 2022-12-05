@@ -94,7 +94,7 @@ public class BaseDeDatos {
 				String email = rs.getString("email");
 				String constrasenya = rs.getString("contrasenya");
 				if(rs.getInt("admin")==1) users.put(email, new Administrador( id, nombre, email, constrasenya ) );		
-				else users.put(email,new Comprador(id, nombre, email, constrasenya ) );
+				else users.put(email,new Comprador(id, nombre, email, constrasenya, rs.getInt("admin")) );
 				}
 			return users;
 		} catch (Exception e) {

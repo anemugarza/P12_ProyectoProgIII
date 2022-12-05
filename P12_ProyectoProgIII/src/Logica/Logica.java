@@ -78,14 +78,14 @@ public class Logica implements Serializable{
 	}
 	
 	public boolean UsuarioComprador(String email) {
-		if(BaseDeDatos.getUsuarios().get(email).getCodigoUsuario() == 0 ) return true;
+		if(BaseDeDatos.getUsuarios().get(email) instanceof Comprador ) return true;
 		else return false;
 
 	}
 
 	
 	public void crearUsuario(String nombre, String email, String contrasenya) {
-		Comprador c1= new Comprador(0, nombre, email,contrasenya ); 
+		Comprador c1= new Comprador(nombre, email,contrasenya, 0); 
 		BaseDeDatos.getUsuarios().put(c1.getEmail(),c1);
 	}
 

@@ -168,7 +168,7 @@ public class VentanaPersonal extends JFrame {
 	}
 	public void actualizarLista(int type) {
 		Vector <String> cabecera = new Vector <String> (Arrays.asList("NOMBRE","CÓDIDO","TIPO PRODUCTO", "PRECIO", "CANTIDAD"));
-		DefaultTableModel mProductos = new DefaultTableModel(new Vector<Vector<Object>>(), cabecera);
+		mProductos = new DefaultTableModel(new Vector<Vector<Object>>(), cabecera);
 		switch (type) {
 		case 0:
 			for(Producto p : c1.getCesta()) {

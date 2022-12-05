@@ -2,12 +2,13 @@ package Clases;
 
 public abstract class Usuario {
 	int codigoUsuario;
-	static int cont=0;
+	static int cont=1;
 	String nomUsuario;
 	String email;
 	String contrasenya;
+	int admin;
 	
-	public Usuario(int cod,String nomUsuario, String email, String contrasenya) {
+	public Usuario(int cod, String nomUsuario, String email, String contrasenya, int admin) {
 		super();
 		if(cod!=0) {
 			this.codigoUsuario=cod;
@@ -15,7 +16,18 @@ public abstract class Usuario {
 		this.nomUsuario = nomUsuario;
 		this.email = email;
 		this.contrasenya = contrasenya;
+		this.admin = admin;
 	}
+
+	
+	public Usuario(String nomUsuario, String email, String contrasenya, int admin) {
+		super();
+		this.nomUsuario = nomUsuario;
+		this.email = email;
+		this.contrasenya = contrasenya;
+		this.admin = admin;
+	}
+
 
 	public int getCodigoUsuario() {
 		return codigoUsuario;
