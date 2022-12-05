@@ -24,7 +24,7 @@ public class Main {
 		BaseDeDatos.abrirConexion("MiBD.db", false);
 		log.cargarProductos("Productos.dat");
 		log.setUsuario(new Comprador(0, "a", "a", "a"));
-		VentanaPrincipal v = new VentanaPrincipal();
+		VentanaInicial v = new VentanaInicial();
 
 		/*VentanaInicial v = new VentanaInicial();
 		EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
