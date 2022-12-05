@@ -142,7 +142,7 @@ public class VentanaLogIn extends JFrame{
 					if(!txtemail.getText().equals("") && !txtcontrasenya.getText().equals("")) {
 						if(logica.existeUsuario(txtemail.getText())) {
 							if(logica.usuarioCorrecto(txtemail.getText(), txtcontrasenya.getText())!=null){
-								if(logica.UsuarioComprador(txtemail.getText())==false){
+								if(logica.UsuarioComprador(txtemail.getText())==true){
 									VentanaPrincipal ventana= new VentanaPrincipal();
 									}else {
 										VentanaPrincipalAdmin ventana = new VentanaPrincipalAdmin();

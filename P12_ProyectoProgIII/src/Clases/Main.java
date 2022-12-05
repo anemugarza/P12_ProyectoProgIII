@@ -18,11 +18,15 @@ import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 public class Main {
 
 	public static void main(String[] args) {
-		Producto prod1 = new Producto("Cuaderno", 12, "Algoritmia.jpeg");
 		Logica log = new Logica();
+		Administrador a1 = new Administrador(1, "a", "a1@a.com", "a");
+		Comprador c1 = new Comprador(0, "a", "c1@a.com", "a");
+		BaseDeDatos.abrirConexion("MiBD.db", false);
 		log.cargarProductos("Productos.dat");
-		/*log.setUsuario(new Comprador(0, "a", "a", "a"));
-		VentanaInicial v = new VentanaInicial();
+		log.setUsuario(new Comprador(0, "a", "a", "a"));
+		VentanaPrincipal v = new VentanaPrincipal();
+
+		/*VentanaInicial v = new VentanaInicial();
 		EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
 			private static final long serialVersionUID = 1L;
 
@@ -46,9 +50,7 @@ public class Main {
 			} 
 			}
 		});*/
-		VentanaPrincipalAdmin v = new VentanaPrincipalAdmin();
 		v.setVisible(true);
-		BaseDeDatos.abrirConexion("MiBD.db", false);
 	}
 
 }
