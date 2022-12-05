@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
@@ -31,6 +32,7 @@ import javax.swing.table.DefaultTableModel;
 import Clases.Comprador;
 import Clases.Producto;
 import Clases.TipoProducto;
+import Clases.Usuario;
 import Logica.Logica;
 
 public class VentanaPersonal extends JFrame {
@@ -53,6 +55,7 @@ public class VentanaPersonal extends JFrame {
 	Vector <String> cabecera = new Vector <String> (Arrays.asList("NOMBRE","CÓDIDO","TIPO PRODUCTO", "PRECIO", "CANTIDAD"));
 	private DefaultTableModel mProductos = new DefaultTableModel(new Vector<Vector<Object>>(), cabecera);
 	private JTable tproductos;
+	public static ArrayList<Producto> Cesta = new ArrayList<>();
 
 	
 	public VentanaPersonal()  {
@@ -140,6 +143,7 @@ public class VentanaPersonal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
 				//Hay que registrar la compra
+				Logica.guardarCompra("Pedidos.dat");
 				
 			}
 		});
@@ -176,6 +180,9 @@ public class VentanaPersonal extends JFrame {
 					 } 
 				 }
 				mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€",cont });
+				Cesta.add(p);
+				
+				
 			}
 			break;
 
@@ -188,7 +195,7 @@ public class VentanaPersonal extends JFrame {
 							mProductos.removeRow(i);
 						 }
 					 }
-				 mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€", cont});
+				 mProductos.addRow(new Object[] {p.getNomP(),"Co:" +p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€", "Cantidad:"+cont});
 			}
 			break;
 		}
@@ -204,7 +211,5 @@ public class VentanaPersonal extends JFrame {
 		return df.format(precioT);
 	}
 	
-	public void calcularCantidad(List<Producto> lista) {
-		//calcular cantidad y que no se añada a la lista dos veces el producto si no que se cambie la cantidad
-	}
+	
 }
