@@ -31,7 +31,7 @@ public class Logica implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private static Usuario usuario;
 	public static List<Producto> productosHistoricos = new ArrayList<>();
-	public static HashMap<Usuario,ArrayList<Producto>> Pedidos = new HashMap<>();
+	
 
 
 	
@@ -113,15 +113,5 @@ public class Logica implements Serializable{
 			System.out.println(e);
 		}
 	}
-	public static void guardarCompra(String nombreFic) {
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nombreFic));
-			oos.writeObject(Pedidos);
-			System.out.println("guardar");
-			oos.close();
-		}catch(IOException e){
-			System.out.println("ERROR EN ESCRITURA de fichero: " + nombreFic);
-			System.out.println(e);
-		}
-	}
+	
 }

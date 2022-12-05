@@ -55,7 +55,7 @@ public class VentanaPersonal extends JFrame {
 	Vector <String> cabecera = new Vector <String> (Arrays.asList("NOMBRE","CÓDIDO","TIPO PRODUCTO", "PRECIO", "CANTIDAD"));
 	private DefaultTableModel mProductos = new DefaultTableModel(new Vector<Vector<Object>>(), cabecera);
 	private JTable tproductos;
-	public static ArrayList<Producto> Cesta = new ArrayList<>();
+
 
 	
 	public VentanaPersonal()  {
@@ -143,7 +143,7 @@ public class VentanaPersonal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
 				//Hay que registrar la compra
-				Logica.guardarCompra("Pedidos.dat");
+				
 				
 			}
 		});
@@ -172,15 +172,15 @@ public class VentanaPersonal extends JFrame {
 		switch (type) {
 		case 0:
 			for(Producto p : c1.getCesta()) {
-				int cont=0;
+				int cont=1;
 				 for (int i = 0; i < mProductos.getRowCount(); i++) {
-					 if(mProductos.getValueAt(i, 1).toString().equals(p.getNomP())){
+					 if(mProductos.getValueAt(i, 0).toString().equals(p.getNomP())){
 						cont= cont+1;
 						mProductos.removeRow(i);
 					 } 
 				 }
 				mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€",cont });
-				Cesta.add(p);
+			
 				
 				
 			}
