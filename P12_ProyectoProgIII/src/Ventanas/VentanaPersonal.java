@@ -14,11 +14,14 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
+import java.util.regex.Pattern;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -33,6 +36,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Clases.Compra;
 import Clases.Comprador;
 import Clases.Producto;
 import Clases.TipoProducto;
@@ -46,6 +50,7 @@ public class VentanaPersonal extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	protected static final String NULL = null;
 	private JLabel info;
 	private JLabel totalPrecio;
 	private JButton bwl;
@@ -55,7 +60,8 @@ public class VentanaPersonal extends JFrame {
 	private JButton bvolver;
 	private JPanel pbotonera;
 	private boolean tipolista; //false es wl y true es cesta
-
+	
+	
 	Comprador c1 = (Comprador) Logica.getUsuario();
 	Vector <String> cabecera = new Vector <String> (Arrays.asList("NOMBRE","CÓDIDO","TIPO PRODUCTO", "PRECIO", "CANTIDAD"));
 	private DefaultTableModel mProductos = new DefaultTableModel(new Vector<Vector<Object>>(), cabecera);
@@ -146,12 +152,22 @@ public class VentanaPersonal extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
-				//Hay que registrar la compra
+				for (Producto p: c1.getCesta()) {
+					//Compra compra=  new Compra(c1.getCodigoUsuario(), Date.from(Instant.now()), p.getCodigoP());
+					JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
+					//BaseDeDatos.añadirCompra(((Compra) compra).getIdCompra(),compra.getIdUsuario(),compra.getFecha(),compra.getIdProducto());
+					
+				}
+				}
+
+			
 				
 				
 			}
-		});
+				
+		
+				
+		);
 		
 		KeyListener kl = new KeyAdapter() {
 			@Override

@@ -20,7 +20,7 @@ public class Main {
 	public static void main(String[] args) {
 		BaseDeDatos.abrirConexion("MiBD.db", false);
 		Logica.cargarProductos("Productos.dat");
-		VentanaLogIn v = new VentanaLogIn();
+		VentanaPrincipalAdmin v = new VentanaPrincipalAdmin();
 
 		/*VentanaInicial v = new VentanaInicial();
 		EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {

@@ -50,7 +50,7 @@ public class BaseDeDatos {
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 
-				sent = "CREATE TABLE IF NOT EXISTS cestas (id INTEGER PRIMARY KEY AUTOINCREMENT, idProducto int, idUsuario INTEGER REFERENCES usuario(id));";
+				sent = "CREATE TABLE IF NOT EXISTS  compra (id INTEGER PRIMARY KEY AUTOINCREMENT, idCompra int, idUsuario INTEGER REFERENCES usuario(id), fecha date, idProducto int);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
@@ -192,6 +192,18 @@ public class BaseDeDatos {
 			
 		} catch (SQLException e) {
 			logger.log( Level.SEVERE, "Error en eliminación de base de datos\t" + e );
+		}
+	}
+	public static void añadirCompra(int idCompra, int idUsuario, String fecha, int idProducto) {
+		String sent="";
+		try(Statement statement = conexion.createStatement()) {
+			sent = "insert into compra (idCompra,idUsuario, idProducto ) values ('" + idCompra +"', '" + idUsuario + "', '" + fecha + ");";
+			logger.log( Level.INFO, "Lanzada actualización a base de datos: " + sent );
+			int val = statement.executeUpdate( sent );
+			logger.log( Level.INFO, "Añadida " + val + " fila a base de datos\t" + sent );
+			
+		} catch (SQLException e) {
+			logger.log( Level.SEVERE, "Error en inserción de base de datos\t" + e );
 		}
 	}
 }
