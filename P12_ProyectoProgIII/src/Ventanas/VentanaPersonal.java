@@ -25,6 +25,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -85,7 +86,7 @@ public class VentanaPersonal extends JFrame {
 		pNorte.add(info, BorderLayout.WEST);
 		pNorte.add(totalPrecio, BorderLayout.EAST);
 		this.add(pNorte,BorderLayout.NORTH);
-		this.add(tproductos, BorderLayout.CENTER);
+		this.add(new JScrollPane(tproductos), BorderLayout.CENTER);
 		this.add(pbotonera, BorderLayout.SOUTH);
 		
 		pNorte.setBounds(100, 100, 100, 30);
@@ -151,9 +152,9 @@ public class VentanaPersonal extends JFrame {
 		KeyListener kl = new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_DELETE) {
+				if (e.isControlDown() && (e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE)) {
 					int pos= tproductos.getSelectedRow();
-					if(tipolista == true) {
+					if(tipolista) {
 						c1.getCesta().remove(pos);
 						actualizarLista(0);
 					}else {

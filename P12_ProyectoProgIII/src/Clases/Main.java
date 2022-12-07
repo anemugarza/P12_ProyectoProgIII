@@ -21,8 +21,8 @@ public class Main {
 		Logica log = new Logica();
 		BaseDeDatos.abrirConexion("MiBD.db", false);
 		log.cargarProductos("Productos.dat");
-		//log.setUsuario(new Comprador(0, "a", "a", "a"));
-		VentanaLogIn v = new VentanaLogIn();
+		log.setUsuario(new Comprador( "a", "a", "a", 0));
+		VentanaPrincipal v = new VentanaPrincipal();
 
 		/*VentanaInicial v = new VentanaInicial();
 		EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
