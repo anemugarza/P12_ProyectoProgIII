@@ -8,21 +8,16 @@ public class Comprador extends Usuario {
 	public List<Producto> cesta = new ArrayList<>();
 	public List<Producto> wl = new ArrayList<>();
 	
-	public Comprador(int id, String nomUsuario, String email, String contrasenya, double monedero,
+	public Comprador(String nomUsuario, String email, String contrasenya, double monedero,
 			List<Producto> cesta, List<Producto> wl, int admin) {
-		super(id, nomUsuario, email, contrasenya, admin);
+		super(nomUsuario, email, contrasenya, admin);
 		this.monedero = monedero;
 		this.cesta = cesta;
 		this.wl = wl;
 	}
 
-	public Comprador(int id, String nomUsuario, String email, String contrasenya, int admin) {
-		super(id, nomUsuario, email, contrasenya, admin);
-	}
-
-	public Comprador( String nomUsuario, String email, String contrasenya, int admin) {
-		super( nomUsuario, email, contrasenya, admin);
-		
+	public Comprador(String nomUsuario, String email, String contrasenya, int admin) {
+		super(nomUsuario, email, contrasenya, admin);
 	}
 
 	public double getMonedero() {

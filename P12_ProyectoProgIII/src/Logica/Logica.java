@@ -31,7 +31,6 @@ public class Logica implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private static Usuario usuario;
 	public static List<Producto> productosHistoricos = new ArrayList<>();
-	
 
 
 	
@@ -65,26 +64,26 @@ public class Logica implements Serializable{
 		return "Logica [usuario=" + usuario + "]";
 	}
 	
-	public boolean existeUsuario(String email) {
+	public static boolean existeUsuario(String email) {
 		if(BaseDeDatos.getUsuarios().containsKey(email)) return true;
 		else return false;
 	}
 	
-	public Usuario usuarioCorrecto(String email, String contrasenya) {
+	public static Usuario usuarioCorrecto(String email, String contrasenya) {
 		if(BaseDeDatos.getUsuarios().get(email).getContrasenya().equals(contrasenya)){
 			Logica.usuario=BaseDeDatos.getUsuarios().get(email);
 			return BaseDeDatos.getUsuarios().get(email);
 		}else return null;
 	}
 	
-	public boolean UsuarioComprador(String email) {
+	public static boolean UsuarioComprador(String email) {
 		if(BaseDeDatos.getUsuarios().get(email) instanceof Comprador ) return true;
 		else return false;
 
 	}
 
 	
-	public void crearUsuario(String nombre, String email, String contrasenya) {
+	public static void crearUsuario(String nombre, String email, String contrasenya) {
 		Comprador c1= new Comprador(nombre, email,contrasenya, 0); 
 		BaseDeDatos.getUsuarios().put(c1.getEmail(),c1);
 	}
@@ -101,7 +100,7 @@ public class Logica implements Serializable{
 		}
 	}
 	
-	public void cargarProductos(String nombreFic) {
+	public static void cargarProductos(String nombreFic) {
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nombreFic));
 			@SuppressWarnings("unchecked")

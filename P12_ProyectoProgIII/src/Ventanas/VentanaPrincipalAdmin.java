@@ -23,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -45,6 +46,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 	private JPanel pCentral;
 	private JPanel pbotonera;
 	private JScrollPane scroll;
+	private boolean borrando = false;
 	public VentanaPrincipalAdmin()  {
 		inicializar();
 	}
@@ -200,22 +202,41 @@ public class VentanaPrincipalAdmin extends JFrame{
 									}
 								});
 								
-								KeyListener kl = new KeyAdapter() {
-									@Override
-									public void keyReleased(KeyEvent e) {
-										if (e.isControlDown() && (e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE)) {
-											Logica.productosHistoricos.remove(p);
-											Logica.guardarProductos("Productos.dat");
-											//actualizar la ventana????
-										}
-									}
-								};
-								pProducto.addKeyListener( kl );
 							}
 						}
 					}
 					pCentral.revalidate();
+
 				}
+			}
+		});
+		
+		//ESTO HAY QUE PONERLO BIEN
+		pCentral.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if (e.isControlDown() && (e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE)) {
+					/*Logica.productosHistoricos.remove(p);
+					Logica.guardarProductos("Productos1.dat");
+					VentanaPrincipalAdmin vp = new VentanaPrincipalAdmin();
+					dispose();*/
+					borrando=true;
+					System.out.println("MODO DE BORRADO");
+					JOptionPane jop = new JOptionPane("Estas borrando, pulse no para acabar de borrar.", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
 			}
 		});
 		

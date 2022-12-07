@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Clases.Comprador;
 import Logica.BaseDeDatos;
 import Logica.Logica;
 
@@ -37,7 +38,6 @@ public class VentanaLogIn extends JFrame{
 		private JButton entrar;
 		private JPanel panelCentral;
 		private JPanel botonera;
-		private Logica logica;
 		private BaseDeDatos bd;
 		
 		//Componentes del registro, de momento ocultos
@@ -79,7 +79,6 @@ public class VentanaLogIn extends JFrame{
 			datosCuenta= new JPanel();
 			botoneraRegistro= new JPanel();
 			guardarDatos= new JButton("Registrarse");
-			logica= new Logica();
 			bd = new BaseDeDatos();
 			
 			//Añadimos a la ventana
@@ -140,9 +139,11 @@ public class VentanaLogIn extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(!txtemail.getText().equals("") && !txtcontrasenya.getText().equals("")) {
-						if(logica.existeUsuario(txtemail.getText())) {
-							if(logica.usuarioCorrecto(txtemail.getText(), txtcontrasenya.getText())!=null){
-								if(logica.UsuarioComprador(txtemail.getText())){
+						if(Logica.existeUsuario(txtemail.getText())) {
+							if(Logica.usuarioCorrecto(txtemail.getText(), txtcontrasenya.getText())!=null){
+								if(Logica.UsuarioComprador(txtemail.getText())){
+									((Comprador) Logica.getUsuario()).setWl(BaseDeDatos.getWLoCesta(Logica.getUsuario().getCodigoUsuario(), 0));
+									((Comprador) Logica.getUsuario()).setCesta(BaseDeDatos.getWLoCesta(Logica.getUsuario().getCodigoUsuario(), 1));
 									VentanaPrincipal ventana= new VentanaPrincipal();
 								}else {
 									VentanaPrincipalAdmin ventana = new VentanaPrincipalAdmin();
@@ -159,7 +160,7 @@ public class VentanaLogIn extends JFrame{
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if(logica.existeUsuario(txtemail.getText())) {
+					if(Logica.existeUsuario(txtemail.getText())) {
 						JOptionPane.showMessageDialog(null, "ERROR: Ya existe una cuenta con ese email. Utilice otro");
 						txtemailRegistro.setText("");
 					}
@@ -167,7 +168,7 @@ public class VentanaLogIn extends JFrame{
 						String er = "{1,}[a-zA-Z]@{1,}[a-zA-Z].{2,}[a-z]";
 						String email = txtemailRegistro.getText();
 						if(Pattern.matches(er, email)) {
-							logica.crearUsuario(txtnombreRegistro.getText(),txtemailRegistro.getText(), txtcontrasenyaRegistro.getText()); 
+							Logica.crearUsuario(txtnombreRegistro.getText(),txtemailRegistro.getText(), txtcontrasenyaRegistro.getText()); 
 							//aqui hay que añadir el codigo tanto arriba como abajo
 							BaseDeDatos.añadirUsuario(0,txtnombreRegistro.getText(),txtemailRegistro.getText(), txtcontrasenyaRegistro.getText());
 							//Después de que se guarden todos los datos, vuelve a la ventana del Log In para poder entrar con la cuenta creada

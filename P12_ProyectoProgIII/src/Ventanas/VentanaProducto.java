@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,6 +24,7 @@ import javax.swing.border.Border;
 import Clases.Comprador;
 import Clases.Producto;
 import Clases.TipoProducto;
+import Logica.BaseDeDatos;
 import Logica.Logica;
 
 public class VentanaProducto extends JFrame{
@@ -95,21 +97,29 @@ public class VentanaProducto extends JFrame{
 		});
 		
 		bañadirCESTA.addActionListener(new ActionListener() {
-			//si es admin entre a la ventana del admin
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					c1.anyadirCesta(p);
-					//aqui hay que cambiar la cantidad
+				c1.anyadirCesta(p);
+				try {
+					BaseDeDatos.añadirProducto(c1.getCodigoUsuario(), p.getCodigoP(), 1);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				JOptionPane.showMessageDialog(null, "¡Producto añadido a tu cesta!");
 			}
 		});
 		
 		bañadirWL.addActionListener(new ActionListener() {
-			//si es admin entre a la ventana del admin
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					c1.anyadirWL(p);
-					//aqui hay que cambiar la cantidad
+				c1.anyadirWL(p);
+				try {
+					BaseDeDatos.añadirProducto(c1.getCodigoUsuario(), p.getCodigoP(), 0);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				JOptionPane.showMessageDialog(null, "¡Producto añadido a tu wishlist!");
 		}
 		});

@@ -7,13 +7,13 @@ public class Administrador extends Usuario {
 	int salario;
 	Map<Long, Analisis> analisis = new HashMap<>();
 
-	public Administrador(int codigoUsuario, String nomUsuario, String email, String contrasenya, int salario) {
-		super(codigoUsuario, nomUsuario, email, contrasenya, 1);
+	public Administrador(String nomUsuario, String email, String contrasenya, int salario) {
+		super(nomUsuario, email, contrasenya, 1);
 		this.salario = salario;
 	}
 
-	public Administrador(int codigoUsuario, String nomUsuario, String email, String contrasenya) {
-		super(codigoUsuario, nomUsuario, email, contrasenya, 1);
+	public Administrador(String nomUsuario, String email, String contrasenya) {
+		super(nomUsuario, email, contrasenya, 1);
 	}
 
 	public int getSalario() {

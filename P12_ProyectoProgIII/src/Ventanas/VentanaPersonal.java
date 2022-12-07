@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +35,7 @@ import Clases.Comprador;
 import Clases.Producto;
 import Clases.TipoProducto;
 import Clases.Usuario;
+import Logica.BaseDeDatos;
 import Logica.Logica;
 
 public class VentanaPersonal extends JFrame {
@@ -155,9 +157,21 @@ public class VentanaPersonal extends JFrame {
 				if (e.isControlDown() && (e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE)) {
 					int pos= tproductos.getSelectedRow();
 					if(tipolista) {
+						try {
+							BaseDeDatos.eliminarProducto(c1.getCodigoUsuario(), c1.cesta.get(pos).getCodigoP(), 1);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						c1.getCesta().remove(pos);
 						actualizarLista(0);
 					}else {
+						try {
+							BaseDeDatos.eliminarProducto(c1.getCodigoUsuario(), c1.wl.get(pos).getCodigoP(), 0);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						c1.getWl().remove(pos);
 						actualizarLista(1);
 					}
@@ -181,9 +195,6 @@ public class VentanaPersonal extends JFrame {
 					 } 
 				 }
 				mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€",cont });
-			
-				
-				
 			}
 			break;
 
@@ -196,7 +207,7 @@ public class VentanaPersonal extends JFrame {
 							mProductos.removeRow(i);
 						 }
 					 }
-				 mProductos.addRow(new Object[] {p.getNomP(),"Co:" +p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€", "Cantidad:"+cont});
+				 mProductos.addRow(new Object[] {p.getNomP(), p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€", cont});
 			}
 			break;
 		}
