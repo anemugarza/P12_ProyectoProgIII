@@ -198,43 +198,7 @@ public class VentanaPersonal extends JFrame {
 			}
 		};
 		tproductos.addKeyListener( kl );
-		
-		/*PAULA*/
-		tproductos.addMouseListener(new MouseListener() {
 			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(e.isAltDown()) {
-					int fila = tproductos.rowAtPoint(e.getPoint());
-					mProductos.removeRow(fila);
-					//cesta.remove(fila);
-				}
-			}
-		});
 	}
 	public void actualizarLista(int type) {
 		Vector <String> cabecera = new Vector <String> (Arrays.asList("NOMBRE","CÓDIDO","TIPO PRODUCTO", "PRECIO", "CANTIDAD"));
