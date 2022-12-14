@@ -198,10 +198,30 @@ public class BaseDeDatos {
 			logger.log( Level.SEVERE, "Error en eliminación de base de datos\t" + e );
 		}
 	}
+	
+	public static int obtenerUltimoIdCompra() {
+		int ultimoIdCompra;
+		String sent = "SELECT max(idCompra) FROM Compra";
+		try(Statement statement = conexion.createStatement()) {
+			logger.log( Level.INFO, "Lanzada sentencia para la obtención del último id de compra: " + sent );
+			ResultSet rs = statement.executeQuery( sent );
+			
+			if(rs.next()) {
+				ultimoIdCompra = rs.getInt(1);
+			}else {
+				ultimoIdCompra = 0;
+			}
+			
+		} catch (SQLException e) {
+			logger.log( Level.SEVERE, "Error en inserción de base de datos\t" + e );
+			ultimoIdCompra = 0;
+		}
+		return ultimoIdCompra;
+	}
 	public static void añadirCompra(int idCompra, int idUsuario, String fecha, int idProducto) {
 		String sent="";
 		try(Statement statement = conexion.createStatement()) {
-			sent = "insert into compra (idCompra,idUsuario, idProducto ) values ('" + idCompra +"', '" + idUsuario + "', '" + fecha + ");";
+			sent = "insert into compra (idCompra,idUsuario, idProducto,fecha ) values (" + idCompra +", " + idUsuario + ","+idProducto+", '" + fecha + "');";
 			logger.log( Level.INFO, "Lanzada actualización a base de datos: " + sent );
 			int val = statement.executeUpdate( sent );
 			logger.log( Level.INFO, "Añadida " + val + " fila a base de datos\t" + sent );

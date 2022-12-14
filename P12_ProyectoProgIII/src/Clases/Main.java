@@ -18,7 +18,7 @@ import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 public class Main {
 
 	public static void main(String[] args) {
-		BaseDeDatos.abrirConexion("MiBD.db", false);
+		BaseDeDatos.abrirConexion("MiBD.db", true);
 		Logica.cargarProductos("Productos.dat");
 		VentanaLogIn v = new VentanaLogIn();
 

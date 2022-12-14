@@ -14,6 +14,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -152,22 +153,23 @@ public class VentanaPersonal extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+				Date d = new Date(System.currentTimeMillis());
+				String fecha = sdf.format(d);
+				int nuevoIdCompra = BaseDeDatos.obtenerUltimoIdCompra() + 1;
 				for (Producto p: c1.getCesta()) {
+					BaseDeDatos.añadirCompra(nuevoIdCompra, c1.getCodigoUsuario() , fecha, p.getCodigoP());;
 					//Compra compra=  new Compra(c1.getCodigoUsuario(), Date.from(Instant.now()), p.getCodigoP());
-					JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
 					//BaseDeDatos.añadirCompra(((Compra) compra).getIdCompra(),compra.getIdUsuario(),compra.getFecha(),compra.getIdProducto());
-					
 				}
-				}
-
-			
-				
-				
+				totalPrecio.setText("PRECIO TOTAL: 0.00 €");
+				JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
+				while(c1.getCesta().size()>0)
+					c1.getCesta().remove(0);
+				while(mProductos.getRowCount()>0)
+					mProductos.removeRow(0);
 			}
-				
-		
-				
-		);
+		});
 		
 		KeyListener kl = new KeyAdapter() {
 			@Override
