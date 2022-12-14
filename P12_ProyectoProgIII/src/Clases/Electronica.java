@@ -26,6 +26,6 @@ public class Electronica extends Producto {
 	
 	@Override
 	public String toString() {
-		return "Electronica [descripcion=" + descripcion + "]";
+		return "Electronica [descripcion=" + descripcion + "precio= " + precio +" €]";
 	}
 }

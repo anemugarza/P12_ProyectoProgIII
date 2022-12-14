@@ -112,5 +112,32 @@ public class Logica implements Serializable{
 			System.out.println(e);
 		}
 	}
+
+	public static double getMenorPrecio(List<Producto> lProductos) {
+		double menor = lProductos.get(0).getPrecio();
+		for(int i=1;i<lProductos.size();i++) {
+			if(lProductos.get(i).getPrecio()<menor) {
+				menor = lProductos.get(i).getPrecio();
+			}
+		}
+		return menor;
+	}
+	public static double quePuedoComprar(double saldo, List<Producto> lProductos, List<Producto> lPuedoComprar, int pos, int cont){
+		if(saldo>0 && cont<lProductos.size()) {
+			Producto p = lProductos.get(pos);
+			if(!lPuedoComprar.contains(p) && p.getPrecio()<=saldo) {
+				lPuedoComprar.add(p);
+				saldo = saldo - p.getPrecio();
+			}
+			pos++;
+			cont++;
+			if(pos>=lProductos.size()) {
+				pos = 0;
+			}
+			return quePuedoComprar(saldo, lProductos, lPuedoComprar,pos,cont);
+		}else {
+			return saldo;
+		}
+	}
 	
 }

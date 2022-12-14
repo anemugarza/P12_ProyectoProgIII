@@ -2,6 +2,7 @@ package Clases;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import Logica.BaseDeDatos;
 import Logica.Logica;
@@ -20,8 +21,18 @@ public class Main {
 	public static void main(String[] args) {
 		BaseDeDatos.abrirConexion("MiBD.db", true);
 		Logica.cargarProductos("Productos.dat");
+		ArrayList<Producto> lPuedoComprar = new ArrayList<>();
+		double saldo = 50;
+		if(saldo>=Logica.getMenorPrecio(Logica.productosHistoricos)) {
+			int num = (int) (Math.floor(Math.random()*(Logica.productosHistoricos.size()-1-0+1)+0));
+			saldo = Logica.quePuedoComprar(saldo, Logica.productosHistoricos, lPuedoComprar,num,1);
+			for(Producto p: lPuedoComprar) {
+				System.out.println(p);
+			}
+			System.out.println("SALDO RESTANTE: "+saldo+" €");
+		}
 		//VentanaLogIn v = new VentanaLogIn();
-		VentanaInicial v = new VentanaInicial();
+		//VentanaInicial v = new VentanaInicial();
 		/*VentanaInicial v = new VentanaInicial();
 		EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
 			private static final long serialVersionUID = 1L;
@@ -46,7 +57,7 @@ public class Main {
 			} 
 			}
 		});*/
-		v.setVisible(true);
+		//v.setVisible(true);
 	}
 
 }

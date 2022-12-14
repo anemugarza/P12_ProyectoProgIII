@@ -11,6 +11,11 @@ public class MaterialEscolar extends Producto {
 	
 	}
 
+	@Override
+	public String toString() {
+		return "MaterialEscolar [nomP=" + nomP + ", precio=" + precio + "€ ]";
+	}
+
 	
 	
 	

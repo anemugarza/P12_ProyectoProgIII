@@ -230,4 +230,6 @@ public class BaseDeDatos {
 			logger.log( Level.SEVERE, "Error en inserción de base de datos\t" + e );
 		}
 	}
+	
+	
 }
