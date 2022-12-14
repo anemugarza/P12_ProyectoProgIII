@@ -1,6 +1,7 @@
 package Ventanas;
 
 
+import java.awt.GraphicsEnvironment;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -19,7 +20,11 @@ public class VentanaInicial extends JFrame{
 	EmbeddedMediaPlayerComponent comp;
 	public VentanaInicial() {
 		BaseDeDatos.abrirConexion("MiBD.db", true);
-		this.setSize(1000, 600);
+		int anchoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
+		int altoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
+		this.setSize(anchoP, altoP);
+		this.setExtendedState(MAXIMIZED_BOTH);
+		//this.setSize(1000, 600);
 		this.setLocationRelativeTo(null);
 		this.setTitle("BIENVENIDO A DEUSTOSHOP");
 		
@@ -48,7 +53,7 @@ public class VentanaInicial extends JFrame{
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
 				if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-					v.dispose();
+					//v.dispose();
 					VentanaLogIn vl = new VentanaLogIn();
 					vl.setVisible(true);
 				}

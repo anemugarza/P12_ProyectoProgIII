@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
@@ -70,7 +71,12 @@ public class VentanaProducto extends JFrame{
 		pbotonera.add(bañadirCESTA);
 		pbotonera.add(bañadirWL);
 		
-		setSize(700,600);
+		//setSize(700,600);
+		int anchoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
+		int altoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
+		this.setSize(anchoP, altoP);
+		this.setExtendedState(MAXIMIZED_BOTH);
+		
 		setLocationRelativeTo(null);
 		setTitle("PRODUCTO: " + p.getNomP());
 		

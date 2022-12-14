@@ -2,6 +2,7 @@ package Ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -105,7 +106,12 @@ public class VentanaPersonal extends JFrame {
 		pbotonera.setBounds(100, 100, 100, 30);
 				
 		//Caracteristicas de la ventana
-		setSize(700,600);
+		//setSize(700,600);
+		int anchoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
+		int altoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
+		this.setSize(anchoP, altoP);
+		this.setExtendedState(MAXIMIZED_BOTH);
+		
 		setLocationRelativeTo(null);
 		setTitle("TU VENTANA PERSONAL");
 		setVisible(true);		
