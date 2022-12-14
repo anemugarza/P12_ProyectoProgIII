@@ -58,6 +58,7 @@ public class VentanaLogIn extends JFrame{
 		}
 		
 		private void inicializar() {
+			JFrame v = this;
 			//Inicializamos elementos 
 			email= new JLabel("Email: ");
 			contrasenya= new JLabel("Contraseña: ");
@@ -144,7 +145,9 @@ public class VentanaLogIn extends JFrame{
 								if(Logica.UsuarioComprador(txtemail.getText())){
 									((Comprador) Logica.getUsuario()).setWl(BaseDeDatos.getWLoCesta(Logica.getUsuario().getCodigoUsuario(), 0));
 									((Comprador) Logica.getUsuario()).setCesta(BaseDeDatos.getWLoCesta(Logica.getUsuario().getCodigoUsuario(), 1));
-									VentanaPrincipal ventana= new VentanaPrincipal();
+									VentanaLoading vl =  new VentanaLoading(v);
+									vl.setVisible(true);
+									
 								}else {
 									VentanaPrincipalAdmin ventana = new VentanaPrincipalAdmin();
 								}dispose();
