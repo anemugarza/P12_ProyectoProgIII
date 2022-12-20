@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,7 +32,7 @@ public class Logica implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private static Usuario usuario;
 	public static List<Producto> productosHistoricos = new ArrayList<>();
-
+	private Logger log;
 
 	
 	public Logica(Usuario usuario) {
@@ -122,12 +123,14 @@ public class Logica implements Serializable{
 		}
 		return menor;
 	}
-	public static double quePuedoComprar(double saldo, List<Producto> lProductos, List<Producto> lPuedoComprar, int pos, int cont){
+	/*
+	 * FUNCION DE PAULA
+	 * public static double quePuedoComprar(double saldo, List<Producto> lProductos, List<Producto> lPuedoComprar, int pos, int cont){
 		if(saldo>0 && cont<lProductos.size()) {
 			Producto p = lProductos.get(pos);
 			if(!lPuedoComprar.contains(p) && p.getPrecio()<=saldo) {
 				lPuedoComprar.add(p);
-				saldo = saldo - p.getPrecio();
+				saldo -= p.getPrecio();
 			}
 			pos++;
 			cont++;
@@ -138,6 +141,25 @@ public class Logica implements Serializable{
 		}else {
 			return saldo;
 		}
-	}
+	}*/
 	
+	@SuppressWarnings("unchecked")
+	public static void quePuedoComprar(double saldo, ArrayList<Producto> lProductos, ArrayList<ArrayList<Producto>> lPuedoComprar, ArrayList<Double> saldos){
+		if(saldo==0 || saldo < Logica.getMenorPrecio(Logica.productosHistoricos)) {
+			lPuedoComprar.add(lProductos);
+			saldos.add(saldo);
+			System.out.println("SALDOOOOO"+saldos);
+			System.out.println("COMPRAAAAAA"+lPuedoComprar);
+			return;
+		}for (Producto p : Logica.productosHistoricos) {
+			if(saldo-p.getPrecio()>0) {
+				lProductos.add(p);
+				saldo -= p.getPrecio();
+				System.out.println(saldo);
+				ArrayList<Producto> ps = new ArrayList<>(lProductos);
+				quePuedoComprar(saldo, ps, lPuedoComprar, saldos);
+				lProductos.remove(p);
+			}
+		}
+	}
 }

@@ -21,20 +21,19 @@ public class Main {
 	public static void main(String[] args) {
 		BaseDeDatos.abrirConexion("MiBD.db", true);
 		Logica.cargarProductos("Productos.dat");
-		ArrayList<Producto> lPuedoComprar = new ArrayList<>();
+		/*ArrayList<ArrayList<Producto>> lPuedoComprar = new ArrayList<>();
 		double saldo = 50;
 		if(saldo>=Logica.getMenorPrecio(Logica.productosHistoricos)) {
-			int num = (int) (Math.floor(Math.random()*(Logica.productosHistoricos.size()-1-0+1)+0));
-			saldo = Logica.quePuedoComprar(saldo, Logica.productosHistoricos, lPuedoComprar,num,1);
-			for(Producto p: lPuedoComprar) {
+			int num = (int) (Math.floor(Math.random()*(Logica.productosHistoricos.size())));
+			saldo = Logica.quePuedoComprar(saldo, new ArrayList<Producto>(), lPuedoComprar);
+			for(ArrayList<Producto> p: lPuedoComprar) {
 				System.out.println(p);
 			}
 			System.out.println("SALDO RESTANTE: "+saldo+" €");
-		}
-		//VentanaLogIn v = new VentanaLogIn();
-		//VentanaInicial v = new VentanaInicial();
-		/*VentanaInicial v = new VentanaInicial();
-		EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
+		}*/
+		
+		VentanaPrincipal v = new VentanaPrincipal();
+		/*EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
 			private static final long serialVersionUID = 1L;
 
 			public void finished(MediaPlayer mediaPlayer) {
@@ -57,7 +56,7 @@ public class Main {
 			} 
 			}
 		});*/
-		//v.setVisible(true);
+		
 	}
 
 }

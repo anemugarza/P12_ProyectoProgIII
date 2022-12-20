@@ -54,7 +54,7 @@ public class BaseDeDatos {
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 
-				sent = "CREATE TABLE IF NOT EXISTS  compra (id INTEGER PRIMARY KEY AUTOINCREMENT, idCompra int, idUsuario INTEGER REFERENCES usuario(id), fecha date, idProducto int);";
+				sent = "CREATE TABLE IF NOT EXISTS  compra (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario(id), fecha date, idProducto int);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
@@ -201,7 +201,7 @@ public class BaseDeDatos {
 	
 	public static int obtenerUltimoIdCompra() {
 		int ultimoIdCompra;
-		String sent = "SELECT max(idCompra) FROM Compra";
+		String sent = "select max(id) from Compra";
 		try(Statement statement = conexion.createStatement()) {
 			logger.log( Level.INFO, "Lanzada sentencia para la obtención del último id de compra: " + sent );
 			ResultSet rs = statement.executeQuery( sent );
@@ -218,10 +218,10 @@ public class BaseDeDatos {
 		}
 		return ultimoIdCompra;
 	}
-	public static void añadirCompra(int idCompra, int idUsuario, String fecha, int idProducto) {
+	public static void añadirCompra(int idUsuario, String fecha, int idProducto) {
 		String sent="";
 		try(Statement statement = conexion.createStatement()) {
-			sent = "insert into compra (idCompra,idUsuario, idProducto,fecha ) values (" + idCompra +", " + idUsuario + ","+idProducto+", '" + fecha + "');";
+			sent = "insert into compra (idUsuario, idProducto,fecha ) values (" + idUsuario + ","+idProducto+", '" + fecha + "');";
 			logger.log( Level.INFO, "Lanzada actualización a base de datos: " + sent );
 			int val = statement.executeUpdate( sent );
 			logger.log( Level.INFO, "Añadida " + val + " fila a base de datos\t" + sent );

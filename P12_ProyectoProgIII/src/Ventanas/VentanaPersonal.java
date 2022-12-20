@@ -162,18 +162,13 @@ public class VentanaPersonal extends JFrame {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 				Date d = new Date(System.currentTimeMillis());
 				String fecha = sdf.format(d);
-				int nuevoIdCompra = BaseDeDatos.obtenerUltimoIdCompra() + 1;
 				for (Producto p: c1.getCesta()) {
-					BaseDeDatos.añadirCompra(nuevoIdCompra, c1.getCodigoUsuario() , fecha, p.getCodigoP());;
-					//Compra compra=  new Compra(c1.getCodigoUsuario(), Date.from(Instant.now()), p.getCodigoP());
-					//BaseDeDatos.añadirCompra(((Compra) compra).getIdCompra(),compra.getIdUsuario(),compra.getFecha(),compra.getIdProducto());
+					BaseDeDatos.añadirCompra(c1.getCodigoUsuario() , fecha, p.getCodigoP());
 				}
 				totalPrecio.setText("PRECIO TOTAL: 0.00 €");
 				JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
-				while(c1.getCesta().size()>0)
-					c1.getCesta().remove(0);
-				while(mProductos.getRowCount()>0)
-					mProductos.removeRow(0);
+				c1.getCesta().removeAll(c1.getCesta());
+				actualizarLista(0);
 			}
 		});
 		

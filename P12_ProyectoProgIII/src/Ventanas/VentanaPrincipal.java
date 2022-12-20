@@ -18,6 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -27,6 +28,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -47,8 +49,11 @@ public class VentanaPrincipal extends JFrame {
 	
 	private JComboBox<TipoProducto> seleccion;
 	private JButton bpersonal;
+	private JButton brecursiva;
 	private JPanel pCentral;
+	private JPanel botonera;
 	private JScrollPane scroll;
+	private VentanaPrincipal v;
 	public VentanaPrincipal()  {
 		inicializar();
 	}
@@ -56,10 +61,13 @@ public class VentanaPrincipal extends JFrame {
 	
 	private void inicializar() {
 		// TODO Auto-generated method stub
+		v=this;
 		seleccion = new JComboBox<>();
 		seleccion.setModel(new DefaultComboBoxModel<TipoProducto>(TipoProducto.values()));
 		bpersonal = new JButton("PERSONAL");
+		brecursiva = new JButton("OPCIONES COMPRA");
 		pCentral = new JPanel();
+		botonera = new JPanel();
 		scroll = new JScrollPane(pCentral);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -95,12 +103,13 @@ public class VentanaPrincipal extends JFrame {
 		
 		this.add(seleccion, BorderLayout.NORTH);
 		this.add(scroll, BorderLayout.CENTER);
-		this.add(bpersonal, BorderLayout.SOUTH);
+		botonera.add(brecursiva);
+		botonera.add(bpersonal);
+		this.add(botonera, BorderLayout.SOUTH);
 		
 		
 		
 		//Caracteristicas de la ventana
-		//setSize(700,600);
 		int anchoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
 		int altoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
 		this.setSize(anchoP, altoP);
@@ -216,8 +225,23 @@ public class VentanaPrincipal extends JFrame {
 		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaPersonal ventana= new VentanaPersonal(); //aqui falta pasarle la logica a la ventana principal
+				VentanaPersonal ventana= new VentanaPersonal(); 
 				dispose();
+			}
+		});
+		
+		brecursiva.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				double saldo =Double.parseDouble(JOptionPane.showInputDialog(v, "SALDO?", "0"));
+				ArrayList<ArrayList<Producto>> lPuedoComprar = new ArrayList<>();
+				ArrayList<Double> saldos = new ArrayList<Double>();
+ 				Logica.quePuedoComprar(saldo, new ArrayList<Producto>(), lPuedoComprar, saldos);
+ 				System.out.println("VENATA P"+ saldos);
+ 				System.out.println("VENTANA P"+ lPuedoComprar);
+				//VentanaRecursiva ventana= new VentanaRecursiva(saldo, lPuedoComprar, saldos); 
+				//dispose();
 			}
 		});
 	}
