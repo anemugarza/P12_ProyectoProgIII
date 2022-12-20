@@ -21,18 +21,7 @@ public class Main {
 	public static void main(String[] args) {
 		BaseDeDatos.abrirConexion("MiBD.db", true);
 		Logica.cargarProductos("Productos.dat");
-		/*ArrayList<ArrayList<Producto>> lPuedoComprar = new ArrayList<>();
-		double saldo = 50;
-		if(saldo>=Logica.getMenorPrecio(Logica.productosHistoricos)) {
-			int num = (int) (Math.floor(Math.random()*(Logica.productosHistoricos.size())));
-			saldo = Logica.quePuedoComprar(saldo, new ArrayList<Producto>(), lPuedoComprar);
-			for(ArrayList<Producto> p: lPuedoComprar) {
-				System.out.println(p);
-			}
-			System.out.println("SALDO RESTANTE: "+saldo+" €");
-		}*/
-		
-		VentanaPrincipal v = new VentanaPrincipal();
+		VentanaLogIn v = new VentanaLogIn();
 		/*EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
 			private static final long serialVersionUID = 1L;
 

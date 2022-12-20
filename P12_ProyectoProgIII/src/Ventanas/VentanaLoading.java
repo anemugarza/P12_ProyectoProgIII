@@ -19,6 +19,7 @@ public class VentanaLoading extends JFrame{
 		setBounds(va.getX()+10,va.getY()+10,200, 100);
 		//setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setResizable(false);
+		setLocationRelativeTo(null);
 		pTitulo = new JPanel();
 		pCentro = new JPanel();
 		getContentPane().add(pTitulo,BorderLayout.NORTH);
@@ -45,14 +46,12 @@ public class VentanaLoading extends JFrame{
 						e.printStackTrace();
 					}
 				}
-				
 				v.dispose();
 				VentanaPrincipal ventana= new VentanaPrincipal();
 			}
 		};
 		Thread t =  new Thread(r);
 		t.start();
-		
 	}
 	
 }
