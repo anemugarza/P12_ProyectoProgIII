@@ -1,17 +1,13 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.GraphicsEnvironment;
-import java.awt.GridLayout;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Vector;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -20,13 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 import Clases.Comprador;
 import Clases.Producto;
-import Logica.BaseDeDatos;
 import Logica.Logica;
 
 public class VentanaRecursiva extends JFrame{
@@ -42,28 +34,28 @@ public class VentanaRecursiva extends JFrame{
 	private JButton bvolver;
 	private JPanel pbotonera;
 	private JLabel s;
-	private JList lista;
+	private JList<Producto> lista;
 	private DefaultListModel<Producto> mlista;
-	private ArrayList<ArrayList<Producto>> lPuedoComprar = new ArrayList<>();
-	private ArrayList<Double> saldos =new ArrayList<Double>();
+	private ArrayList<ArrayList<Producto>> lPuedoComprar;
+	private ArrayList<Double> saldos;
 	private int cont=0;
 	Comprador c1 = (Comprador) Logica.getUsuario();
 
 	public VentanaRecursiva(double saldo, ArrayList<ArrayList<Producto>> lPuedoComprar, ArrayList<Double> saldos)  {
-		inicializar(saldo);
 		this.lPuedoComprar=lPuedoComprar;
 		this.saldos=saldos;
+		inicializar(saldo);
 	}
 
 	private void inicializar(double saldo) {
 		// TODO Auto-generated method stub
-		info = new JLabel("OPCIÓN "+ cont);
-		s = new JLabel("SALDO RESTANTE: " + saldos.get(cont));
+		info = new JLabel("OPCIÓN: "+ (cont+1));
+		s = new JLabel("");
 		banterior = new JButton("OPCIÓN ANTERIOR");
 		bsiguiente = new JButton("SIGUIENTE OPCIÓN");
 		bvolver = new JButton("VOLVER");
 		pNorte = new JPanel();
-		lista = new JList();
+		lista = new JList<Producto>();
 		mlista = new DefaultListModel<Producto>();
 		pbotonera = new JPanel();
 		
@@ -72,22 +64,15 @@ public class VentanaRecursiva extends JFrame{
 		pbotonera.add(bsiguiente);
 		pNorte.add(bvolver, BorderLayout.WEST);
 		pNorte.add(info, BorderLayout.WEST);
-		this.add(pNorte,BorderLayout.NORTH);
-		this.add(lista, BorderLayout.CENTER);
-		this.add(s, BorderLayout.CENTER);
-		this.add(pbotonera, BorderLayout.SOUTH);
+		pNorte.add(s, BorderLayout.WEST );
+		pbotonera.add(s, BorderLayout.NORTH);
+		ScrollPane panelLista = new ScrollPane();
+		panelLista.add(lista);
+		getContentPane().add(pNorte,BorderLayout.NORTH);
+		getContentPane().add(panelLista, BorderLayout.CENTER);
+		getContentPane().add(pbotonera, BorderLayout.SOUTH);
 		
-		pNorte.setBounds(100, 100, 100, 30);
-		pNorte.setLayout(new GridLayout(1,3));
-		pbotonera.setBounds(100, 100, 100, 30);
-				
-		//Caracteristicas de la ventana
-		//setSize(700,600);
-		int anchoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
-		int altoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
-		this.setSize(anchoP, altoP);
-		this.setExtendedState(MAXIMIZED_BOTH);
-		
+		setSize(800,600);
 		setLocationRelativeTo(null);
 		setTitle("OPCIONES DE COMPRA");
 		setVisible(true);		
@@ -111,8 +96,12 @@ public class VentanaRecursiva extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(cont==0) JOptionPane.showMessageDialog(null, "No hay opción anterior");
-				else actualizarLista(cont-1);
+				if(cont<=0) JOptionPane.showMessageDialog(null, "No hay opción anterior");
+				else {
+					cont--;
+					info.setText("OPCIÓN:"+(cont+1));
+					actualizarLista(cont);
+				}
 			}
 		});
 		
@@ -120,16 +109,23 @@ public class VentanaRecursiva extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(cont==lPuedoComprar.size()) JOptionPane.showMessageDialog(null, "No hay siguiente opción");
-				else actualizarLista(cont+1);
+				if(cont>=lPuedoComprar.size()-1) JOptionPane.showMessageDialog(null, "No hay siguiente opción");
+				else {
+					cont++;
+					info.setText("OPCIÓN:"+(cont+1));
+					actualizarLista(cont);
+				}
 			}
 		});			
 	}
 	
 	public void actualizarLista(int cont) {
+		mlista.removeAllElements();
 		for(Producto p: lPuedoComprar.get(cont)) {
 			mlista.addElement(p);
 		}
-		lista.setModel(mlista);
+		DecimalFormat df = new DecimalFormat("0.00");
+		s.setText("SALDO RESTANTE: " + df.format(saldos.get(cont)));
+		lista = new JList(mlista);
 	}
 }

@@ -123,25 +123,7 @@ public class Logica implements Serializable{
 		}
 		return menor;
 	}
-	/*
-	 * FUNCION DE PAULA
-	 * public static double quePuedoComprar(double saldo, List<Producto> lProductos, List<Producto> lPuedoComprar, int pos, int cont){
-		if(saldo>0 && cont<lProductos.size()) {
-			Producto p = lProductos.get(pos);
-			if(!lPuedoComprar.contains(p) && p.getPrecio()<=saldo) {
-				lPuedoComprar.add(p);
-				saldo -= p.getPrecio();
-			}
-			pos++;
-			cont++;
-			if(pos>=lProductos.size()) {
-				pos = 0;
-			}
-			return quePuedoComprar(saldo, lProductos, lPuedoComprar,pos,cont);
-		}else {
-			return saldo;
-		}
-	}*/
+	
 	
 	@SuppressWarnings("unchecked")
 	public static void quePuedoComprar(double saldo, ArrayList<Producto> lProductos, ArrayList<ArrayList<Producto>> lPuedoComprar, ArrayList<Double> saldos){
