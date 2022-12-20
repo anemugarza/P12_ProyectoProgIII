@@ -148,16 +148,13 @@ public class Logica implements Serializable{
 		if(saldo==0 || saldo < Logica.getMenorPrecio(Logica.productosHistoricos)) {
 			lPuedoComprar.add(lProductos);
 			saldos.add(saldo);
-			System.out.println("SALDOOOOO"+saldos);
-			System.out.println("COMPRAAAAAA"+lPuedoComprar);
 			return;
-		}for (Producto p : Logica.productosHistoricos) {
+		}
+		for (Producto p : Logica.productosHistoricos) {
 			if(saldo-p.getPrecio()>0) {
 				lProductos.add(p);
-				saldo -= p.getPrecio();
-				System.out.println(saldo);
 				ArrayList<Producto> ps = new ArrayList<>(lProductos);
-				quePuedoComprar(saldo, ps, lPuedoComprar, saldos);
+				quePuedoComprar(saldo - p.getPrecio(), ps, lPuedoComprar, saldos);
 				lProductos.remove(p);
 			}
 		}

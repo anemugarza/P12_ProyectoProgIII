@@ -238,10 +238,8 @@ public class VentanaPrincipal extends JFrame {
 				ArrayList<ArrayList<Producto>> lPuedoComprar = new ArrayList<>();
 				ArrayList<Double> saldos = new ArrayList<Double>();
  				Logica.quePuedoComprar(saldo, new ArrayList<Producto>(), lPuedoComprar, saldos);
- 				System.out.println("VENATA P"+ saldos);
- 				System.out.println("VENTANA P"+ lPuedoComprar);
-				//VentanaRecursiva ventana= new VentanaRecursiva(saldo, lPuedoComprar, saldos); 
-				//dispose();
+				VentanaRecursiva ventana= new VentanaRecursiva(saldo, lPuedoComprar, saldos); 
+				dispose();
 			}
 		});
 	}
