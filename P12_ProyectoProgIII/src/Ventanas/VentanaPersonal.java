@@ -158,12 +158,10 @@ public class VentanaPersonal extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				Date d = new Date(System.currentTimeMillis());
 				String fecha = sdf.format(d);
-				for (Producto p: c1.getCesta()) {
-					BaseDeDatos.añadirCompra(c1.getCodigoUsuario() , fecha, p.getCodigoP());
-				}
+				BaseDeDatos.añadirCompra(c1.getCodigoUsuario() , fecha);
 				totalPrecio.setText("PRECIO TOTAL: 0.00 €");
 				JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
 				c1.getCesta().removeAll(c1.getCesta());
@@ -185,6 +183,8 @@ public class VentanaPersonal extends JFrame {
 						}
 						c1.getCesta().remove(pos);
 						actualizarLista(0);
+						totalPrecio.setText("PRECIO TOTAL: " + actualizarPrecio(c1.getWl()) + "€");
+
 					}else {
 						try {
 							BaseDeDatos.eliminarProducto(c1.getCodigoUsuario(), c1.wl.get(pos).getCodigoP(), 0);
@@ -194,6 +194,8 @@ public class VentanaPersonal extends JFrame {
 						}
 						c1.getWl().remove(pos);
 						actualizarLista(1);
+						totalPrecio.setText("PRECIO TOTAL: " + actualizarPrecio(c1.getWl()) + "€");
+
 					}
 					
 				}
@@ -205,30 +207,31 @@ public class VentanaPersonal extends JFrame {
 	public void actualizarLista(int type) {
 		Vector <String> cabecera = new Vector <String> (Arrays.asList("NOMBRE","CÓDIDO","TIPO PRODUCTO", "PRECIO", "CANTIDAD"));
 		mProductos = new DefaultTableModel(new Vector<Vector<Object>>(), cabecera);
+		List<Producto> añadidos = new ArrayList<Producto>();
 		switch (type) {
 		case 0:
 			for(Producto p : c1.getCesta()) {
-				int cont=1;
-				 for (int i = 0; i < mProductos.getRowCount(); i++) {
-					 if(mProductos.getValueAt(i, 0).toString().equals(p.getNomP())){
-						cont= cont+1;
-						mProductos.removeRow(i);
-					 } 
-				 }
-				mProductos.addRow(new Object[] {p.getNomP(),p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€",cont });
+				int cont=0;
+				for(Producto p2 : c1.getCesta()) {
+					if(p.equals(p2)) cont++;
+				}
+				if(!añadidos.contains(p)) {
+					mProductos.addRow(new Object[] {p.getNomP(), p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€", cont});
+					añadidos.add(p);
+				}
 			}
 			break;
 
 		default:
 			for(Producto p : c1.getWl()) {
-					int cont=1;
-					 for (int i = 0; i < mProductos.getRowCount(); i++) {
-						 if(mProductos.getValueAt(i, 0).toString().equals(p.getNomP())){
-							cont= cont+1;
-							mProductos.removeRow(i);
-						 }
-					 }
-				 mProductos.addRow(new Object[] {p.getNomP(), p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€", cont});
+				int cont=0;
+				for(Producto p2 : c1.getWl()) {
+					if(p.equals(p2)) cont++;
+				}
+				if(!añadidos.contains(p)) {
+					mProductos.addRow(new Object[] {p.getNomP(), p.getCodigoP(),p.getClass().getSimpleName(),p.getPrecio()+ "€", cont});
+					añadidos.add(p);
+				}
 			}
 			break;
 		}

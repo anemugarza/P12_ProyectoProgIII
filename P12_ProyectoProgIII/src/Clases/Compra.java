@@ -1,59 +1,59 @@
 package Clases;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class Compra extends Usuario {
-	double monedero;
-	public List<Producto> cesta = new ArrayList<>();
-	public List<Producto> wl = new ArrayList<>();
+public class Compra {
+	private int idCompra;
+	private Usuario user;
+	private ArrayList<Producto> productosComprados;
+	private Date fecha;
 	
-	public Compra(String nomUsuario, String email, String contrasenya, double monedero,
-			List<Producto> cesta, List<Producto> wl, int admin) {
-		super(nomUsuario, email, contrasenya, admin);
-		this.monedero = monedero;
-		this.cesta = cesta;
-		this.wl = wl;
+	public Compra(int idCompra, Usuario user, ArrayList<Producto> productosComprados, Date fecha) {
+		super();
+		this.idCompra = idCompra;
+		this.user = user;
+		this.productosComprados = productosComprados;
+		this.fecha = fecha;
 	}
 
-	public Compra(String nomUsuario, String email, String contrasenya, int admin) {
-		super(nomUsuario, email, contrasenya, admin);
+	public int getIdCompra() {
+		return idCompra;
 	}
 
-	public double getMonedero() {
-		return monedero;
+	public void setIdCompra(int idCompra) {
+		this.idCompra = idCompra;
 	}
 
-	public void setMonedero(double monedero) {
-		this.monedero = monedero;
+	public Usuario getUser() {
+		return user;
 	}
 
-	public List<Producto> getCesta() {
-		return cesta;
+	public void setUser(Usuario user) {
+		this.user = user;
 	}
 
-	public void setCesta(List<Producto> cesta) {
-		this.cesta = cesta;
+	public ArrayList<Producto> getProductosComprados() {
+		return productosComprados;
 	}
 
-	public List<Producto> getWl() {
-		return wl;
+	public void setProductosComprados(ArrayList<Producto> productosComprados) {
+		this.productosComprados = productosComprados;
 	}
 
-	public void setWl(List<Producto> wl) {
-		this.wl = wl;
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	@Override
 	public String toString() {
-		return "Comprador [monedero=" + monedero + ", cesta=" + cesta + ", wl=" + wl + "]";
+		return "Compra [idCompra=" + idCompra + ", user=" + user + ", productosComprados=" + productosComprados
+				+ ", fecha=" + fecha + "]";
 	}
 	
-	public void anyadirWL(Producto p) {
-		wl.add(p);
-	}
-	
-	public void anyadirCesta(Producto p) {
-		cesta.add(p);
-	}
 }

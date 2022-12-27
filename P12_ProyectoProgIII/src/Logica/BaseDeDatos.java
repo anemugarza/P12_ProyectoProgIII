@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import Clases.Administrador;
+import Clases.Compra;
 import Clases.Comprador;
 import Clases.Producto;
 import Clases.Ropa;
@@ -54,10 +56,13 @@ public class BaseDeDatos {
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 
-				sent = "CREATE TABLE IF NOT EXISTS  compra (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario(id), fecha date, idProducto int);";
+				sent = "CREATE TABLE IF NOT EXISTS  compra (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario(id), fecha date);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
+				sent = "CREATE TABLE IF NOT EXISTS  compraP (id INTEGER REFERENCES compra(id), idProducto int);";
+				logger.log( Level.INFO, "Statement: " + sent );
+				statement.executeUpdate( sent );
 			}
 			return true;
 		} catch(Exception e) {
@@ -105,7 +110,33 @@ public class BaseDeDatos {
 			return null;
 		}
 	}
-	
+	public static Usuario getUsuarioId(int id) {
+		try (Statement statement = conexion.createStatement()){
+			String sent = "select * from usuario where id = "+ id+";";
+			logger.log( Level.INFO, "Statement: " + sent );
+			ResultSet rs = statement.executeQuery( sent );
+			while( rs.next() ) { // Leer el resultset
+				String nombre = rs.getString("nombre");
+				String email = rs.getString("email");
+				String constrasenya = rs.getString("contrasenya");
+				if(rs.getInt("admin")==1) {
+					Administrador a =new Administrador(nombre, email, constrasenya );
+					a.setCodigoUsuario(id);
+					return a;		
+				}
+				else {
+					Comprador c = new Comprador(nombre, email, constrasenya, rs.getInt("admin")) ;
+					c.setCodigoUsuario(id);
+					return c;
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.log( Level.SEVERE, "Excepción", e );
+			return null;
+		}
+		return null;
+	}
 	//Los usuarios administradores hay que añadirlos directamente a la base de datos
 	public static void añadirUsuario(int id, String nombre, String email, String contrasenya) {
 		String sent="";
@@ -199,35 +230,62 @@ public class BaseDeDatos {
 		}
 	}
 	
-	public static int obtenerUltimoIdCompra() {
-		int ultimoIdCompra;
-		String sent = "select max(id) from Compra";
-		try(Statement statement = conexion.createStatement()) {
-			logger.log( Level.INFO, "Lanzada sentencia para la obtención del último id de compra: " + sent );
-			ResultSet rs = statement.executeQuery( sent );
-			
-			if(rs.next()) {
-				ultimoIdCompra = rs.getInt(1);
-			}else {
-				ultimoIdCompra = 0;
-			}
-			
-		} catch (SQLException e) {
-			logger.log( Level.SEVERE, "Error en inserción de base de datos\t" + e );
-			ultimoIdCompra = 0;
-		}
-		return ultimoIdCompra;
-	}
-	public static void añadirCompra(int idUsuario, String fecha, int idProducto) {
+	public static void añadirCompra(int idUsuario, String fecha) {
 		String sent="";
 		try(Statement statement = conexion.createStatement()) {
-			sent = "insert into compra (idUsuario, idProducto,fecha ) values (" + idUsuario + ","+idProducto+", '" + fecha + "');";
+			sent = "insert into compra (idUsuario, fecha ) values (" + idUsuario + ",'" + fecha + "');";
 			logger.log( Level.INFO, "Lanzada actualización a base de datos: " + sent );
 			int val = statement.executeUpdate( sent );
 			logger.log( Level.INFO, "Añadida " + val + " fila a base de datos\t" + sent );
 			
 		} catch (SQLException e) {
 			logger.log( Level.SEVERE, "Error en inserción de base de datos\t" + e );
+		}
+	}
+	
+	public static void añadirCompraP(int idCompra, int idProducto) {
+		String sent="";
+		try(Statement statement = conexion.createStatement()) {
+			sent = "insert into compraP (id, idProducto ) values (" + idCompra + "," + idProducto + ");";
+			logger.log( Level.INFO, "Lanzada actualización a base de datos: " + sent );
+			int val = statement.executeUpdate( sent );
+			logger.log( Level.INFO, "Añadida " + val + " fila a base de datos\t" + sent );
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Error en inserción de base de datos\t" + e );
+		}
+	}
+	
+	public static HashMap<Integer,Compra> getCompras(){
+		HashMap<Integer,Compra> mapaCompras = new HashMap<>();
+		ArrayList<Producto> ps = new ArrayList<Producto>();
+		try (Statement statement = conexion.createStatement()){
+			String sent = "select * from compra;";
+			logger.log( Level.INFO, "Statement: " + sent );
+			ResultSet rs = statement.executeQuery( sent );
+			while( rs.next() ) { // Leer el resultset
+				int id = rs.getInt("id");
+				int idUsuario = rs.getInt("idUsuario");
+				Date fecha = rs.getDate("fecha");
+				sent = "select idProducto from compraP where id = "+id + ";";
+				logger.log( Level.INFO, "Statement: " + sent );
+				ResultSet rs2 = statement.executeQuery( sent );
+				while(rs2.next()) {
+					int idProducto=rs2.getInt("idProducto");
+					for(Producto p : Logica.productosHistoricos) {
+						if(idProducto==p.getCodigoP()) {
+							ps.add(p);
+							break;
+						}
+					}
+				}
+				Compra c = new Compra(id, getUsuarioId(idUsuario), ps, fecha);
+				mapaCompras.put(id, c);
+			}
+			return mapaCompras;
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.log( Level.SEVERE, "Excepción", e );
+			return null;
 		}
 	}
 	
