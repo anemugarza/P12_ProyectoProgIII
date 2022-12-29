@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import Clases.Producto;
 import Logica.Logica;
 
-public class VentanaCambioFoto extends JFrame{
+public class VentanaCambioFoto extends JFrame implements VentanaCambio{
 	private static final long serialVersionUID = 1L;
 	
 	//Componentes del Log In
@@ -31,7 +31,7 @@ public class VentanaCambioFoto extends JFrame{
 		inicializar(p);
 	}
 	
-	private void inicializar(Producto p) {
+	public void inicializar(Producto p) {
 		//Inicializamos elementos 
 		fotoN= new JLabel("Introduzca el nombre del archivo de la nueva foto: ");
 		txtfoto= new JTextField(60);
@@ -57,7 +57,7 @@ public class VentanaCambioFoto extends JFrame{
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.out.println("Cerrando");
-				System.exit(0);
+				dispose();
 			}
 		});
 		

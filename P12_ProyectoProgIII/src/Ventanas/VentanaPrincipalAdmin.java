@@ -32,6 +32,7 @@ import Clases.MaterialEscolar;
 import Clases.Producto;
 import Clases.Ropa;
 import Clases.TipoProducto;
+import Logica.BaseDeDatos;
 import Logica.Logica;
 
 public class VentanaPrincipalAdmin extends JFrame{
@@ -64,33 +65,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(50, 30, 300, 50);
-		for(Producto p : Logica.productosHistoricos) {
-			JPanel pProducto = new JPanel();
-			JPanel pfoto = new JPanel();
-			JPanel pnom = new JPanel();
-			JLabel lNom = new JLabel(p.getNomP());
-			ImageIcon foto = new ImageIcon((String) p.getFoto());
-			JLabelAjustado lfoto = new JLabelAjustado(foto);
-			lfoto.setPreferredSize( new Dimension( 200, 200 ) );
-			pfoto.add(lfoto);
-			pnom.add(lNom);
-			pProducto.add(pfoto, BorderLayout.NORTH);
-			pProducto.add(pnom, BorderLayout.SOUTH);
-			pProducto.setLayout(new GridLayout(2,1));
-			pCentral.add(pProducto);
-			pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
-			
-			pProducto.addMouseListener(new MouseAdapter() {
-				
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					// TODO Auto-generated method stub
-					if (e.getClickCount() == 2) {
-						VentanaModificarProd v = new VentanaModificarProd(p);
-					}
-				}
-			});
-		}
+		for(Producto p: Logica.productosHistoricos)crearVentana(p);
 		
 		pbotonera.add(banyadirProd);
 		pbotonera.add(bestadistica);
@@ -123,84 +98,21 @@ public class VentanaPrincipalAdmin extends JFrame{
 					if(tp.equals(TipoProducto.ELECTRONICA)) {
 						for (Producto p : Logica.productosHistoricos) {
 							if(p instanceof Electronica) {
-								JPanel pProducto = new JPanel();
-								JPanel pfoto = new JPanel();
-								JLabel lNom = new JLabel(p.getNomP());
-								ImageIcon foto = new ImageIcon((String) p.getFoto());
-								JLabelAjustado lfoto = new JLabelAjustado(foto);
-								lfoto.setPreferredSize( new Dimension( 200, 200 ) );
-								pfoto.add(lfoto);
-								pProducto.add(pfoto, BorderLayout.NORTH);
-								pProducto.add(lNom, BorderLayout.SOUTH);
-								pCentral.add(pProducto);
-								pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
-								
-								pProducto.addMouseListener(new MouseAdapter() {
-						
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										// TODO Auto-generated method stub
-										if (e.getClickCount() == 2) {
-											VentanaModificarProd vp = new VentanaModificarProd(p);
-										}
-									}
-								});
+								crearVentana(p);
 							}
 						}
 					}
 					else if(tp.equals(TipoProducto.ROPA)) {
 						for (Producto p : Logica.productosHistoricos) {
 							if(p instanceof Ropa) {
-								JPanel pProducto = new JPanel();
-								JPanel pfoto = new JPanel();
-								JLabel lNom = new JLabel(p.getNomP());
-								ImageIcon foto = new ImageIcon((String) p.getFoto());
-								JLabelAjustado lfoto = new JLabelAjustado(foto);
-								lfoto.setPreferredSize( new Dimension( 200, 200 ) );
-								pfoto.add(lfoto);
-								pProducto.add(pfoto, BorderLayout.NORTH);
-								pProducto.add(lNom, BorderLayout.SOUTH);
-								pCentral.add(pProducto);
-								pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
-								
-								pProducto.addMouseListener(new MouseAdapter() {
-								
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										// TODO Auto-generated method stub
-										if (e.getClickCount() == 2) {
-											VentanaModificarProd vp = new VentanaModificarProd(p);
-										}
-									}
-								});
+								crearVentana(p);
 							}
 						}
 					}
 					else if(tp.equals(TipoProducto.MATERIAL_ESCOLAR)) {
 						for (Producto p : Logica.productosHistoricos) {
 							if(p instanceof MaterialEscolar) {
-								JPanel pProducto = new JPanel();
-								JPanel pfoto = new JPanel();
-								JLabel lNom = new JLabel(p.getNomP());
-								ImageIcon foto = new ImageIcon((String) p.getFoto());
-								JLabelAjustado lfoto = new JLabelAjustado(foto);
-								lfoto.setPreferredSize( new Dimension( 200, 200 ) );
-								pfoto.add(lfoto);
-								pProducto.add(pfoto, BorderLayout.NORTH);
-								pProducto.add(lNom, BorderLayout.SOUTH);
-								pCentral.add(pProducto);
-								pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
-								pProducto.addMouseListener(new MouseAdapter() {
-								
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										// TODO Auto-generated method stub
-										if (e.getClickCount() == 2) {
-											VentanaModificarProd vp = new VentanaModificarProd(p);
-											dispose();
-										}
-									}
-								});
+								crearVentana(p);
 								
 							}
 						}
@@ -211,34 +123,6 @@ public class VentanaPrincipalAdmin extends JFrame{
 			}
 		});
 		
-		//ESTO HAY QUE PONERLO BIEN
-		pCentral.addKeyListener(new KeyListener() {
-			
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				if (e.isControlDown() && (e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE)) {
-					/*Logica.productosHistoricos.remove(p);
-					Logica.guardarProductos("Productos1.dat");
-					VentanaPrincipalAdmin vp = new VentanaPrincipalAdmin();
-					dispose();*/
-					borrando=true;
-					System.out.println("MODO DE BORRADO");
-					JOptionPane jop = new JOptionPane("Estas borrando, pulse no para acabar de borrar.", JOptionPane.INFORMATION_MESSAGE);
-				}
-			}
-			
-			@Override
-			public void keyPressed(KeyEvent e) {
-				
-			}
-		});
 		
 		bestadistica.addActionListener(new ActionListener() {
 		
@@ -257,6 +141,41 @@ public class VentanaPrincipalAdmin extends JFrame{
 			}
 		});
 		
+	}
+	
+	public void crearVentana(Producto p) {
+		JPanel pProducto = new JPanel();
+		JPanel pfoto = new JPanel();
+		JPanel pnom = new JPanel();
+		JLabel lNom = new JLabel(p.getNomP());
+		ImageIcon foto = new ImageIcon((String) p.getFoto());
+		JLabelAjustado lfoto = new JLabelAjustado(foto);
+		lfoto.setPreferredSize( new Dimension( 200, 200 ) );
+		pfoto.add(lfoto);
+		pnom.add(lNom);
+		pProducto.add(pfoto, BorderLayout.NORTH);
+		pProducto.add(pnom, BorderLayout.SOUTH);
+		pProducto.setLayout(new GridLayout(2,1));
+		pCentral.add(pProducto);
+		pCentral.setLayout(new GridLayout((int) Math.ceil(Logica.productosHistoricos.size()/2) , 2));
+		
+		pProducto.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if (e.getClickCount() == 2) {
+					VentanaModificarProd v = new VentanaModificarProd(p);
+				}
+				if (e.getClickCount() == 1 && e.isControlDown()) {
+					Logica.productosHistoricos.remove(p);
+					Logica.guardarProductos("Productos.dat");
+					crearVentana(p);
+				}
+				
+			}
+		});
+		pCentral.revalidate();
 	}
 	
 	private static class JLabelAjustado extends JLabel {

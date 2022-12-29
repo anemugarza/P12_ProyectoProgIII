@@ -94,7 +94,7 @@ public class VentanaAnyadirP extends JFrame{
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.out.println("Cerrando");
-				System.exit(0);
+				dispose();
 			}
 		});
 		
@@ -119,6 +119,7 @@ public class VentanaAnyadirP extends JFrame{
 						dispose();
 				}else JOptionPane.showMessageDialog(null, "Debes indicar de qué tipo es el producto");
 				}else JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");
+				dispose();
 			}
 		});
 

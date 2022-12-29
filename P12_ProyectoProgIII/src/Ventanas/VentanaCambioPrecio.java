@@ -25,7 +25,7 @@ import Clases.Producto;
 import Logica.BaseDeDatos;
 import Logica.Logica;
 
-public class VentanaCambioPrecio extends JFrame{
+public class VentanaCambioPrecio extends JFrame implements VentanaCambio{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -42,7 +42,7 @@ public class VentanaCambioPrecio extends JFrame{
 		inicializar(p);
 	}
 	
-	private void inicializar(Producto p) {
+	public void inicializar(Producto p) {
 		//Inicializamos elementos 
 		precioN= new JLabel("Introduzca el nuevo precio: ");
 		txtPrecio= new JTextField(10);
@@ -68,7 +68,7 @@ public class VentanaCambioPrecio extends JFrame{
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.out.println("Cerrando");
-				System.exit(0);
+				dispose();
 			}
 		});
 		

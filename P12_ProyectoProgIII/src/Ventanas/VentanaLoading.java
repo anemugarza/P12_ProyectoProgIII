@@ -39,8 +39,7 @@ public class VentanaLoading extends JFrame{
 				for(int i=0;i<100;i++) {
 					pb.setValue(pb.getValue()+1);
 					try {
-						Thread.sleep(1);
-						//Thread.sleep(1);
+						Thread.sleep((int) Math.random()*(100-50+1)+50);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

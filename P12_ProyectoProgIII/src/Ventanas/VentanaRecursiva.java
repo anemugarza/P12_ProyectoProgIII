@@ -32,6 +32,7 @@ public class VentanaRecursiva extends JFrame{
 	private JButton bsiguiente;
 	private JPanel pNorte;
 	private JButton bvolver;
+	private JButton bcrearCesta;
 	private JPanel pbotonera;
 	private JLabel s;
 	private JList<Producto> lista;
@@ -54,6 +55,7 @@ public class VentanaRecursiva extends JFrame{
 		banterior = new JButton("OPCIÓN ANTERIOR");
 		bsiguiente = new JButton("SIGUIENTE OPCIÓN");
 		bvolver = new JButton("VOLVER");
+		bcrearCesta = new JButton("CREAR CESTA");
 		pNorte = new JPanel();
 		lista = new JList<Producto>();
 		mlista = new DefaultListModel<Producto>();
@@ -62,6 +64,7 @@ public class VentanaRecursiva extends JFrame{
 		actualizarLista(cont);
 		pbotonera.add(banterior);
 		pbotonera.add(bsiguiente);
+		pbotonera.add(bcrearCesta);
 		pNorte.add(bvolver, BorderLayout.WEST);
 		pNorte.add(info, BorderLayout.WEST);
 		pNorte.add(s, BorderLayout.WEST );
@@ -116,7 +119,18 @@ public class VentanaRecursiva extends JFrame{
 					actualizarLista(cont);
 				}
 			}
-		});			
+		});	
+		
+		bcrearCesta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				c1.getCesta().removeAll(c1.getCesta());
+				for( Producto p: lPuedoComprar.get(cont)) {
+					c1.anyadirCesta(p);
+				}
+			}
+		});	
 	}
 	
 	public void actualizarLista(int cont) {
