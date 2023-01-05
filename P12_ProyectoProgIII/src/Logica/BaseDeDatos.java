@@ -52,10 +52,6 @@ public class BaseDeDatos {
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 
-				sent = "CREATE TABLE IF NOT EXISTS analisis (id INTEGER PRIMARY KEY AUTOINCREMENT, fecha bigint, datos varchar(100), idUsuario KEY REFERENCES usuario (id));";
-				logger.log( Level.INFO, "Statement: " + sent );
-				statement.executeUpdate( sent );
-
 				sent = "CREATE TABLE IF NOT EXISTS  compra (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario(id), fecha date);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );

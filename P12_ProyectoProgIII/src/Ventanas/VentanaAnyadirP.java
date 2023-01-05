@@ -108,14 +108,21 @@ public class VentanaAnyadirP extends JFrame{
 		bguardarDatos.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Producto p;
 				if(txtfoto.getText()!=null || txtnombre.getText()!=null|| txtprecio.getText()!=null ) {
 					if(tipoP.getSelectedItem() != null) {
 						if(tipoP.getSelectedItem() == TipoProducto.ELECTRONICA) {
-							new Electronica(txtnombre.getText(), Double.parseDouble(txtprecio.getText()),"Media/" +txtfoto.getText());
+							p = new Electronica(txtnombre.getText(), Double.parseDouble(txtprecio.getText()),"Media/" +txtfoto.getText());
 						}else if(tipoP.getSelectedItem() == TipoProducto.ROPA){
-							new Ropa(txtnombre.getText(), Double.parseDouble(txtprecio.getText()),"Media/" +txtfoto.getText());
-						}else new MaterialEscolar(txtnombre.getText(), Double.parseDouble(txtprecio.getText()),"Media/" +txtfoto.getText());
+							p = new Ropa(txtnombre.getText(), Double.parseDouble(txtprecio.getText()),"Media/" +txtfoto.getText());
+						}else {
+							p = new MaterialEscolar(txtnombre.getText(), Double.parseDouble(txtprecio.getText()),"Media/" +txtfoto.getText());
+						}
+						Logica.productosHistoricos.add(p);
 						Logica.guardarProductos("Productos.dat");
+						for(Producto t : Logica.productosHistoricos) {
+							VentanaPrincipalAdmin.crearVentana(t);
+						}
 						dispose();
 				}else JOptionPane.showMessageDialog(null, "Debes indicar de qué tipo es el producto");
 				}else JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");

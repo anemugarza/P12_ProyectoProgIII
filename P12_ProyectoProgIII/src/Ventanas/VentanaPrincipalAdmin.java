@@ -16,6 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -44,7 +45,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 	private JComboBox<TipoProducto> seleccion;
 	private JButton banyadirProd;
 	private JButton bestadistica;
-	private JPanel pCentral;
+	private static JPanel pCentral;
 	private JPanel pbotonera;
 	private JScrollPane scroll;
 	private boolean borrando = false;
@@ -128,7 +129,12 @@ public class VentanaPrincipalAdmin extends JFrame{
 		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaEstadistica ventana= new VentanaEstadistica(); 
+				ImageIcon icono = new ImageIcon("");
+				String op = (String) JOptionPane.showInputDialog(null, "OPCIONES DE ESTADÍSTICAS",
+		                "OPCIONES DE ESTADÍSTICAS", JOptionPane.QUESTION_MESSAGE,
+		                icono, new Object[] { "PRODUCTO MÁS VENDIDO ENTRE DOS FECHAS","GASTO MEDIO DE CLIENTES EN UN MES", "DÍA DE LA SEMANA QUE MÁS SE COMPRA" },
+		                "PRODUCTO MÁS VENDIDO ENTRE DOS FECHAS");
+				VentanaEstadistica ventana= new VentanaEstadistica(op); 
 				dispose();
 			}
 		});
@@ -143,7 +149,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 		
 	}
 	
-	public void crearVentana(Producto p) {
+	public static void crearVentana(Producto p) {
 		JPanel pProducto = new JPanel();
 		JPanel pfoto = new JPanel();
 		JPanel pnom = new JPanel();
