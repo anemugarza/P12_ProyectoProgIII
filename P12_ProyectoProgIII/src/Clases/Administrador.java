@@ -7,6 +7,13 @@ public class Administrador extends Usuario {
 	int salario;
 	Map<Long, Analisis> analisis = new HashMap<>();
 
+	/**
+	 * 
+	 * @param nomUsuario 
+	 * @param email
+	 * @param contrasenya
+	 * @param salario
+	 */
 	public Administrador(String nomUsuario, String email, String contrasenya, int salario) {
 		super(nomUsuario, email, contrasenya, 1);
 		this.salario = salario;
@@ -16,6 +23,10 @@ public class Administrador extends Usuario {
 		super(nomUsuario, email, contrasenya, 1);
 	}
 
+	/**
+	 * 
+	 * @return salario
+	 */
 	public int getSalario() {
 		return salario;
 	}

@@ -38,7 +38,6 @@ public class VentanaLogIn extends JFrame{
 		private JButton entrar;
 		private JPanel panelCentral;
 		private JPanel botonera;
-		private BaseDeDatos bd;
 		
 		//Componentes del registro, de momento ocultos
 		private JLabel infoCuenta;
@@ -80,7 +79,6 @@ public class VentanaLogIn extends JFrame{
 			datosCuenta= new JPanel();
 			botoneraRegistro= new JPanel();
 			guardarDatos= new JButton("Registrarse");
-			bd = new BaseDeDatos();
 			
 			//Añadimos a la ventana
 			panelCentral.add(email);
