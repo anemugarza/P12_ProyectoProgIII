@@ -21,9 +21,10 @@ public class Main {
 	public static void main(String[] args) {
 		BaseDeDatos.abrirConexion("MiBD.db", true);
 		Logica.cargarProductos("Productos.dat");
-		System.out.println(BaseDeDatos.getCompras());
+		//VentanaLogIn v = new VentanaLogIn();
 		VentanaPrincipalAdmin v = new VentanaPrincipalAdmin();
-		/*EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
+		/*VentanaInicial v = new VentanaInicial();
+		EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
 			private static final long serialVersionUID = 1L;
 
 			public void finished(MediaPlayer mediaPlayer) {

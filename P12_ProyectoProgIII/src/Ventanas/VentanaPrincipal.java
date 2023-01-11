@@ -18,7 +18,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -39,6 +41,7 @@ import Clases.Producto;
 import Clases.Ropa;
 import Clases.TipoProducto;
 import Logica.Logica;
+import Properties.PropertiesProyecto;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -50,8 +53,10 @@ public class VentanaPrincipal extends JFrame {
 	private JComboBox<TipoProducto> seleccion;
 	private JButton bpersonal;
 	private JButton brecursiva;
+	private JButton bProperties;
 	private JPanel pCentral;
 	private JPanel botonera;
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	private JScrollPane scroll;
 	private VentanaPrincipal v;
 	public VentanaPrincipal()  {
@@ -65,6 +70,7 @@ public class VentanaPrincipal extends JFrame {
 		seleccion = new JComboBox<>();
 		seleccion.setModel(new DefaultComboBoxModel<TipoProducto>(TipoProducto.values()));
 		bpersonal = new JButton("PERSONAL");
+		bProperties = new JButton("HOJA DE RECLAMACIONES");
 		brecursiva = new JButton("OPCIONES COMPRA");
 		pCentral = new JPanel();
 		botonera = new JPanel();
@@ -103,6 +109,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		this.add(seleccion, BorderLayout.NORTH);
 		this.add(scroll, BorderLayout.CENTER);
+		botonera.add(bProperties);
 		botonera.add(brecursiva);
 		botonera.add(bpersonal);
 		this.add(botonera, BorderLayout.SOUTH);
@@ -226,6 +233,25 @@ public class VentanaPrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VentanaPersonal ventana= new VentanaPersonal(); 
+				dispose();
+			}
+		});
+		
+		bProperties.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String[] props = { "Usuario", "Fecha", "Descripción", "Número de teléfono" };
+				String[] mensajes = { "Usuario que reclama: ", "Fecha de reclamación: ", "Motivo resumido de la reclamación: ", "Número de teléfono: " };
+				String[] defecto = { "a@gmail.com", sdf.format(new Date(System.currentTimeMillis())), ".", ""};
+				String[] carpetas = { "", "", "", ""};
+				try {
+					PropertiesProyecto dialogo = new PropertiesProyecto( "properties.xml", props, mensajes, defecto, carpetas );
+					dialogo.setVisible(true);  // Edición interactiva de configuración (hasta que no confirma o cancela el usuario no se devuelve el control)
+					dialogo.dispose();  // Cierra la ventana para que swing acabe
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				dispose();
 			}
 		});

@@ -158,14 +158,17 @@ public class VentanaPersonal extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				Date d = new Date(System.currentTimeMillis());
-				String fecha = sdf.format(d);
-				BaseDeDatos.añadirCompra(c1.getCodigoUsuario() , fecha);
-				totalPrecio.setText("PRECIO TOTAL: 0.00 €");
-				JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
-				c1.getCesta().removeAll(c1.getCesta());
-				actualizarLista(0);
+				if(!c1.getCesta().isEmpty()) {
+					long fecha = System.currentTimeMillis();
+					int id = BaseDeDatos.añadirCompra(c1.getCodigoUsuario() , fecha);
+					for(Producto p : c1.getCesta()) {
+						BaseDeDatos.añadirCompraP(id, p.getCodigoP());
+					}
+					totalPrecio.setText("PRECIO TOTAL: 0.00 €");
+					JOptionPane.showMessageDialog(null, "Tu compra ha sido registrada");
+					c1.getCesta().removeAll(c1.getCesta());
+					actualizarLista(0);
+				}else JOptionPane.showMessageDialog(null, "ERROR: Cesta vacia");
 			}
 		});
 		

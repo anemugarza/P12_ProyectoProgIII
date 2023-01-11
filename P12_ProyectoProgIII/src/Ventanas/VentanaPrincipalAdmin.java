@@ -16,6 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -134,7 +135,12 @@ public class VentanaPrincipalAdmin extends JFrame{
 		                "OPCIONES DE ESTADÍSTICAS", JOptionPane.QUESTION_MESSAGE,
 		                icono, new Object[] { "PRODUCTO MÁS VENDIDO ENTRE DOS FECHAS","GASTO MEDIO DE CLIENTES EN UN MES", "DÍA DE LA SEMANA QUE MÁS SE COMPRA" },
 		                "PRODUCTO MÁS VENDIDO ENTRE DOS FECHAS");
-				VentanaEstadistica ventana= new VentanaEstadistica(op); 
+				try {
+					VentanaEstadistica ventana= new VentanaEstadistica(op);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
 				dispose();
 			}
 		});

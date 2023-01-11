@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ import Clases.Usuario;
 public class BaseDeDatos {
 	private static Connection conexion;
 	private static Logger logger = Logger.getLogger( "BaseDeDatos" );
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	private static HashMap<String,Usuario> users = new HashMap<String, Usuario>();
 	
 	/** Abre conexión con la base de datos
@@ -52,7 +54,7 @@ public class BaseDeDatos {
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 
-				sent = "CREATE TABLE IF NOT EXISTS  compra (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario(id), fecha date);";
+				sent = "CREATE TABLE IF NOT EXISTS  compra (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario(id), fecha bigint);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
@@ -226,17 +228,23 @@ public class BaseDeDatos {
 		}
 	}
 	
-	public static void añadirCompra(int idUsuario, String fecha) {
+	public static int añadirCompra(int idUsuario, long fecha) {
 		String sent="";
 		try(Statement statement = conexion.createStatement()) {
 			sent = "insert into compra (idUsuario, fecha ) values (" + idUsuario + ",'" + fecha + "');";
 			logger.log( Level.INFO, "Lanzada actualización a base de datos: " + sent );
 			int val = statement.executeUpdate( sent );
 			logger.log( Level.INFO, "Añadida " + val + " fila a base de datos\t" + sent );
-			
+			sent = "select id from compra order by id desc;";
+			ResultSet rs = statement.executeQuery(sent);
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				return id;
+			}
 		} catch (SQLException e) {
 			logger.log( Level.SEVERE, "Error en inserción de base de datos\t" + e );
 		}
+		return 0;
 	}
 	
 	public static void añadirCompraP(int idCompra, int idProducto) {
@@ -251,17 +259,19 @@ public class BaseDeDatos {
 		}
 	}
 	
-	public static HashMap<Integer,Compra> getCompras(){
+	public static HashMap<Integer,Compra> getCompras(int type, long fecha1, long fecha2){
 		HashMap<Integer,Compra> mapaCompras = new HashMap<>();
 		ArrayList<Producto> ps = new ArrayList<Producto>();
+		String sent="";
 		try (Statement statement = conexion.createStatement()){
-			String sent = "select * from compra;";
+			if(type ==1) sent = "select * from compra where fecha between "+ fecha1+ " and " + fecha2 +";";
+			else sent = "select * from compra;";
 			logger.log( Level.INFO, "Statement: " + sent );
 			ResultSet rs = statement.executeQuery( sent );
 			while( rs.next() ) { // Leer el resultset
 				int id = rs.getInt("id");
 				int idUsuario = rs.getInt("idUsuario");
-				Date fecha = rs.getDate("fecha");
+				long fecha = rs.getLong("fecha");
 				sent = "select idProducto from compraP where id = "+id + ";";
 				logger.log( Level.INFO, "Statement: " + sent );
 				ResultSet rs2 = statement.executeQuery( sent );
@@ -271,8 +281,7 @@ public class BaseDeDatos {
 						if(idProducto==p.getCodigoP()) {
 							ps.add(p);
 							break;
-						}
-					}
+						}					}
 				}
 				Compra c = new Compra(id, getUsuarioId(idUsuario), ps, fecha);
 				mapaCompras.put(id, c);

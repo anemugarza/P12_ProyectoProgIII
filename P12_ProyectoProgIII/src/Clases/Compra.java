@@ -8,9 +8,9 @@ public class Compra {
 	private int idCompra;
 	private Usuario user;
 	private ArrayList<Producto> productosComprados;
-	private Date fecha;
+	private long fecha;
 	
-	public Compra(int idCompra, Usuario user, ArrayList<Producto> productosComprados, Date fecha) {
+	public Compra(int idCompra, Usuario user, ArrayList<Producto> productosComprados, long fecha) {
 		super();
 		this.idCompra = idCompra;
 		this.user = user;
@@ -42,11 +42,11 @@ public class Compra {
 		this.productosComprados = productosComprados;
 	}
 
-	public Date getFecha() {
+	public long getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(long fecha) {
 		this.fecha = fecha;
 	}
 

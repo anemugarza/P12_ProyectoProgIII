@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 
+import Clases.Compra;
 import Clases.Comprador;
 import Clases.Electronica;
 import Clases.MaterialEscolar;
@@ -138,6 +139,30 @@ public class Logica implements Serializable{
 				ArrayList<Producto> ps = new ArrayList<>(lProductos);
 				quePuedoComprar(saldo - p.getPrecio(), ps, lPuedoComprar, saldos);
 				lProductos.remove(p);
+			}
+		}
+	}
+	
+	public static Producto productoMasVendido(long fecha1, long fecha2) {
+		HashMap<Integer,Compra> comprasEntreFechas = BaseDeDatos.getCompras(1, fecha1, fecha2);
+		HashMap<Producto, Integer> contador = new HashMap<Producto, Integer>();
+		for(Integer i :  comprasEntreFechas.keySet()) {
+			recursivaContador(comprasEntreFechas.get(i).getProductosComprados(), contador);
+		}
+		Producto max = null;
+		int maxI=0;
+		for(Producto p : contador.keySet()) if(contador.get(p)>maxI) max=p;
+		return max;
+		
+	}
+	public static void recursivaContador(ArrayList<Producto> prs, HashMap<Producto, Integer> contador) {
+		if(prs.size()>0) {
+			for(Producto p: prs) {
+				if(!contador.containsKey(p)) contador.put(p, 1);
+				else contador.put(p, contador.get(p)+1);
+				prs.remove(p);
+				recursivaContador(prs, contador);
+				break;
 			}
 		}
 	}

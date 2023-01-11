@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
  * Utiliza Properties para guardar estos valores en fichero
  */
 public class PropertiesProyecto extends JDialog {
-
+	//Solo se guarda la última reclamación ya que las reclamaciones se atienden lo antes posible 
 	private ArrayList<JTextField> tfPropiedad = new ArrayList<JTextField>();
 	private ArrayList<String> propiedad = new ArrayList<String>();
 	private ArrayList<String> valorDefecto = new ArrayList<String>();
@@ -114,7 +114,14 @@ public class PropertiesProyecto extends JDialog {
 			for (int i=0; i < propiedad.size(); i++) {
 				misProps.setProperty( propiedad.get(i), tfPropiedad.get(i).getText() );
 			}
-			saveProps();
+			int op = JOptionPane.showConfirmDialog(null, "Tu anterior reclamación se borrará, solo se guardará esta. ¿Estás seguro de que quieres guardar esta reclamación?");
+			switch (op) {
+			case 0:
+				saveProps();
+				break;
+			default:
+				break;
+			}
 		}
 		hayCambios = false;
 		setVisible(false);
@@ -196,23 +203,4 @@ public class PropertiesProyecto extends JDialog {
 		}
 	}
 	
-
-	
-	/** 
-	 * Main de prueba, genera un fichero de configuración con unas pocas propiedades
-	 */
-	public static void main(String[] args) {
-		String[] props = { "Usuario", "Fecha", "Descripción", "Número de teléfono" };
-		String[] mensajes = { "Usuario que reclama: ", "Fecha de reclamación: ", "Motivo resumido de la reclamación: ", "Número de teléfono: " };
-		String[] defecto = { "a@gmail.com", sdf.format(new Date(System.currentTimeMillis())), ".", ""};
-		String[] carpetas = { "", "", "", ""};
-		try {
-			PropertiesProyecto dialogo = new PropertiesProyecto( "properties.xml", props, mensajes, defecto, carpetas );
-			dialogo.setVisible(true);  // Edición interactiva de configuración (hasta que no confirma o cancela el usuario no se devuelve el control)
-			dialogo.dispose();  // Cierra la ventana para que swing acabe
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }
