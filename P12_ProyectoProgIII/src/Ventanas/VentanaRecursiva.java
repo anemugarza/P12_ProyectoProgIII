@@ -125,9 +125,16 @@ public class VentanaRecursiva extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				c1.getCesta().removeAll(c1.getCesta());
-				for( Producto p: lPuedoComprar.get(cont)) {
-					c1.anyadirCesta(p);
+				int op = JOptionPane.showConfirmDialog(null, "Se creará una cesta con esta opción. ¿Desea realizar esta operación?");
+				switch (op) {
+				case 0:
+					c1.getCesta().removeAll(c1.getCesta());
+					for( Producto p: lPuedoComprar.get(cont)) {
+						c1.anyadirCesta(p);
+					}
+					break;
+				default:
+					break;
 				}
 			}
 		});	

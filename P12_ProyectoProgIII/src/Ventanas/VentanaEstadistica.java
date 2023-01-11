@@ -1,6 +1,7 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,7 +35,7 @@ public class VentanaEstadistica extends JFrame{
 	private JTextField txtatr2;
 	private JLabel atr1;
 	private JLabel atr2;
-	private JLabel prodMasVend;
+	private JLabel result;
 	private JPanel pCentral;
 	private JPanel pfechas;
 	private JPanel pNorte;
@@ -51,6 +52,8 @@ public class VentanaEstadistica extends JFrame{
 		bnuevaE = new JButton("NUEVA ESTADÍSTICA");
 		pfechas = new JPanel();
 		pNorte = new JPanel();
+		result = new JLabel();
+		result.setBackground(new Color(0, 0, 255));
 		
 		//Dependiendo de la estadistica se crea un panel central u otro
 		switch (op) {
@@ -59,9 +62,6 @@ public class VentanaEstadistica extends JFrame{
 			atr2 = new JLabel("Introduzca la fecha final: ");
 			txtatr1 = new JTextField(sdf.format(System.currentTimeMillis()-24*3600000L));
 			txtatr2 = new JTextField(sdf.format((System.currentTimeMillis()+24*3600000L)));
-			prodMasVend = new JLabel();
-			//esto hay que ponerlo en el medio
-			pCentral.add(prodMasVend);
 			break;
 		case "GASTO MEDIO DE CLIENTES EN UN MES":
 			atr1 = new JLabel("Introduzca el año: ");
@@ -87,6 +87,8 @@ public class VentanaEstadistica extends JFrame{
 		pNorte.add(bcrearEstadis);
 		pCentral.setLayout(new BorderLayout());
 		pCentral.add(pNorte, BorderLayout.NORTH);
+		//esto hay que ponerlo en el medio
+		pCentral.add(result);
 		this.add(pCentral, BorderLayout.CENTER);
 		
 		setSize(600,400);
@@ -115,14 +117,14 @@ public class VentanaEstadistica extends JFrame{
 				switch (op) {
 				case "PRODUCTO MÁS VENDIDO ENTRE DOS FECHAS":
 					try {
-						prodMasVend.setText(Logica.productoMasVendido((sdf.parse(txtatr1.getText())).getTime(), (sdf.parse(txtatr2.getText())).getTime()).getNomP());
+						result.setText(Logica.productoMasVendido((sdf.parse(txtatr1.getText())).getTime(), (sdf.parse(txtatr2.getText())).getTime()).getNomP().toUpperCase());
 					} catch (ParseException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					break;
 				case "GASTO MEDIO DE CLIENTES EN UN MES":
-					
+					result.setText(String.format("%.2f",String.valueOf(Logica.gastoMedio(txtatr1.getText(), txtatr2.getText()))));
 					break;
 				default:
 					

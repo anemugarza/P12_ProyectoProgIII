@@ -54,7 +54,7 @@ public class BaseDeDatos {
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 
-				sent = "CREATE TABLE IF NOT EXISTS  compra (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario(id), fecha bigint);";
+				sent = "CREATE TABLE IF NOT EXISTS  compra (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario INTEGER REFERENCES usuario(id), fecha bigint, precio float);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
@@ -228,10 +228,10 @@ public class BaseDeDatos {
 		}
 	}
 	
-	public static int añadirCompra(int idUsuario, long fecha) {
+	public static int añadirCompra(int idUsuario, long fecha, double precio) {
 		String sent="";
 		try(Statement statement = conexion.createStatement()) {
-			sent = "insert into compra (idUsuario, fecha ) values (" + idUsuario + ",'" + fecha + "');";
+			sent = "insert into compra (idUsuario, fecha, precio ) values (" + idUsuario + ",'" + fecha + "', " + (float) precio + ");";
 			logger.log( Level.INFO, "Lanzada actualización a base de datos: " + sent );
 			int val = statement.executeUpdate( sent );
 			logger.log( Level.INFO, "Añadida " + val + " fila a base de datos\t" + sent );
@@ -272,6 +272,8 @@ public class BaseDeDatos {
 				int id = rs.getInt("id");
 				int idUsuario = rs.getInt("idUsuario");
 				long fecha = rs.getLong("fecha");
+				System.out.println(fecha);
+				float precio = rs.getFloat("precio");
 				sent = "select idProducto from compraP where id = "+id + ";";
 				logger.log( Level.INFO, "Statement: " + sent );
 				ResultSet rs2 = statement.executeQuery( sent );
@@ -283,7 +285,7 @@ public class BaseDeDatos {
 							break;
 						}					}
 				}
-				Compra c = new Compra(id, getUsuarioId(idUsuario), ps, fecha);
+				Compra c = new Compra(id, getUsuarioId(idUsuario), ps, fecha,(double) precio);
 				mapaCompras.put(id, c);
 			}
 			return mapaCompras;

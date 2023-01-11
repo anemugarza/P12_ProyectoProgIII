@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 
@@ -32,6 +34,7 @@ public class Logica implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private static Usuario usuario;
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	public static List<Producto> productosHistoricos = new ArrayList<>();
 	private Logger log;
 
@@ -145,6 +148,10 @@ public class Logica implements Serializable{
 	
 	public static Producto productoMasVendido(long fecha1, long fecha2) {
 		HashMap<Integer,Compra> comprasEntreFechas = BaseDeDatos.getCompras(1, fecha1, fecha2);
+		if(comprasEntreFechas.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No hay compras entre estas fechas");
+			return null;
+		}else {
 		HashMap<Producto, Integer> contador = new HashMap<Producto, Integer>();
 		for(Integer i :  comprasEntreFechas.keySet()) {
 			recursivaContador(comprasEntreFechas.get(i).getProductosComprados(), contador);
@@ -153,7 +160,7 @@ public class Logica implements Serializable{
 		int maxI=0;
 		for(Producto p : contador.keySet()) if(contador.get(p)>maxI) max=p;
 		return max;
-		
+		}
 	}
 	public static void recursivaContador(ArrayList<Producto> prs, HashMap<Producto, Integer> contador) {
 		if(prs.size()>0) {
@@ -165,5 +172,33 @@ public class Logica implements Serializable{
 				break;
 			}
 		}
+	}
+	
+	public static double gastoMedio(String anyo, String mes) {
+		long fecha1 = parsear(anyo, mes, "01");
+		long fecha2 = parsear(anyo, mes, "31");
+		HashMap<Integer,Compra> comprasEntreFechas = BaseDeDatos.getCompras(1, fecha1, fecha2);
+		if(comprasEntreFechas.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No hay compras entre estas fechas");
+			return 0;
+		}else {
+			double gastoTotal = 0.0;
+			for(Compra c : comprasEntreFechas.values()) {
+				gastoTotal += c.getPrecio();
+			}
+			double media = gastoTotal/comprasEntreFechas.size();
+			return media;
+		}
+	}
+	
+	public static long parsear(String anyo, String mes, String dia) {
+		String fecha = dia + "/" + mes + "/" + anyo;
+		try {
+			return sdf.parse(fecha).getTime();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }

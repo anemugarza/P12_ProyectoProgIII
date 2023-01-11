@@ -9,13 +9,15 @@ public class Compra {
 	private Usuario user;
 	private ArrayList<Producto> productosComprados;
 	private long fecha;
+	private double precio;
 	
-	public Compra(int idCompra, Usuario user, ArrayList<Producto> productosComprados, long fecha) {
+	public Compra(int idCompra, Usuario user, ArrayList<Producto> productosComprados, long fecha, double precio) {
 		super();
 		this.idCompra = idCompra;
 		this.user = user;
 		this.productosComprados = productosComprados;
 		this.fecha = fecha;
+		this.precio = precio;
 	}
 
 	public int getIdCompra() {
@@ -50,10 +52,18 @@ public class Compra {
 		this.fecha = fecha;
 	}
 
+	
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
 	@Override
 	public String toString() {
 		return "Compra [idCompra=" + idCompra + ", user=" + user + ", productosComprados=" + productosComprados
-				+ ", fecha=" + fecha + "]";
+				+ ", fecha=" + fecha + ", precio=" + precio + "]";
 	}
-	
 }

@@ -10,6 +10,8 @@ import java.util.Properties;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import Ventanas.VentanaPrincipal;
+
 /** Clase de Properties.
  * Permite crear una ventana de diálogo que gestiona valores de configuración
  * Utiliza Properties para guardar estos valores en fichero
@@ -118,8 +120,10 @@ public class PropertiesProyecto extends JDialog {
 			switch (op) {
 			case 0:
 				saveProps();
+				VentanaPrincipal v = new VentanaPrincipal();
 				break;
 			default:
+				VentanaPrincipal v1 = new VentanaPrincipal();
 				break;
 			}
 		}

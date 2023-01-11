@@ -88,7 +88,7 @@ public class VentanaPersonal extends JFrame {
 		tproductos = new JTable(mProductos);
 		
 		actualizarLista(1);
-		totalPrecio = new JLabel("PRECIO TOTAL: " + actualizarPrecio(c1.getWl())+ "€");
+		totalPrecio = new JLabel("PRECIO TOTAL: " + String.format("%.2f", actualizarPrecio(c1.getWl()))+ "€");
 		tproductos.setModel(mProductos);
 		pbotonera.add(bwl);
 		pbotonera.add(bcesta);
@@ -137,7 +137,7 @@ public class VentanaPersonal extends JFrame {
 				bcompra.setVisible(true);
 				info.setText("LISTA: Cesta");
 				actualizarLista(0);
-				totalPrecio.setText("PRECIO TOTAL: " + actualizarPrecio(c1.getCesta())+ "€");
+				totalPrecio.setText("PRECIO TOTAL: " + String.format("%.2f", actualizarPrecio(c1.getCesta()))+ "€");
 				tipolista = true;
 			}
 		});
@@ -149,7 +149,7 @@ public class VentanaPersonal extends JFrame {
 				bcompra.setVisible(false);
 				info.setText("LISTA: WishList");
 				actualizarLista(1);
-				totalPrecio.setText("PRECIO TOTAL: " + actualizarPrecio(c1.getWl()) + "€");
+				totalPrecio.setText("PRECIO TOTAL: " + String.format("%.2f", actualizarPrecio(c1.getWl())) + "€");
 				tipolista = false;
 			}
 		});
@@ -160,7 +160,7 @@ public class VentanaPersonal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(!c1.getCesta().isEmpty()) {
 					long fecha = System.currentTimeMillis();
-					int id = BaseDeDatos.añadirCompra(c1.getCodigoUsuario() , fecha);
+					int id = BaseDeDatos.añadirCompra(c1.getCodigoUsuario() , fecha, actualizarPrecio(c1.getCesta()));
 					for(Producto p : c1.getCesta()) {
 						BaseDeDatos.añadirCompraP(id, p.getCodigoP());
 					}
@@ -186,7 +186,7 @@ public class VentanaPersonal extends JFrame {
 						}
 						c1.getCesta().remove(pos);
 						actualizarLista(0);
-						totalPrecio.setText("PRECIO TOTAL: " + actualizarPrecio(c1.getWl()) + "€");
+						totalPrecio.setText("PRECIO TOTAL: " + String.format("%.2f", actualizarPrecio(c1.getCesta())) + "€");
 
 					}else {
 						try {
@@ -197,7 +197,7 @@ public class VentanaPersonal extends JFrame {
 						}
 						c1.getWl().remove(pos);
 						actualizarLista(1);
-						totalPrecio.setText("PRECIO TOTAL: " + actualizarPrecio(c1.getWl()) + "€");
+						totalPrecio.setText("PRECIO TOTAL: " + String.format("%.2f", actualizarPrecio(c1.getWl())) + "€");
 
 					}
 					
@@ -241,13 +241,13 @@ public class VentanaPersonal extends JFrame {
 		tproductos.setModel(mProductos);
 	}
 	
-	public String actualizarPrecio(List<Producto> lista) {
+	public double actualizarPrecio(List<Producto> lista) {
 		double precioT = 0.0;
 		DecimalFormat df = new DecimalFormat("#.00");
 		for(Producto p : lista) {
 			precioT += p.getPrecio();
 		}
-		return df.format(precioT);
+		return precioT;
 	}
 	
 	

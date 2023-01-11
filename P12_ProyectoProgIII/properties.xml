@@ -2,8 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment>Propiedades de AEFicConfiguracion</comment>
-<entry key="Número de teléfono"/>
-<entry key="Descripción"/>
+<entry key="Número de teléfono">23535</entry>
 <entry key="Usuario">a@gmail.com</entry>
+<entry key="Descripción">wett453r</entry>
 <entry key="Fecha">11/01/2023</entry>
 </properties>
