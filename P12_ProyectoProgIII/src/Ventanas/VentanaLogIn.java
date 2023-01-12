@@ -166,7 +166,7 @@ public class VentanaLogIn extends JFrame{
 						txtemailRegistro.setText("");
 					}
 					if (!txtemailRegistro.getText().equals("")  && !txtcontrasenyaRegistro.getText().equals("") ){
-						String er = "[a-zA-Z]{1,}.{0,}[a-zA-Z]{1,}@{1,}[a-zA-Z].{2,}[a-z]";
+						String er = "[a-zA-Z]{1,}.{0,}[a-zA-Z]{0,}@[a-zA-Z]{1,}.[a-z]{2,}";
 						String email = txtemailRegistro.getText();
 						if(Pattern.matches(er, email)) {
 							Logica.crearUsuario(txtnombreRegistro.getText(),txtemailRegistro.getText(), txtcontrasenyaRegistro.getText()); 
