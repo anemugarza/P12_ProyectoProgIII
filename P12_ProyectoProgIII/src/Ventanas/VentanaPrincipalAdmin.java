@@ -137,7 +137,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} 
-				}
+				} 
 			}
 		});
 		

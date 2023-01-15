@@ -2,11 +2,13 @@ package Ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -41,6 +43,8 @@ public class VentanaEstadistica extends JFrame{
 	private JPanel pfechas;
 	private JPanel pNorte;
 	private JComboBox<String> jcbProd;
+	DecimalFormat df = new DecimalFormat("#.00");
+
                                
 	public VentanaEstadistica(String op) throws ParseException  {
 		inicializar(op);
@@ -90,10 +94,9 @@ public class VentanaEstadistica extends JFrame{
 		pNorte.add(pfechas);
 		if(op.equals("CANTIDAD VENDIDA DE UN PRODUCTO EN UN MES"))pNorte.add(jcbProd);
 		pNorte.add(bcrearEstadis);
-		pCentral.setLayout(new BorderLayout());
-		pCentral.add(pNorte, BorderLayout.NORTH);
-		//esto hay que ponerlo en el medio
-		pCentral.add(result, BorderLayout.CENTER);
+		pCentral.setLayout(new GridLayout(2,1));
+		pCentral.add(pNorte);
+		pCentral.add(result);
 		this.add(pCentral, BorderLayout.CENTER);
 		
 		setSize(700,400);
@@ -129,7 +132,7 @@ public class VentanaEstadistica extends JFrame{
 					}
 					break;
 				case "GASTO MEDIO DE CLIENTES EN UN MES":
-					result.setText(String.valueOf(Logica.gastoMedio(txtatr1.getText(), txtatr2.getText()))+ "€");
+					result.setText(String.valueOf(df.format(Logica.gastoMedio(txtatr1.getText(), txtatr2.getText())))+ "€");
 					break;
 				case "CANTIDAD VENDIDA DE UN PRODUCTO EN UN MES":
 					result.setText(String.valueOf(Logica.cantProdEnUnMes(txtatr1.getText(), txtatr2.getText(), (String)jcbProd.getSelectedItem())));
