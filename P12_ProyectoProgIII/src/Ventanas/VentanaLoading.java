@@ -1,16 +1,18 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 public class VentanaLoading extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel pTitulo,pCentro;
 	private JLabel lblTitulo;
 	private JProgressBar pb;

@@ -7,7 +7,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import Logica.BaseDeDatos;
-import uk.co.caprica.vlcj.player.base.MediaPlayer;
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 
 

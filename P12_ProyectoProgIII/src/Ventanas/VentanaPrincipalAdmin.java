@@ -9,16 +9,11 @@ import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
-import java.util.ArrayList;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,7 +29,6 @@ import Clases.MaterialEscolar;
 import Clases.Producto;
 import Clases.Ropa;
 import Clases.TipoProducto;
-import Logica.BaseDeDatos;
 import Logica.Logica;
 
 public class VentanaPrincipalAdmin extends JFrame{
@@ -49,7 +43,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 	private static JPanel pCentral;
 	private JPanel pbotonera;
 	private JScrollPane scroll;
-	private boolean borrando = false;
+
 	public VentanaPrincipalAdmin()  {
 		inicializar();
 	}
