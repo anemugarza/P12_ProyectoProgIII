@@ -3,13 +3,9 @@ package Properties;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Properties;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import Ventanas.VentanaPrincipal;
 
 /** Clase de Properties.
@@ -17,11 +13,14 @@ import Ventanas.VentanaPrincipal;
  * Utiliza Properties para guardar estos valores en fichero
  */
 public class PropertiesProyecto extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//Solo se guarda la última reclamación ya que las reclamaciones se atienden lo antes posible 
 	private ArrayList<JTextField> tfPropiedad = new ArrayList<JTextField>();
 	private ArrayList<String> propiedad = new ArrayList<String>();
 	private ArrayList<String> valorDefecto = new ArrayList<String>();
-	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	private String nomFic;
 	private Properties misProps = null;
 	private boolean hayCambios = false;

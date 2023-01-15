@@ -2,18 +2,12 @@ package Clases;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 import Logica.BaseDeDatos;
 import Logica.Logica;
 import Ventanas.VentanaInicial;
 import Ventanas.VentanaLogIn;
-import Ventanas.VentanaModificarProd;
-import Ventanas.VentanaModificarProd;
-import Ventanas.VentanaPersonal;
-import Ventanas.VentanaPrincipal;
-import Ventanas.VentanaPrincipalAdmin;
-import uk.co.caprica.vlcj.player.base.MediaPlayer;
+import javafx.scene.media.MediaPlayer;
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 
 public class Main {
@@ -21,9 +15,10 @@ public class Main {
 	public static void main(String[] args) {
 		BaseDeDatos.abrirConexion("MiBD.db", true);
 		Logica.cargarProductos("Productos.dat");
-		VentanaLogIn v = new VentanaLogIn();
-		//VentanaPrincipalAdmin v = new VentanaPrincipalAdmin();
-		/*VentanaInicial v = new VentanaInicial();
+		
+		//Administrador a = new Administrador("ASIER", "asier@deusto.es", "admin");
+		//BaseDeDatos.añadirAdmin(a.getNomUsuario(), a.getEmail(), a.getContrasenya());
+		VentanaInicial v = new VentanaInicial();
 		EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
 			private static final long serialVersionUID = 1L;
 
@@ -46,7 +41,7 @@ public class Main {
 				vl.setVisible(true);
 			} 
 			}
-		});*/
+		});
 		
 	}
 

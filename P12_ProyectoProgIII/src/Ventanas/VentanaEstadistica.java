@@ -2,6 +2,7 @@ package Ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,13 +13,15 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import Clases.Producto;
 import Logica.Logica;
 
 
@@ -39,6 +42,7 @@ public class VentanaEstadistica extends JFrame{
 	private JPanel pCentral;
 	private JPanel pfechas;
 	private JPanel pNorte;
+	private JComboBox<String> jcbProd;
                                
 	public VentanaEstadistica(String op) throws ParseException  {
 		inicializar(op);
@@ -67,13 +71,15 @@ public class VentanaEstadistica extends JFrame{
 			atr1 = new JLabel("Introduzca el año: ");
 			atr2 = new JLabel("Introduzca el mes: ");
 			txtatr1 = new JTextField("2023");
-			txtatr2 = new JTextField("02");
+			txtatr2 = new JTextField("01");
 			break;
 		default:
 			atr1 = new JLabel("Introduzca el año: ");
 			atr2 = new JLabel("Introduzca el mes: ");
 			txtatr1 = new JTextField("2023");
-			txtatr2 = new JTextField("02");
+			txtatr2 = new JTextField("01");
+			jcbProd = new JComboBox<String>();
+			for(Producto p : Logica.productosHistoricos) jcbProd.addItem(p.getNomP());
 			break;
 		}
 		this.add(bvolver, BorderLayout.NORTH);
@@ -84,6 +90,7 @@ public class VentanaEstadistica extends JFrame{
 		pfechas.add(txtatr2);
 		pfechas.setLayout(new GridLayout(2,2));
 		pNorte.add(pfechas);
+		if(op.equals("CANTIDAD VENDIDA DE UN PRODUCTO EN UN MES"))pNorte.add(jcbProd);
 		pNorte.add(bcrearEstadis);
 		pCentral.setLayout(new BorderLayout());
 		pCentral.add(pNorte, BorderLayout.NORTH);
@@ -91,7 +98,7 @@ public class VentanaEstadistica extends JFrame{
 		pCentral.add(result);
 		this.add(pCentral, BorderLayout.CENTER);
 		
-		setSize(600,400);
+		setSize(700,400);
 		setLocationRelativeTo(null);
 		setTitle("ESTADÍSTICA: " + op);
 		setVisible(true);
@@ -124,10 +131,12 @@ public class VentanaEstadistica extends JFrame{
 					}
 					break;
 				case "GASTO MEDIO DE CLIENTES EN UN MES":
-					result.setText(String.format("%.2f",String.valueOf(Logica.gastoMedio(txtatr1.getText(), txtatr2.getText()))));
+					result.setText(String.valueOf(Logica.gastoMedio(txtatr1.getText(), txtatr2.getText()))+ "€");
+					break;
+				case "CANTIDAD VENDIDA DE UN PRODUCTO EN UN MES":
+					result.setText(String.valueOf(Logica.cantProdEnUnMes(txtatr1.getText(), txtatr2.getText(), (String)jcbProd.getSelectedItem())));
 					break;
 				default:
-					
 					break;
 				}
 				
@@ -140,7 +149,7 @@ public class VentanaEstadistica extends JFrame{
 				ImageIcon icono = new ImageIcon("");
 				String op = (String) JOptionPane.showInputDialog(null, "OPCIONES DE ESTADÍSTICAS",
 		                "OPCIONES DE ESTADÍSTICAS", JOptionPane.QUESTION_MESSAGE,
-		                icono, new Object[] { "PRODUCTO MÁS VENDIDO ENTRE DOS FECHAS","GASTO MEDIO DE CLIENTES EN UN MES", "DÍA DE LA SEMANA QUE MÁS SE COMPRA" },
+		                icono, new Object[] { "PRODUCTO MÁS VENDIDO ENTRE DOS FECHAS","GASTO MEDIO DE CLIENTES EN UN MES", "CANTIDAD VENDIDA DE UN PRODUCTO EN UN MES" },
 		                "PRODUCTO MÁS VENDIDO ENTRE DOS FECHAS");
 				try {
 					VentanaEstadistica ventana= new VentanaEstadistica(op);

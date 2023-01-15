@@ -133,7 +133,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 				ImageIcon icono = new ImageIcon("");
 				String op = (String) JOptionPane.showInputDialog(null, "OPCIONES DE ESTADÍSTICAS",
 		                "OPCIONES DE ESTADÍSTICAS", JOptionPane.QUESTION_MESSAGE,
-		                icono, new Object[] { "PRODUCTO MÁS VENDIDO ENTRE DOS FECHAS","GASTO MEDIO DE CLIENTES EN UN MES", "DÍA DE LA SEMANA QUE MÁS SE COMPRA" },
+		                icono, new Object[] { "PRODUCTO MÁS VENDIDO ENTRE DOS FECHAS","GASTO MEDIO DE CLIENTES EN UN MES", "CANTIDAD VENDIDA DE UN PRODUCTO EN UN MES" },
 		                "PRODUCTO MÁS VENDIDO ENTRE DOS FECHAS");
 				try {
 					VentanaEstadistica ventana= new VentanaEstadistica(op);

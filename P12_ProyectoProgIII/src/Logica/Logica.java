@@ -1,7 +1,5 @@
 package Logica;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,20 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
-
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.text.StyledEditorKit.ForegroundAction;
-
 import Clases.Compra;
 import Clases.Comprador;
-import Clases.Electronica;
-import Clases.MaterialEscolar;
 import Clases.Producto;
-import Clases.Ropa;
 import Clases.Usuario;
 
 public class Logica implements Serializable{
@@ -36,9 +24,6 @@ public class Logica implements Serializable{
 	private static Usuario usuario;
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	public static List<Producto> productosHistoricos = new ArrayList<>();
-	private Logger log;
-
-	
 	public Logica(Usuario usuario) {
 		super();
 		Logica.usuario = usuario;
@@ -129,7 +114,6 @@ public class Logica implements Serializable{
 	}
 	
 	
-	@SuppressWarnings("unchecked")
 	public static void quePuedoComprar(double saldo, ArrayList<Producto> lProductos, ArrayList<ArrayList<Producto>> lPuedoComprar, ArrayList<Double> saldos){
 		if(saldo==0 || saldo < Logica.getMenorPrecio(Logica.productosHistoricos)) {
 			lPuedoComprar.add(lProductos);
@@ -200,5 +184,23 @@ public class Logica implements Serializable{
 			e.printStackTrace();
 		}
 		return 0;
+	}
+	
+	public static int cantProdEnUnMes(String anyo, String mes, String prod) {
+		long fecha1 = parsear(anyo, mes, "01");
+		long fecha2 = parsear(anyo, mes, "31");
+		HashMap<Integer,Compra> comprasEntreFechas = BaseDeDatos.getCompras(1, fecha1, fecha2);
+		if(comprasEntreFechas.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No hay compras entre estas fechas");
+			return 0;
+		}else {
+			int cant = 0;
+			for(Compra c : comprasEntreFechas.values()) {
+				for(Producto p : c.getProductosComprados()) {
+					if(prod.equals(p.getNomP())) cant++;
+				}
+			}
+			return cant;
+		}
 	}
 }

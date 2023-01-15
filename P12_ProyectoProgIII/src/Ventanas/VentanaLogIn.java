@@ -171,7 +171,7 @@ public class VentanaLogIn extends JFrame{
 						if(Pattern.matches(er, email)) {
 							Logica.crearUsuario(txtnombreRegistro.getText(),txtemailRegistro.getText(), txtcontrasenyaRegistro.getText()); 
 							//aqui hay que añadir el codigo tanto arriba como abajo
-							BaseDeDatos.añadirUsuario(0,txtnombreRegistro.getText(),txtemailRegistro.getText(), txtcontrasenyaRegistro.getText());
+							BaseDeDatos.añadirUsuario(txtnombreRegistro.getText(),txtemailRegistro.getText(), txtcontrasenyaRegistro.getText());
 							//Después de que se guarden todos los datos, vuelve a la ventana del Log In para poder entrar con la cuenta creada
 							txtemailRegistro.setText("");
 							txtcontrasenyaRegistro.setText("");

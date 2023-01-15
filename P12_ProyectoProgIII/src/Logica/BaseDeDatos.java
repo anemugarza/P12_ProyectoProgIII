@@ -7,10 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,8 +16,6 @@ import Clases.Administrador;
 import Clases.Compra;
 import Clases.Comprador;
 import Clases.Producto;
-import Clases.Ropa;
-import Clases.Talla;
 import Clases.Usuario;
 
 
@@ -135,11 +131,25 @@ public class BaseDeDatos {
 		}
 		return null;
 	}
-	//Los usuarios administradores hay que añadirlos directamente a la base de datos
-	public static void añadirUsuario(int id, String nombre, String email, String contrasenya) {
+	
+	public static void añadirUsuario(String nombre, String email, String contrasenya) {
 		String sent="";
 		try(Statement statement = conexion.createStatement()) {
 			sent = "insert into usuario (nombre, email, contrasenya, admin) values ('" + nombre +"', '" + email + "', '" + contrasenya + "', 0);";
+			logger.log( Level.INFO, "Lanzada actualización a base de datos: " + sent );
+			int val = statement.executeUpdate( sent );
+			logger.log( Level.INFO, "Añadida " + val + " fila a base de datos\t" + sent );
+			
+		} catch (SQLException e) {
+			logger.log( Level.SEVERE, "Error en inserción de base de datos\t" + e );
+		}
+	}
+	
+	//La función está hecha pero en el log in solo se pueden crear usuarios compradores, los administradores tendrán que ser añadidos a mano
+	public static void añadirAdmin(String nombre, String email, String contrasenya) {
+		String sent="";
+		try(Statement statement = conexion.createStatement()) {
+			sent = "insert into usuario (nombre, email, contrasenya, admin) values ('" + nombre +"', '" + email + "', '" + contrasenya + "', 1);";
 			logger.log( Level.INFO, "Lanzada actualización a base de datos: " + sent );
 			int val = statement.executeUpdate( sent );
 			logger.log( Level.INFO, "Añadida " + val + " fila a base de datos\t" + sent );
@@ -272,7 +282,6 @@ public class BaseDeDatos {
 				int id = rs.getInt("id");
 				int idUsuario = rs.getInt("idUsuario");
 				long fecha = rs.getLong("fecha");
-				System.out.println(fecha);
 				float precio = rs.getFloat("precio");
 				sent = "select idProducto from compraP where id = "+id + ";";
 				logger.log( Level.INFO, "Statement: " + sent );
