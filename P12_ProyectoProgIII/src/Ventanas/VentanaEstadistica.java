@@ -93,7 +93,7 @@ public class VentanaEstadistica extends JFrame{
 		pCentral.setLayout(new BorderLayout());
 		pCentral.add(pNorte, BorderLayout.NORTH);
 		//esto hay que ponerlo en el medio
-		pCentral.add(result);
+		pCentral.add(result, BorderLayout.CENTER);
 		this.add(pCentral, BorderLayout.CENTER);
 		
 		setSize(700,400);

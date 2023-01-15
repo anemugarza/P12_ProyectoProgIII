@@ -142,7 +142,7 @@ public class VentanaLogIn extends JFrame{
 									((Comprador) Logica.getUsuario()).setCesta(BaseDeDatos.getWLoCesta(Logica.getUsuario().getCodigoUsuario(), 1));
 									VentanaLoading vl =  new VentanaLoading(v);
 									vl.setVisible(true);
-									
+									dispose();
 								}else {
 									VentanaPrincipalAdmin ventana = new VentanaPrincipalAdmin();
 								}dispose();

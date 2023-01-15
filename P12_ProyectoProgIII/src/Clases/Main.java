@@ -1,4 +1,4 @@
-package Clases;
+ package Clases;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
