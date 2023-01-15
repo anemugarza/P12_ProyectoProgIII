@@ -1,6 +1,8 @@
 package Ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -8,6 +10,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
@@ -53,7 +58,8 @@ public class VentanaPersonal extends JFrame {
 	private DefaultTableModel mProductos = new DefaultTableModel(new Vector<Vector<Object>>(), cabecera);
 	private JTable tproductos;
 
-
+	private int filaMouseOver = -1;
+	private int colMouseOver = -1;
 	
 	public VentanaPersonal()  {
 		inicializar();
@@ -189,6 +195,36 @@ public class VentanaPersonal extends JFrame {
 			}
 		};
 		tproductos.addKeyListener( kl );
+		
+		
+		tproductos.setDefaultRenderer( Object.class, (table, value, isSelected, hasFocus, row, column) -> {
+			JLabel label = new JLabel( value + "" );
+			label.setFont( new Font( "Arial", Font.PLAIN, 14 ) );
+			label.setOpaque( true );
+			if (filaMouseOver>=0 && colMouseOver>=0 && row==filaMouseOver && column==colMouseOver) {
+				label.setBackground( Color.GREEN );
+			} else {
+				label.setBackground( Color.WHITE );
+			}
+			return label;
+		} );
+		tproductos.addMouseListener( new MouseAdapter() {
+			public void mouseExited(MouseEvent e) {
+				filaMouseOver = -1;
+				colMouseOver = -1;
+				tproductos.repaint();
+			}
+		});
+		tproductos.addMouseMotionListener( new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				filaMouseOver = tproductos.rowAtPoint(e.getPoint());
+				colMouseOver = tproductos.columnAtPoint(e.getPoint());
+				if (filaMouseOver>=0 && colMouseOver>=0) {
+					tproductos.repaint();
+				}
+			}
+		});
 			
 	}
 	public void actualizarLista(int type) {

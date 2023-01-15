@@ -129,13 +129,15 @@ public class VentanaPrincipalAdmin extends JFrame{
 		                "OPCIONES DE ESTADÍSTICAS", JOptionPane.QUESTION_MESSAGE,
 		                icono, new Object[] { "PRODUCTO MÁS VENDIDO ENTRE DOS FECHAS","GASTO MEDIO DE CLIENTES EN UN MES", "CANTIDAD VENDIDA DE UN PRODUCTO EN UN MES" },
 		                "PRODUCTO MÁS VENDIDO ENTRE DOS FECHAS");
-				try {
-					VentanaEstadistica ventana= new VentanaEstadistica(op);
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} 
-				dispose();
+				if(op != null) {
+					try {
+						VentanaEstadistica ventana= new VentanaEstadistica(op);
+						dispose();
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} 
+				}
 			}
 		});
 		
