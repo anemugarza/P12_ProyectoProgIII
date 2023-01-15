@@ -56,7 +56,6 @@ public class VentanaPrincipal extends JFrame {
 		inicializar();
 	}
 	
-	
 	private void inicializar() {
 		// TODO Auto-generated method stub
 		v=this;
@@ -106,8 +105,6 @@ public class VentanaPrincipal extends JFrame {
 		botonera.add(brecursiva);
 		botonera.add(bpersonal);
 		this.add(botonera, BorderLayout.SOUTH);
-		
-		
 		
 		//Caracteristicas de la ventana
 		int anchoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();

@@ -12,6 +12,8 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -40,6 +42,9 @@ public class VentanaEstadistica extends JFrame{
 	private JLabel atr2;
 	private JLabel result;
 	private JPanel pCentral;
+	private JPanel p1;
+	private JPanel p2;
+	private JPanel pResultado;
 	private JPanel pfechas;
 	private JPanel pNorte;
 	private JComboBox<String> jcbProd;
@@ -58,6 +63,9 @@ public class VentanaEstadistica extends JFrame{
 		bnuevaE = new JButton("NUEVA ESTADÍSTICA");
 		pfechas = new JPanel();
 		pNorte = new JPanel();
+		p1 = new JPanel();
+		p2 = new JPanel();
+		pResultado = new JPanel();
 		result = new JLabel();
 		result.setBackground(new Color(0, 0, 255));
 		
@@ -94,12 +102,16 @@ public class VentanaEstadistica extends JFrame{
 		pNorte.add(pfechas);
 		if(op.equals("CANTIDAD VENDIDA DE UN PRODUCTO EN UN MES"))pNorte.add(jcbProd);
 		pNorte.add(bcrearEstadis);
+		pResultado.add(p1);
+		pResultado.add(result);
+		pResultado.add(p2);
 		pCentral.setLayout(new GridLayout(2,1));
 		pCentral.add(pNorte);
-		pCentral.add(result);
+		pCentral.add( pResultado, BorderLayout.CENTER );
+		
 		this.add(pCentral, BorderLayout.CENTER);
 		
-		setSize(700,400);
+		setSize(650,300);
 		setLocationRelativeTo(null);
 		setTitle("ESTADÍSTICA: " + op);
 		setVisible(true);
@@ -135,12 +147,11 @@ public class VentanaEstadistica extends JFrame{
 					result.setText(String.valueOf(df.format(Logica.gastoMedio(txtatr1.getText(), txtatr2.getText())))+ "€");
 					break;
 				case "CANTIDAD VENDIDA DE UN PRODUCTO EN UN MES":
-					result.setText(String.valueOf(Logica.cantProdEnUnMes(txtatr1.getText(), txtatr2.getText(), (String)jcbProd.getSelectedItem())));
+					result.setText(String.valueOf(Logica.cantProdEnUnMes(txtatr1.getText(), txtatr2.getText(), (String)jcbProd.getSelectedItem()) + " unidades vendidas"));
 					break;
 				default:
 					break;
 				}
-				
 			}
 		});
 		

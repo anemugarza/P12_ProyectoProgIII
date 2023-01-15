@@ -41,7 +41,7 @@ public class VentanaPersonal extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected static final String NULL = null;
+	
 	private JLabel info;
 	private JLabel totalPrecio;
 	private JButton bwl;
@@ -195,7 +195,6 @@ public class VentanaPersonal extends JFrame {
 			}
 		};
 		tproductos.addKeyListener( kl );
-		
 		
 		tproductos.setDefaultRenderer( Object.class, (table, value, isSelected, hasFocus, row, column) -> {
 			JLabel label = new JLabel( value + "" );

@@ -19,7 +19,6 @@ public class VentanaLoading extends JFrame{
 	public VentanaLoading(JFrame va) {
 		super();
 		setBounds(va.getX()+10,va.getY()+10,200, 100);
-		//setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		pTitulo = new JPanel();

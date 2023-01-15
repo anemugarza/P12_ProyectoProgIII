@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,8 +27,7 @@ public class VentanaCambioPrecio extends JFrame implements VentanaCambio{
 	private JButton bcancelar;
 	private JButton bguardarDatos;
 	private JPanel pbotonera;
-	
-
+	private static Logger logger = Logger.getLogger( "CambioPrecio" );
 	
 	public VentanaCambioPrecio(Producto p)  {
 		inicializar(p);
@@ -72,6 +74,7 @@ public class VentanaCambioPrecio extends JFrame implements VentanaCambio{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				p.setPrecio(Double.parseDouble(txtPrecio.getText()));
+				logger.log( Level.INFO, "Cambio de precio efectuado correctamente:  "+ p.getNomP());
 				Logica.guardarProductos("Productos.dat");
 				VentanaModificarProd ventana= new VentanaModificarProd(p); 
 				dispose();	

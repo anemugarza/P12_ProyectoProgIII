@@ -5,6 +5,9 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.*;
 import Ventanas.VentanaPrincipal;
 
@@ -24,6 +27,8 @@ public class PropertiesProyecto extends JDialog {
 	private String nomFic;
 	private Properties misProps = null;
 	private boolean hayCambios = false;
+	private static Logger logger = Logger.getLogger( "Properties" );
+
 	
 	/** Construye un diálogo con definición particular de configuración de propiedades
 	 * @param nomFic	Nombre del fichero en el que se guardarán/cargarán las propiedades
@@ -201,6 +206,7 @@ public class PropertiesProyecto extends JDialog {
 	public void saveProps() {
 		try {
 			misProps.storeToXML( new PrintStream( nomFic ), "Propiedades de AEFicConfiguracion" );
+			logger.log( Level.INFO, "Cambios guardados correctamente en: "+ nomFic);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

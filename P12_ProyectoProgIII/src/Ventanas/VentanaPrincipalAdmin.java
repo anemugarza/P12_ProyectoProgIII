@@ -48,7 +48,6 @@ public class VentanaPrincipalAdmin extends JFrame{
 		inicializar();
 	}
 	
-	
 	private void inicializar() {
 		// TODO Auto-generated method stub
 		seleccion = new JComboBox<>();
@@ -68,8 +67,6 @@ public class VentanaPrincipalAdmin extends JFrame{
 		this.add(seleccion, BorderLayout.NORTH);
 		this.add(scroll, BorderLayout.CENTER);
 		this.add(pbotonera, BorderLayout.SOUTH);
-		
-		
 		
 		//Caracteristicas de la ventana
 		setSize(700,600);
@@ -118,7 +115,6 @@ public class VentanaPrincipalAdmin extends JFrame{
 				}
 			}
 		});
-		
 		
 		bestadistica.addActionListener(new ActionListener() {
 		
