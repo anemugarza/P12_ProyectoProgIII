@@ -27,7 +27,7 @@ import Logica.Logica;
 public class VentanaAnyadirP extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
-	
+	//Componentes de la ventana
 	private JLabel nombreP;
 	private JLabel precioP;
 	private JLabel fotoP;

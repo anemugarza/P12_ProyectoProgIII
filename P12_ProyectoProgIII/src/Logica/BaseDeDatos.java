@@ -75,7 +75,10 @@ public class BaseDeDatos {
 			logger.log( Level.SEVERE, "Excepción", e );
 		}
 	}
-	
+	/**
+	 * Método para obtener todos los usuarios  guardados en la base de datos, tanto compradores como usuarios.
+	 * @return devuelve un mapa con la direccion de correo del usuario como clave.
+	 */
 	public static HashMap<String,Usuario> getUsuarios(){
 		try (Statement statement = conexion.createStatement()){
 			String sent = "select * from usuario;";
@@ -104,6 +107,11 @@ public class BaseDeDatos {
 			return null;
 		}
 	}
+	/**
+	 * Obtiene un usuario sabiendo su id
+	 * @param id el codigo de identificacion por el que buscamos al usuario
+	 * @return un usuario administrador o comprador
+	 */
 	public static Usuario getUsuarioId(int id) {
 		try (Statement statement = conexion.createStatement()){
 			String sent = "select * from usuario where id = "+ id+";";
@@ -131,6 +139,12 @@ public class BaseDeDatos {
 		}
 		return null;
 	}
+	/**
+	 * Añade un usuario nuevo a la base de datos
+	 * @param nombre el nombre del usuario 
+	 * @param email la direccion de correo del usuario
+	 * @param contrasenya la contraseña con la que acceder a dicha direccion de correo
+	 */
 	
 	public static void añadirUsuario(String nombre, String email, String contrasenya) {
 		String sent="";
@@ -144,8 +158,14 @@ public class BaseDeDatos {
 			logger.log( Level.SEVERE, "Error en inserción de base de datos\t" + e );
 		}
 	}
-	
-	//La función está hecha pero en el log in solo se pueden crear usuarios compradores, los administradores tendrán que ser añadidos a mano
+	/**
+	 * Para añadir nuevos administradores a la base de datos
+	 * @param nombre el nombre del administrador
+	 * @param email  la direccion de correo del administrador
+	 * @param contrasenya a contraseña con la que acceder a dicha direccion de correo
+	 * La función está hecha pero en el log in solo se pueden crear usuarios compradores, los administradores tendrán que ser añadidos a mano.
+	 */
+
 	public static void añadirAdmin(String nombre, String email, String contrasenya) {
 		String sent="";
 		try(Statement statement = conexion.createStatement()) {
@@ -158,7 +178,12 @@ public class BaseDeDatos {
 			logger.log( Level.SEVERE, "Error en inserción de base de datos\t" + e );
 		}
 	}
-	
+	/**
+	 * Para obtener la lista de productos que forman la wishlist o cesta del comprador
+	 * @param id el código de identificación del usuario
+	 * @param tipo el parametro con el que indicaremos que queremos obtener, la wishlist(0) o la compra(1).
+	 * @return la lista de los productos actualmente en cesta o wishlist
+	 */
 	public static List<Producto> getWLoCesta(int id, int tipo){
 		String sent;
 		try (Statement statement = conexion.createStatement()){
@@ -191,7 +216,13 @@ public class BaseDeDatos {
 			return null;
 		}
 	}
-	
+	/**
+	 * para añadir un nuevo producto a la cesta o la wishlist dentro de la base de datos
+	 * @param idUsuario el código de identificación del usuario a cuya cesta/wishlist se añadirá
+	 * @param idProducto  el código de identificación del producto 
+	 * @param tipo el parametro con el que indicaremos donde queremos guardar el producto, la wishlist(0) o la compra(1).
+	 * @throws SQLException indicará error en caso de no haber podido guardar correctamente el producto
+	 */
 	public static void añadirProducto(int idUsuario, int idProducto, int tipo) throws SQLException {
 		String sent="";
 		switch (tipo) {
@@ -214,7 +245,13 @@ public class BaseDeDatos {
 			logger.log( Level.SEVERE, "Error en inserción de base de datos\t" + e );
 		}
 	}
-	
+	/**
+	 * para borrar un producto de la cesta o la wishlist
+	 * @param idUsuario el código de identificación del usuario de cuya cesta/wishlist se eliminará el producto
+	 * @param idProducto  el código de identificación del producto
+	 * @param tipo el parametro con el que indicaremos de donde queremos borrar el producto, la wishlist(0) o la compra(1).
+	 * @throws SQLException indicará error en caso de no haber podido borrar correctamente el producto
+	 */
 	public static void eliminarProducto(int idUsuario, int idProducto, int tipo) throws SQLException {
 		String sent="";
 		switch (tipo) {
@@ -238,6 +275,13 @@ public class BaseDeDatos {
 		}
 	}
 	
+	/**
+	 * para añadir una nueva compra a la base de datos una vez esta es confirmada por el usuario.
+	 * @param idUsuario el codigo de identificacion del usuario cuya compra se añadirá a la base de datos
+	 * @param fecha la fecha del dia en que esta compra es realizada
+	 * @param precio el coste total de la compra
+	 * @return valor 0
+	 */
 	public static int añadirCompra(int idUsuario, long fecha, double precio) {
 		String sent="";
 		try(Statement statement = conexion.createStatement()) {
@@ -256,7 +300,11 @@ public class BaseDeDatos {
 		}
 		return 0;
 	}
-	
+	/**
+	 * para añadir los productos que se han adquirido en una compra.
+	 * @param idCompra codigo de identificacion de la compra, que servirá para relacionar los productos de una misma compra.
+	 * @param idProducto el codigo de identificacion del producto
+	 */
 	public static void añadirCompraP(int idCompra, int idProducto) {
 		String sent="";
 		try(Statement statement = conexion.createStatement()) {
@@ -268,6 +316,13 @@ public class BaseDeDatos {
 			logger.log( Level.SEVERE, "Error en inserción de base de datos\t" + e );
 		}
 	}
+	/**
+	 * Obtener las compras registradas en la base de datos.
+	 * @param type parametro que indicará si queremos obtener una fecha hecha entre ciertas fechas(1) o no.
+	 * @param fecha1 la fecha que indica el principio del periodo de tiempo en el que buscamos una compra
+	 * @param fecha2 la fecha que indica el final del periodo de tiempo en el que buscamos una compra
+	 * @return un mapa de las compras con el codigo de identificacion (id) de cada compra como clave.
+	 */
 	
 	public static HashMap<Integer,Compra> getCompras(int type, long fecha1, long fecha2){
 		HashMap<Integer,Compra> mapaCompras = new HashMap<>();
