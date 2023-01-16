@@ -41,7 +41,7 @@ public class VentanaPersonal extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	//Componentes de la ventana personal
 	private JLabel info;
 	private JLabel totalPrecio;
 	private JButton bwl;
@@ -53,7 +53,7 @@ public class VentanaPersonal extends JFrame {
 	private boolean tipolista; //false es wl y true es cesta
 	
 	
-	
+	//
 	Comprador c1 = (Comprador) Logica.getUsuario();
 	Vector <String> cabecera = new Vector <String> (Arrays.asList("NOMBRE","CÓDIDO","TIPO PRODUCTO", "PRECIO", "CANTIDAD"));
 	private DefaultTableModel mProductos = new DefaultTableModel(new Vector<Vector<Object>>(), cabecera);
