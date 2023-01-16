@@ -27,7 +27,7 @@ import Logica.Logica;
 public class VentanaAnyadirP extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
-	//Componentes del Log In
+	
 	private JLabel nombreP;
 	private JLabel precioP;
 	private JLabel fotoP;
@@ -98,14 +98,19 @@ public class VentanaAnyadirP extends JFrame{
 				dispose();
 			}
 		});
-		
+		// Para cancelar el proceso de añadir un nuevo producto
 		bcancelar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();	
 			}
 		});
-		
+		/**
+		 * Para guardar los datos del nuevo productos en la base de datos.
+		 * En caso de no haber rellenado todos los campos no se podrán guardar los datos.
+		 * En caso de no haber indicadp a que categoria pertenece el nuevo producto no se podrán guardar los datos.
+		 * En caso de no habernos encontado con ningún error. El producto se añadirá  tanto a la base de datos  como a la ventana principal.
+		 */
 		bguardarDatos.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -122,9 +127,7 @@ public class VentanaAnyadirP extends JFrame{
 						Logica.productosHistoricos.add(p);
 						logger.log( Level.INFO, p.getNomP()+" añadido correctamente");
 						Logica.guardarProductos("Productos.dat");
-						for(Producto t : Logica.productosHistoricos) {
-							VentanaPrincipalAdmin.crearVentana(t);
-						}
+						VentanaPrincipalAdmin va = new VentanaPrincipalAdmin();
 						dispose();
 				}else JOptionPane.showMessageDialog(null, "Debes indicar de qué tipo es el producto");
 				}else JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos");

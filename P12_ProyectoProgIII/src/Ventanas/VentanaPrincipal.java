@@ -56,6 +56,12 @@ public class VentanaPrincipal extends JFrame {
 		inicializar();
 	}
 	
+
+	/**
+	 * Inicializa la ventana principal con todos los productos disponibles en tienda creando un JPanel para cada uno.
+	 * Al clickar dos veces en alguna de los JPanel se abrirá la ventana del producto en cuestión.
+	 */
+
 	private void inicializar() {
 		// TODO Auto-generated method stub
 		v=this;
@@ -122,6 +128,13 @@ public class VentanaPrincipal extends JFrame {
 				System.exit(0);
 			}
 		});
+		
+		/**
+		 * Con la combobox selección se mostrarán las tres opciones para filtrar todos los productos en tienda.
+		 * Se dividen en las siguientes categorias: electronica, ropa y material escolar. Al seleccionar alguna de estas
+		 * se volverá a cargar la ventana principal pero solamente con productos que pertenezcan a la categoria especificada.
+		 * En todo lo demás la ventana funcionará exactamente igual.
+		 */
 		
 		seleccion.addActionListener(new ActionListener() {
 		
@@ -218,6 +231,10 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		
+		/**
+		 * Botón para abrir la ventana personal
+		 */
+		
 		bpersonal.addActionListener(new ActionListener() {
 		
 			@Override
@@ -226,6 +243,11 @@ public class VentanaPrincipal extends JFrame {
 				dispose();
 			}
 		});
+		
+		/**
+		 * Botón para crear una nueva clase de Properties, la cual permite crear una ventana de diálogo 
+		 * que gestiona valores de configuración
+		 */
 		
 		bProperties.addActionListener(new ActionListener() {
 			
@@ -245,6 +267,10 @@ public class VentanaPrincipal extends JFrame {
 				dispose();
 			}
 		});
+		/**
+		 * Botón para abrir la ventana de recursividad, mostrando primero por pantalla un JOptionPane 
+		 * donde hay que indicar el saldo del que se dispone para que en la función logica quePuedoComprar  pueda funcionar.
+		 */
 		
 		brecursiva.addActionListener(new ActionListener() {
 			

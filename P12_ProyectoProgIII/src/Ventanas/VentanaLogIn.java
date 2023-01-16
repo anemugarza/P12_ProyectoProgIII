@@ -154,6 +154,12 @@ public class VentanaLogIn extends JFrame{
 					txtcontrasenya.setText("");
 				}
 			});
+			/**
+			 * Guarda los datos de registro ( email y contraseña ) en la base de datos.
+			 * No se podrán guardar los datos si la dirección de correo ha sido ya registrada.
+			 * Si no escribimos nada donde pide la dirección de  correo o la contraseña para acceder a ella no se podrán guardar los datos.
+			 * La dirección de correo tendrá que tener cierto fomato, sino tampoco se podrá guardar.
+			 */
 			
 			guardarDatos.addActionListener(new ActionListener() {
 
