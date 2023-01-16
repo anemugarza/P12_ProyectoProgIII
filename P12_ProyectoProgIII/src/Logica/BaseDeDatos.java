@@ -199,7 +199,7 @@ public class BaseDeDatos {
 			sent = "insert into wl (idUsuario, idProducto) values ("+idUsuario + ", " + idProducto + ");";
 			break;
 		case 1:
-			sent = "insert into cestas (idProducto, idUsuario) values ("+idUsuario + ", " + idProducto + ");";
+			sent = "insert into cestas (idUsuario, idProducto) values ("+idUsuario + ", " + idProducto + ");";
 			break;
 		default:
 			throw new SQLException("type not defined");

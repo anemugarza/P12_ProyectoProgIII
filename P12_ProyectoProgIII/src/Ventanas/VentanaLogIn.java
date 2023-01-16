@@ -174,13 +174,12 @@ public class VentanaLogIn extends JFrame{
 							txtemailRegistro.setText("");
 							txtcontrasenyaRegistro.setText("");
 							getContentPane().removeAll();
-							setSize(400,200);
+							setSize(500,200);
 							setTitle("DEUSTOSHOP LOG IN");
 							getContentPane().setLayout(new GridLayout(2,1));
 							panelCentral.setLayout(new GridLayout(2,2));
 							getContentPane().add(panelCentral);
 							getContentPane().add(botonera);
-							setVisible(true);
 						}
 						else
 							JOptionPane.showMessageDialog(null, "ERROR: El formato del email no es correcto");

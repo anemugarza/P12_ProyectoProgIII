@@ -2,6 +2,7 @@ package Ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
@@ -28,7 +29,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import Clases.Comprador;
 import Clases.Producto;
@@ -196,31 +199,35 @@ public class VentanaPersonal extends JFrame {
 		};
 		tproductos.addKeyListener( kl );
 		
-		tproductos.setDefaultRenderer( Object.class, (table, value, isSelected, hasFocus, row, column) -> {
-			JLabel label = new JLabel( value + "" );
-			label.setFont( new Font( "Arial", Font.PLAIN, 14 ) );
-			label.setOpaque( true );
-			if (filaMouseOver>=0 && colMouseOver>=0 && row==filaMouseOver && column==colMouseOver) {
-				label.setBackground( Color.GREEN );
-			} else {
-				label.setBackground( Color.WHITE );
-			}
-			return label;
-		} );
 		tproductos.addMouseListener( new MouseAdapter() {
-			public void mouseExited(MouseEvent e) {
-				filaMouseOver = -1;
-				colMouseOver = -1;
-				tproductos.repaint();
-			}
-		});
-		tproductos.addMouseMotionListener( new MouseMotionAdapter() {
 			@Override
-			public void mouseMoved(MouseEvent e) {
-				filaMouseOver = tproductos.rowAtPoint(e.getPoint());
-				colMouseOver = tproductos.columnAtPoint(e.getPoint());
-				if (filaMouseOver>=0 && colMouseOver>=0) {
-					tproductos.repaint();
+			public void mouseClicked(MouseEvent e) {
+				int row = tproductos.rowAtPoint( e.getPoint() );
+				int col = tproductos.columnAtPoint( e.getPoint() );
+				if (row>=0 && col==3) {
+					String valor =  (String) tproductos.getModel().getValueAt(row, col);
+					valor = valor.replace("€", "");
+					double valorPrecio = Double.parseDouble(valor);
+					DefaultTableCellRenderer tcr = new DefaultTableCellRenderer() {
+
+						@Override
+					    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+					    {
+					    	Component ret = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+					    	String v2 =  (String) value;
+							v2 = v2.replace("€", "");
+					    	double valorv2 = Double.parseDouble(v2);
+					        if(valorv2 >= valorPrecio) {
+					            this.setBackground(Color.RED);
+					        } else {
+					            this.setBackground(Color.GREEN);
+							}
+					        return ret;
+					    }
+					};
+					TableColumn c = tproductos.getColumnModel().getColumn(3);
+				    c.setCellRenderer(tcr);
+				    tproductos.repaint();
 				}
 			}
 		});

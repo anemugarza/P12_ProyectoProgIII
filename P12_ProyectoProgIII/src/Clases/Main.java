@@ -16,9 +16,6 @@ public class Main {
 		BaseDeDatos.abrirConexion("MiBD.db", true);
 		Logica.cargarProductos("Productos.dat");
 		
-		//Administrador a = new Administrador("ASIER", "asier@deusto.es", "admin");
-		//BaseDeDatos.añadirAdmin(a.getNomUsuario(), a.getEmail(), a.getContrasenya());
-		
 		VentanaInicial v = new VentanaInicial();
 		EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
 			private static final long serialVersionUID = 1L;

@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -21,6 +22,7 @@ import javax.swing.JPanel;
 
 import Clases.Comprador;
 import Clases.Producto;
+import Logica.BaseDeDatos;
 import Logica.Logica;
 
 public class VentanaRecursiva extends JFrame{
@@ -130,9 +132,25 @@ public class VentanaRecursiva extends JFrame{
 				int op = JOptionPane.showConfirmDialog(null, "Se creará una cesta con esta opción. ¿Desea realizar esta operación?");
 				switch (op) {
 				case 0:
+					for(Producto p : c1.getCesta()) {
+						try {
+							BaseDeDatos.eliminarProducto(c1.getCodigoUsuario(), p.getCodigoP(), 1);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
 					c1.getCesta().removeAll(c1.getCesta());
 					for( Producto p: lPuedoComprar.get(cont)) {
 						c1.anyadirCesta(p);
+					}
+					for(Producto p: c1.getCesta()) {
+						try {
+							BaseDeDatos.añadirProducto(c1.getCodigoUsuario(), p.getCodigoP(), 1);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 					break;
 				default:
