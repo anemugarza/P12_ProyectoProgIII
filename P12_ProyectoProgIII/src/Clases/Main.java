@@ -7,6 +7,7 @@ import Logica.BaseDeDatos;
 import Logica.Logica;
 import Ventanas.VentanaInicial;
 import Ventanas.VentanaLogIn;
+import Ventanas.VentanaPrincipal;
 import uk.co.caprica.vlcj.player.base.MediaPlayer;
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 
@@ -19,7 +20,7 @@ public class Main {
 		//Administrador a = new Administrador("ASIER", "asier@deusto.es", "admin");
 		//BaseDeDatos.añadirAdmin(a.getNomUsuario(), a.getEmail(), a.getContrasenya());
 		
-		VentanaInicial v = new VentanaInicial();
+		VentanaPrincipal v = new VentanaPrincipal();
 		EmbeddedMediaPlayerComponent comp = new EmbeddedMediaPlayerComponent() {
 			private static final long serialVersionUID = 1L;
 

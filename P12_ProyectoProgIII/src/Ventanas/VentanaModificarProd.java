@@ -20,7 +20,7 @@ import Clases.Producto;
 public class VentanaModificarProd extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
-	//Componentes del Log In
+	//Componentes del producto
 	private JLabel nombreProd;
 	private JLabel precioProd;
 	private ImageIcon foto;
@@ -38,8 +38,13 @@ public class VentanaModificarProd extends JFrame{
 	public VentanaModificarProd(Producto p)  {
 		inicializar(p);
 	}
+	/**
+	 * Inicializa la ventana 
+	 * @param p: es el producto que queremos modificar
+	 */
 	
 	private void inicializar(Producto p) {
+		//Inicializamos elementos 
 		nombreProd= new JLabel("Nombre: " + p.getNomP());
 		precioProd= new JLabel("Precio: " + p.getPrecio() + "€");
 		foto = new ImageIcon(p.getFoto());
@@ -52,6 +57,7 @@ public class VentanaModificarProd extends JFrame{
 		bFoto = new JButton("MODIFICAR FOTO");
 		bvolver = new JButton("VOLVER");
 
+		//Añadimos a la ventana
 		pCentral.setLayout(new BorderLayout());
 		pCentral.add(lfoto, BorderLayout.CENTER);
 		pInfo.setLayout(new BorderLayout());
@@ -62,6 +68,7 @@ public class VentanaModificarProd extends JFrame{
 		pbotonera.add(bPrecio);
 		pbotonera.add(bFoto);
 		
+		//Caracteristicas de la ventana
 		setSize(700,600);
 		setLocationRelativeTo(null);
 		setTitle("PRODUCTO: " + p.getNomP());
@@ -81,7 +88,7 @@ public class VentanaModificarProd extends JFrame{
 			
 			
 		});
-		
+		// Botón para volver a la ventana anterior, est es, la ventana principal del administrador.
 		bvolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -90,13 +97,14 @@ public class VentanaModificarProd extends JFrame{
 			}
 		});
 		
+		//Botón para modificar el nombre, abriendo la ventana para ello.
 		bNombre.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VentanaCambioNombre vn= new VentanaCambioNombre(p); 
 			}
 		});
-		
+		///Botón para modificar el precio, abriendo la ventana para ello.
 		bPrecio.addActionListener(new ActionListener() {
 			
 			@Override
@@ -105,6 +113,7 @@ public class VentanaModificarProd extends JFrame{
 			}
 		});
 		
+		//Botón para modificar la foto, abriendo la ventana para ello.
 		bFoto.addActionListener(new ActionListener() {
 					
 			@Override

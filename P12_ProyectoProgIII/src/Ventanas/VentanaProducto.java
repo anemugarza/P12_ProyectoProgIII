@@ -42,6 +42,10 @@ public class VentanaProducto extends JFrame{
 	public VentanaProducto(Producto p)  {
 		inicializar(p);
 	}
+	/**
+	 * Inicializa la ventana producto
+	 * @param p es el producto que utilizamos para inicializarlo
+	 */
 	
 	private void inicializar(Producto p) {
 		nombreProd= new JLabel("Nombre: " + p.getNomP());
@@ -88,6 +92,8 @@ public class VentanaProducto extends JFrame{
 			}
 		});
 		
+		//Botón para volver a la ventana previa, esto es, a la principal
+		
 		bvolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -96,6 +102,7 @@ public class VentanaProducto extends JFrame{
 			}
 		});
 		
+		//Botón para añadir el producto en pantalla a la cesta
 		bañadirCESTA.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -110,6 +117,7 @@ public class VentanaProducto extends JFrame{
 			}
 		});
 		
+		// Botón para añadir el producto en pantalla a la wishlist
 		bañadirWL.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -151,6 +159,9 @@ public class VentanaProducto extends JFrame{
 				this.tamY = imagen.getIconHeight();
 			}
 		}
+		
+		
+		
 		protected void paintComponent(Graphics g) {
 			Graphics2D g2 = (Graphics2D) g;  // El Graphics realmente es Graphics2D
 			g2.setColor( Color.WHITE );

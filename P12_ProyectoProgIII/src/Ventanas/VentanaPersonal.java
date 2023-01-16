@@ -53,6 +53,7 @@ public class VentanaPersonal extends JFrame {
 	private boolean tipolista; //false es wl y true es cesta
 	
 	
+	
 	Comprador c1 = (Comprador) Logica.getUsuario();
 	Vector <String> cabecera = new Vector <String> (Arrays.asList("NOMBRE","CÓDIDO","TIPO PRODUCTO", "PRECIO", "CANTIDAD"));
 	private DefaultTableModel mProductos = new DefaultTableModel(new Vector<Vector<Object>>(), cabecera);
@@ -64,6 +65,9 @@ public class VentanaPersonal extends JFrame {
 	public VentanaPersonal()  {
 		inicializar();
 	}
+	/**
+	 * Inicializa la ventana personal mostrando la wishlist por defecto.
+	 */
 
 	private void inicializar() {
 		// TODO Auto-generated method stub
@@ -76,6 +80,7 @@ public class VentanaPersonal extends JFrame {
 		pNorte = new JPanel();
 		pbotonera = new JPanel();
 		tproductos = new JTable(mProductos);
+	
 		
 		actualizarLista(1);
 		totalPrecio = new JLabel("PRECIO TOTAL: " + String.format("%.2f", actualizarPrecio(c1.getWl()))+ "€");
@@ -111,7 +116,7 @@ public class VentanaPersonal extends JFrame {
 				System.exit(0);
 			}
 		});
-		
+		//Botón para volver a la página anterior, esto es , la ventana principal.
 		bvolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -119,7 +124,7 @@ public class VentanaPersonal extends JFrame {
 				dispose();	
 			}
 		});
-		
+		//Botón para que la ventana muestre los productos en cesta y el precio total de esta.
 		bcesta.addActionListener(new ActionListener() {
 
 			@Override
@@ -131,6 +136,7 @@ public class VentanaPersonal extends JFrame {
 				tipolista = true;
 			}
 		});
+		//Botón para que la ventana muestre los productos de la wishlist y el precio total de esta.
 		
 		bwl.addActionListener(new ActionListener() {
 
@@ -143,6 +149,13 @@ public class VentanaPersonal extends JFrame {
 				tipolista = false;
 			}
 		});
+		/**
+		 * Botón para relizar la compra de los productos en cesta.
+		 * La compra será registrada en la base de datos y la cesta volverá a estar 
+		 * vacía y el precio total a cero.
+		 * El botón falla si en la cesta no hay ningun producto.
+		 */
+		
 		
 		bcompra.addActionListener(new ActionListener() {
 
@@ -161,6 +174,11 @@ public class VentanaPersonal extends JFrame {
 				}else JOptionPane.showMessageDialog(null, "ERROR: Cesta vacia");
 			}
 		});
+		
+		/**
+		 * Se pueden borrar los productos tanto de la wishlist como de la cesta. Solo hay que poner el ratón encima del 
+		 * producto que queremos borrar y darle al ctrl + supr. Se actualiza tanto la lista en ventanta como de la base de datos.
+		 */
 		
 		KeyListener kl = new KeyAdapter() {
 			@Override
@@ -196,7 +214,9 @@ public class VentanaPersonal extends JFrame {
 		};
 		tproductos.addKeyListener( kl );
 		
-		
+		/**
+		 * Renderer que muestra el producto en color verde si pasamos el ratón por encima.
+		 */
 		tproductos.setDefaultRenderer( Object.class, (table, value, isSelected, hasFocus, row, column) -> {
 			JLabel label = new JLabel( value + "" );
 			label.setFont( new Font( "Arial", Font.PLAIN, 14 ) );
@@ -227,6 +247,11 @@ public class VentanaPersonal extends JFrame {
 		});
 			
 	}
+	/**
+	 * Actualiza la lista de productos
+	 * @param type: indica que lista queremos que se cargue. Valor 0 para cargar la cesta y en cualquier otro 
+	 * caso la lista que se mostrará por defecto es la wishlist.
+	 */
 	public void actualizarLista(int type) {
 		Vector <String> cabecera = new Vector <String> (Arrays.asList("NOMBRE","CÓDIDO","TIPO PRODUCTO", "PRECIO", "CANTIDAD"));
 		mProductos = new DefaultTableModel(new Vector<Vector<Object>>(), cabecera);
@@ -260,6 +285,11 @@ public class VentanaPersonal extends JFrame {
 		}
 		tproductos.setModel(mProductos);
 	}
+	/**
+	 * actualiza el precio total de las listas
+	 * @param lista: es la lista de prouctos del que hay que obtener un precio total
+	 * @return devuelve lo que habría que pagar para hacerse con todos los articulos de la lista en pantalla.
+	 */
 	
 	public double actualizarPrecio(List<Producto> lista) {
 		double precioT = 0.0;

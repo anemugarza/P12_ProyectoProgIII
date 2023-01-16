@@ -41,12 +41,22 @@ public class VentanaRecursiva extends JFrame{
 	private ArrayList<Double> saldos;
 	private int cont=0;
 	Comprador c1 = (Comprador) Logica.getUsuario();
+	/**
+	 * 
+	 * @param saldo dinero del que dispone para las diferentes opciones de compra que se le ofrecen al comprador
+	 * @param lPuedoComprar lista de productos que se pueden comprar con el saldo disponible
+	 * @param saldos lista de diferentes saldos restantes
+	 */
 
 	public VentanaRecursiva(double saldo, ArrayList<ArrayList<Producto>> lPuedoComprar, ArrayList<Double> saldos)  {
 		this.lPuedoComprar=lPuedoComprar;
 		this.saldos=saldos;
 		inicializar(saldo);
 	}
+	/**
+	 * inicializa la ventana de recursividad
+	 * @param saldo: saldo del que dispone el comprador para las diferentes opciones que se le van a proporcionar
+	 */
 
 	private void inicializar(double saldo) {
 		// TODO Auto-generated method stub
@@ -87,6 +97,7 @@ public class VentanaRecursiva extends JFrame{
 			}
 		});
 		
+		//Botón para volver a la página anterior, esto es , a la principal
 		bvolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -95,6 +106,7 @@ public class VentanaRecursiva extends JFrame{
 			}
 		});
 		
+		//Botón para volver a la anterior opción de compra
 		banterior.addActionListener(new ActionListener() {
 
 			@Override
@@ -108,6 +120,8 @@ public class VentanaRecursiva extends JFrame{
 			}
 		});
 		
+		
+		//Botón para ir a la siguiente opcion de compra
 		bsiguiente.addActionListener(new ActionListener() {
 
 			@Override
@@ -120,7 +134,7 @@ public class VentanaRecursiva extends JFrame{
 				}
 			}
 		});	
-		
+		//Botón para crear una cesta con la compra actualmente en pantalla
 		bcrearCesta.addActionListener(new ActionListener() {
 
 			@Override
@@ -139,6 +153,11 @@ public class VentanaRecursiva extends JFrame{
 			}
 		});	
 	}
+	
+	/**
+	 * actualiza la lista de productos posibles que se pueden comprar con el saldo del usuario
+	 * @param cont: contador que indica el numero de la opcion de compra
+	 */
 	
 	public void actualizarLista(int cont) {
 		mlista.removeAllElements();
