@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,8 +33,6 @@ public class VentanaModificarProd extends JFrame{
 	private JPanel pCentral;
 	private JPanel pInfo;
 	private JPanel pbotonera;
-	private Producto p;
-
 	
 	public VentanaModificarProd(Producto p)  {
 		inicializar(p);
@@ -125,6 +124,10 @@ public class VentanaModificarProd extends JFrame{
 		
 	}
 	private static class JLabelAjustado extends JLabel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private ImageIcon imagen; 
 		private int tamX;
 		private int tamY;

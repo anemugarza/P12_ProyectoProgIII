@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -39,7 +41,8 @@ public class VentanaAnyadirP extends JFrame{
 	private JButton bcancelar;
 	private JButton bguardarDatos;
 	private JPanel pbotonera;
-	
+	private static Logger logger = Logger.getLogger( "AnyadirProducto" );
+
 
 	public VentanaAnyadirP() {
 		// TODO Auto-generated constructor stub
@@ -122,6 +125,7 @@ public class VentanaAnyadirP extends JFrame{
 							p = new MaterialEscolar(txtnombre.getText(), Double.parseDouble(txtprecio.getText()),"Media/" +txtfoto.getText());
 						}
 						Logica.productosHistoricos.add(p);
+						logger.log( Level.INFO, p.getNomP()+" añadido correctamente");
 						Logica.guardarProductos("Productos.dat");
 						for(Producto t : Logica.productosHistoricos) {
 							VentanaPrincipalAdmin.crearVentana(t);

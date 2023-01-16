@@ -41,7 +41,7 @@ public class VentanaPersonal extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected static final String NULL = null;
+	
 	private JLabel info;
 	private JLabel totalPrecio;
 	private JButton bwl;
@@ -214,9 +214,11 @@ public class VentanaPersonal extends JFrame {
 		};
 		tproductos.addKeyListener( kl );
 		
+
 		/**
 		 * Renderer que muestra el producto en color verde si pasamos el ratón por encima.
 		 */
+
 		tproductos.setDefaultRenderer( Object.class, (table, value, isSelected, hasFocus, row, column) -> {
 			JLabel label = new JLabel( value + "" );
 			label.setFont( new Font( "Arial", Font.PLAIN, 14 ) );

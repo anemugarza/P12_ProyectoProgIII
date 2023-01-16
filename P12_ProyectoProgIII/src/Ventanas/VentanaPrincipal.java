@@ -56,10 +56,12 @@ public class VentanaPrincipal extends JFrame {
 		inicializar();
 	}
 	
+
 	/**
 	 * Inicializa la ventana principal con todos los productos disponibles en tienda creando un JPanel para cada uno.
 	 * Al clickar dos veces en alguna de los JPanel se abrirá la ventana del producto en cuestión.
 	 */
+
 	private void inicializar() {
 		// TODO Auto-generated method stub
 		v=this;
@@ -109,8 +111,6 @@ public class VentanaPrincipal extends JFrame {
 		botonera.add(brecursiva);
 		botonera.add(bpersonal);
 		this.add(botonera, BorderLayout.SOUTH);
-		
-		
 		
 		//Caracteristicas de la ventana
 		int anchoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();

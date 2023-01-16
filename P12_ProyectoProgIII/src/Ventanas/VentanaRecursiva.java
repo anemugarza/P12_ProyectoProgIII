@@ -8,6 +8,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -26,7 +28,6 @@ public class VentanaRecursiva extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected static final String NULL = null;
 	private JLabel info;
 	private JButton banterior;
 	private JButton bsiguiente;
@@ -41,12 +42,16 @@ public class VentanaRecursiva extends JFrame{
 	private ArrayList<Double> saldos;
 	private int cont=0;
 	Comprador c1 = (Comprador) Logica.getUsuario();
+
 	/**
 	 * 
 	 * @param saldo dinero del que dispone para las diferentes opciones de compra que se le ofrecen al comprador
 	 * @param lPuedoComprar lista de productos que se pueden comprar con el saldo disponible
 	 * @param saldos lista de diferentes saldos restantes
 	 */
+
+	private static Logger logger = Logger.getLogger( "VentanaRecursiva" );
+
 
 	public VentanaRecursiva(double saldo, ArrayList<ArrayList<Producto>> lPuedoComprar, ArrayList<Double> saldos)  {
 		this.lPuedoComprar=lPuedoComprar;
@@ -150,6 +155,7 @@ public class VentanaRecursiva extends JFrame{
 				default:
 					break;
 				}
+				logger.log( Level.INFO, "Cesta creada con opción: " +  cont+1 );
 			}
 		});	
 	}

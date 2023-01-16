@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.swing.ComboBoxModel;
@@ -35,9 +37,8 @@ public class VentanaCambioNombre extends JFrame implements VentanaCambio{
 		private JButton bcancelar;
 		private JButton bguardarDatos;
 		private JPanel pbotonera;
-		
+		private static Logger logger = Logger.getLogger( "CambioNombre" );
 
-		
 		public VentanaCambioNombre(Producto p)  {
 			inicializar(p);
 		}
@@ -83,6 +84,7 @@ public class VentanaCambioNombre extends JFrame implements VentanaCambio{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					p.setNomP(txtNombre.getText());
+					logger.log( Level.INFO, "Cambio de nombre efectuado correctamente:  "+ p.getNomP());
 					Logica.guardarProductos("Productos.dat");
 					VentanaModificarProd ventana= new VentanaModificarProd(p); 
 					dispose();	

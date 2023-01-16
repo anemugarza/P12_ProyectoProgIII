@@ -141,11 +141,12 @@ public class VentanaLogIn extends JFrame{
 									((Comprador) Logica.getUsuario()).setWl(BaseDeDatos.getWLoCesta(Logica.getUsuario().getCodigoUsuario(), 0));
 									((Comprador) Logica.getUsuario()).setCesta(BaseDeDatos.getWLoCesta(Logica.getUsuario().getCodigoUsuario(), 1));
 									VentanaLoading vl =  new VentanaLoading(v);
-									vl.setVisible(true);
 									dispose();
+									vl.setVisible(true);
 								}else {
 									VentanaPrincipalAdmin ventana = new VentanaPrincipalAdmin();
-								}dispose();
+									dispose();
+								}
 								}else JOptionPane.showMessageDialog(null, "ERROR: Contraseña incorrecta. Vuelva a intentarlo");
 							}else JOptionPane.showMessageDialog(null, "ERROR: No existe ninguna cuenta con ese email. REGISTRESE");
 						}else JOptionPane.showMessageDialog(null, "ERROR: Rellene todos los datos");

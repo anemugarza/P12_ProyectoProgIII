@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -38,7 +39,6 @@ public class VentanaProducto extends JFrame{
 	private JPanel pInfo;
 	private JPanel pbotonera;
 
-	
 	public VentanaProducto(Producto p)  {
 		inicializar(p);
 	}
@@ -68,17 +68,14 @@ public class VentanaProducto extends JFrame{
 		pCentral.add(pInfo, BorderLayout.SOUTH);
 		pbotonera.add(bañadirCESTA);
 		pbotonera.add(bañadirWL);
+		pbotonera.setBounds(100, 100, 30, 30);
 		
-		//setSize(700,600);
 		int anchoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
 		int altoP = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
 		this.setSize(anchoP, altoP);
 		this.setExtendedState(MAXIMIZED_BOTH);
-		
 		setLocationRelativeTo(null);
 		setTitle("PRODUCTO: " + p.getNomP());
-		
-		pbotonera.setBounds(100, 100, 30, 30);
 		
 		this.add(bvolver, BorderLayout.NORTH);
 		this.add(pCentral, BorderLayout.CENTER);

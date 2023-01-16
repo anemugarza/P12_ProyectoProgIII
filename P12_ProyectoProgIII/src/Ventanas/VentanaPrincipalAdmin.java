@@ -48,10 +48,10 @@ public class VentanaPrincipalAdmin extends JFrame{
 		inicializar();
 	}
 	
+
 	/**
 	 * Inicializa la ventana principal con todos los productos disponibles en tienda
 	 */
-	
 	
 	private void inicializar() {
 		// TODO Auto-generated method stub
@@ -72,8 +72,6 @@ public class VentanaPrincipalAdmin extends JFrame{
 		this.add(seleccion, BorderLayout.NORTH);
 		this.add(scroll, BorderLayout.CENTER);
 		this.add(pbotonera, BorderLayout.SOUTH);
-		
-		
 		
 		//Caracteristicas de la ventana
 		setSize(700,600);
@@ -129,10 +127,12 @@ public class VentanaPrincipalAdmin extends JFrame{
 			}
 		});
 		
+
 		/**
 		 * Al pulsar este botón se nos dará la opción de elegir entre los tres tipos de estadisticas dispoibles, 
 		 * al elegir alguno de estos se abrirá la ventana de estadisticas con la opcion elegida.
 		 */
+
 		bestadistica.addActionListener(new ActionListener() {
 		
 			@Override

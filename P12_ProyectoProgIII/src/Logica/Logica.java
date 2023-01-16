@@ -10,6 +10,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 import Clases.Compra;
 import Clases.Comprador;
@@ -24,6 +27,9 @@ public class Logica implements Serializable{
 	private static Usuario usuario;
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	public static List<Producto> productosHistoricos = new ArrayList<>();
+	private static Logger logger = Logger.getLogger( "Logica" );
+
+	
 	public Logica(Usuario usuario) {
 		super();
 		Logica.usuario = usuario;
@@ -62,6 +68,7 @@ public class Logica implements Serializable{
 	public static Usuario usuarioCorrecto(String email, String contrasenya) {
 		if(BaseDeDatos.getUsuarios().get(email).getContrasenya().equals(contrasenya)){
 			Logica.usuario=BaseDeDatos.getUsuarios().get(email);
+			logger.log( Level.INFO, "Existe usuario en la BD");
 			return BaseDeDatos.getUsuarios().get(email);
 		}else return null;
 	}
@@ -82,11 +89,10 @@ public class Logica implements Serializable{
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nombreFic));
 			oos.writeObject(productosHistoricos);
-			System.out.println("guardar");
+			logger.log( Level.INFO, "Productos guardados correctamente en: " + nombreFic );
 			oos.close();
 		}catch(IOException e){
-			System.out.println("ERROR EN ESCRITURA de fichero: " + nombreFic);
-			System.out.println(e);
+			logger.log( Level.INFO, "ERROR EN ESCRITURA de fichero: " + nombreFic + e);
 		}
 	}
 	
@@ -97,9 +103,9 @@ public class Logica implements Serializable{
 			List<Producto> cCargado = (ArrayList<Producto>) ois.readObject();
 			productosHistoricos=cCargado;
 			ois.close();
+			logger.log( Level.INFO, "Productos cargados correctamente desde: " + nombreFic );
 		} catch (IOException | ClassNotFoundException e) {
-			System.out.println("ERROR EN LA CARGA de fichero: " + nombreFic);
-			System.out.println(e);
+			logger.log( Level.INFO, "ERROR EN LA CARGA de fichero: " + nombreFic + e);
 		}
 	}
 
