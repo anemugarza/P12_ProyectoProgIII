@@ -37,11 +37,11 @@ public class VentanaModificarProd extends JFrame{
 	public VentanaModificarProd(Producto p)  {
 		inicializar(p);
 	}
+	
 	/**
 	 * Inicializa la ventana 
 	 * @param p: es el producto que queremos modificar
 	 */
-	
 	private void inicializar(Producto p) {
 		//Inicializamos elementos 
 		nombreProd= new JLabel("Nombre: " + p.getNomP());
@@ -84,11 +84,10 @@ public class VentanaModificarProd extends JFrame{
 				System.out.println("Cerrando");
 				System.exit(0);
 			}
-			
-			
 		});
+		
 		/**
-		 * para volver a la ventana anterior, est es, la ventana principal del administrador.
+		 * Para volver a la ventana anterior, es decir, la ventana principal del administrador.
 		 */
 		bvolver.addActionListener(new ActionListener() {
 			@Override
@@ -98,8 +97,8 @@ public class VentanaModificarProd extends JFrame{
 			}
 		});
 		
-		/*
-		 * para modificar el nombre, abriendo la ventana para ello.
+		/**
+		 * Para modificar el nombre, abriendo la ventana para ello.
 		 */
 		bNombre.addActionListener(new ActionListener() {
 			@Override
@@ -107,8 +106,9 @@ public class VentanaModificarProd extends JFrame{
 				VentanaCambioNombre vn= new VentanaCambioNombre(p); 
 			}
 		});
+		
 		/**
-		 * para modificar el precio, abriendo la ventana para ello.
+		 * Para modificar el precio, abriendo la ventana para ello.
 		 */
 		bPrecio.addActionListener(new ActionListener() {
 			
@@ -119,7 +119,7 @@ public class VentanaModificarProd extends JFrame{
 		});
 		
 		/**
-		 * para modificar la foto, abriendo la ventana para ello.
+		 * Para modificar la foto, abriendo la ventana para ello.
 		 */
 		bFoto.addActionListener(new ActionListener() {
 					

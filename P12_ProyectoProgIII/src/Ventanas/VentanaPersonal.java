@@ -56,8 +56,10 @@ public class VentanaPersonal extends JFrame {
 	
 	//Genera un comprador
 	Comprador c1 = (Comprador) Logica.getUsuario();
+	
 	//Crea un vector con las cabeceras  del panel de productos
 	Vector <String> cabecera = new Vector <String> (Arrays.asList("NOMBRE","CÓDIDO","TIPO PRODUCTO", "PRECIO", "CANTIDAD"));
+	
 	//Se crea la tabla de productos
 	private DefaultTableModel mProductos = new DefaultTableModel(new Vector<Vector<Object>>(), cabecera);
 	private JTable tproductos;
@@ -65,10 +67,10 @@ public class VentanaPersonal extends JFrame {
 	public VentanaPersonal()  {
 		inicializar();
 	}
+	
 	/**
 	 * Inicializa la ventana personal mostrando la wishlist por defecto.
 	 */
-
 	private void inicializar() {
 		// TODO Auto-generated method stub
 		tipolista = false;
@@ -81,7 +83,6 @@ public class VentanaPersonal extends JFrame {
 		pbotonera = new JPanel();
 		tproductos = new JTable(mProductos);
 	
-		
 		actualizarLista(1);
 		totalPrecio = new JLabel("PRECIO TOTAL: " + String.format("%.2f", actualizarPrecio(c1.getWl()))+ "€");
 		tproductos.setModel(mProductos);
@@ -116,8 +117,9 @@ public class VentanaPersonal extends JFrame {
 				System.exit(0);
 			}
 		});
+		
 		/**
-		 * para volver a la página anterior, esto es , la ventana principal.
+		 * Para volver a la página anterior, esto es , la ventana principal.
 		 */
 		bvolver.addActionListener(new ActionListener() {
 			@Override
@@ -126,8 +128,9 @@ public class VentanaPersonal extends JFrame {
 				dispose();	
 			}
 		});
+		
 		/**
-		 * para que la ventana muestre los productos en cesta y el precio total de esta.
+		 * Para que la ventana muestre los productos en cesta y el precio total de esta.
 		 */
 		bcesta.addActionListener(new ActionListener() {
 
@@ -140,10 +143,10 @@ public class VentanaPersonal extends JFrame {
 				tipolista = true;
 			}
 		});
-		/**
-		 * para que la ventana muestre los productos de la wishlist y el precio total de esta.
-		 */
 		
+		/**
+		 * Para que la ventana muestre los productos de la wishlist y el precio total de esta.
+		 */
 		bwl.addActionListener(new ActionListener() {
 
 			@Override
@@ -155,14 +158,13 @@ public class VentanaPersonal extends JFrame {
 				tipolista = false;
 			}
 		});
+		
 		/**
 		 * Botón para relizar la compra de los productos en cesta.
 		 * La compra será registrada en la base de datos y la cesta volverá a estar 
 		 * vacía y el precio total a cero.
 		 * El botón falla si en la cesta no hay ningun producto.
 		 */
-		
-		
 		bcompra.addActionListener(new ActionListener() {
 
 			@Override
@@ -185,7 +187,6 @@ public class VentanaPersonal extends JFrame {
 		 * Se pueden borrar los productos tanto de la wishlist como de la cesta. Solo hay que poner el ratón encima del 
 		 * producto que queremos borrar y darle al ctrl + supr. Se actualiza tanto la lista en ventanta como de la base de datos.
 		 */
-		
 		KeyListener kl = new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -219,11 +220,11 @@ public class VentanaPersonal extends JFrame {
 			}
 		};
 		tproductos.addKeyListener( kl );
+		
 		/**
 		 * Renderer con el que si clickamos un producto marcará de verde los que tengan un precion menor o igual a este.
 		 * Asimismo, marcará de rojo los que tengan el coste superior.
 		 */
-
 		tproductos.addMouseListener( new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -258,6 +259,7 @@ public class VentanaPersonal extends JFrame {
 		});
 			
 	}
+	
 	/**
 	 * Actualiza la lista de productos
 	 * @param type: indica que lista queremos que se cargue. Valor 0 para cargar la cesta y en cualquier otro 
@@ -296,12 +298,12 @@ public class VentanaPersonal extends JFrame {
 		}
 		tproductos.setModel(mProductos);
 	}
+	
 	/**
-	 * actualiza el precio total de las listas
+	 * Actualiza el precio total de las listas
 	 * @param lista: es la lista de prouctos del que hay que obtener un precio total
 	 * @return devuelve lo que habría que pagar para hacerse con todos los articulos de la lista en pantalla.
 	 */
-	
 	public double actualizarPrecio(List<Producto> lista) {
 		double precioT = 0.0;
 		DecimalFormat df = new DecimalFormat("#.00");
@@ -310,6 +312,4 @@ public class VentanaPersonal extends JFrame {
 		}
 		return precioT;
 	}
-	
-	
 }

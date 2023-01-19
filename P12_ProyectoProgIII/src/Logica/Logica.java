@@ -59,19 +59,19 @@ public class Logica implements Serializable{
 	public String toString() {
 		return "Logica [usuario=" + usuario + "]";
 	}
+	
 	/**
-	 * comprueba que un usuario existe en la base de datps
+	 * Comprueba que un usuario existe en la base de datps
 	 * @param email la direccion de correo que buscaremos en la base de datos
 	 * @return true si la direccion ya existia, false en caso contrario
 	 */
-	
 	public static boolean existeUsuario(String email) {
 		if(BaseDeDatos.getUsuarios().containsKey(email)) return true;
 		else return false;
 	}
 	
 	/**
-	 * para comprobar que la direccion de correo y la contraseña coinciden
+	 * Para comprobar que la direccion de correo y la contraseña coinciden
 	 * @param email la direccion de correo del usuario
 	 * @param contrasenya la contraseña con la que se debería de permitir el acceso a dicha direccion de correo
 	 * @return true si los dos parametros coinciden, false en caso contrario
@@ -83,18 +83,19 @@ public class Logica implements Serializable{
 			return BaseDeDatos.getUsuarios().get(email);
 		}else return null;
 	}
+	
 	/**
-	 * comprueba si el usuario se trata de un comprador
+	 * Comprueba si el usuario se trata de un comprador
 	 * @param email la direccion de correo del usuario
 	 * @return true si es un comprador, false en caso de ser administrador
 	 */
 	public static boolean UsuarioComprador(String email) {
 		if(BaseDeDatos.getUsuarios().get(email) instanceof Comprador ) return true;
 		else return false;
-
 	}
+	
 	/**
-	 * crea un nuevo usuario 
+	 * Crea un nuevo usuario 
 	 * @param nombre nombre del usuario
 	 * @param email la direccion de correo del usuario
 	 * @param contrasenya codigo con el que el usuario accede a su cuenta personal
@@ -104,11 +105,11 @@ public class Logica implements Serializable{
 		Comprador c1= new Comprador(nombre, email,contrasenya, 0); 
 		BaseDeDatos.getUsuarios().put(c1.getEmail(),c1);
 	}
+	
 	/**
-	 * Guarda los productos en ficheros
+	 * Guarda los productos en un fichero serializado
 	 * @param nombreFic nombre fichero en el que deseamos guardar los productos
 	 */
-	
 	public static void guardarProductos(String nombreFic) {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nombreFic));
@@ -119,11 +120,11 @@ public class Logica implements Serializable{
 			logger.log( Level.INFO, "ERROR EN ESCRITURA de fichero: " + nombreFic + e);
 		}
 	}
+	
 	/**
-	 * Carga los productos desde el fichero
+	 * Carga los productos desde un fichero serializado
 	 * @param nombreFic nombre del fichero del que deseamos cargar los productos
 	 */
-	
 	public static void cargarProductos(String nombreFic) {
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nombreFic));
@@ -136,8 +137,9 @@ public class Logica implements Serializable{
 			logger.log( Level.INFO, "ERROR EN LA CARGA de fichero: " + nombreFic + e);
 		}
 	}
+	
 	/**
-	 * obtiene el proucto con menor precio 
+	 * Obtiene el proucto con menor precio 
 	 * @param lProductos la lista de productos en la que tendra que buscar el que menos valga
 	 * @return el precio del producto de menor costo
 	 */
@@ -150,15 +152,14 @@ public class Logica implements Serializable{
 		}
 		return menor;
 	}
+	
 	/**
-	 * funcion recursiva en la que obtendremos una lista con productos que podremos comprar con un limite de dinero.
+	 * Funcion recursiva en la que obtendremos una lista con productos que podremos comprar con un limite de dinero.
 	 * @param saldo el limite de dinero que ponemos para las diferentes opciones de compra
 	 * @param lProductos lista de todos los productos
 	 * @param lPuedoComprar  lista en la que se guardaran los que se pueden comprar 
 	 * @param saldos lista de diferentes saldos
 	 */
-	
-	
 	public static void quePuedoComprar(double saldo, ArrayList<Producto> lProductos, ArrayList<ArrayList<Producto>> lPuedoComprar, ArrayList<Double> saldos){
 		if(saldo==0 || saldo < Logica.getMenorPrecio(Logica.productosHistoricos)) {
 			lPuedoComprar.add(lProductos);
@@ -174,13 +175,13 @@ public class Logica implements Serializable{
 			}
 		}
 	}
+	
 	/**
-	 * para obtener el producto más vendido entre dos fechas
+	 * Obtiene el producto más vendido entre las fechas indicadas
 	 * @param fecha1 la fecha que indica el principio del periodo de tiempo en el que buscamos el producto
 	 * @param fecha2 la fecha que indica el final del periodo de tiempo en el que buscamos el producto
 	 * @return el producto mas vendido entre las fechas indicadas.
 	 */
-	
 	public static Producto productoMasVendido(long fecha1, long fecha2) {
 		HashMap<Integer,Compra> comprasEntreFechas = BaseDeDatos.getCompras(1, fecha1, fecha2);
 		if(comprasEntreFechas.isEmpty()) {
@@ -198,6 +199,11 @@ public class Logica implements Serializable{
 		}
 	}
 
+	/**
+	 * Función recursiva para contar cuántas veces aparece un producto en una lista
+	 * @param prs un ArrayList de productos
+	 * @param contador un mapa asociando un producto con la cantidad
+	 */
 	public static void recursivaContador(ArrayList<Producto> prs, HashMap<Producto, Integer> contador) {
 		if(prs.size()>0) {
 			for(Producto p: prs) {
@@ -209,15 +215,13 @@ public class Logica implements Serializable{
 			}
 		}
 	}
+	
 	/**
 	 * Obtiene el gasto medio de compras realizadas en un mes 
 	 * @param anyo  el año del que queremos obtener dicho dato
 	 * @param mes el mes  del que queremos obtener dicho dato
 	 * @return la media de todos los gastos de nuestros clientes entre el numero de compras
 	 */
-	
-	
-	
 	public static double gastoMedio(String anyo, String mes) {
 		long fecha1 = parsear(anyo, mes, "01");
 		long fecha2 = parsear(anyo, mes, "31");
@@ -234,8 +238,9 @@ public class Logica implements Serializable{
 			return media;
 		}
 	}
+	
 	/**
-	 * para parsear el año, mes y dia indicado  a un formato especifico de fecha
+	 * Para parsear el año, mes y dia indicado a un formato especifico de fecha
 	 * @param anyo  
 	 * @param mes 
 	 * @param dia 
@@ -251,14 +256,14 @@ public class Logica implements Serializable{
 		}
 		return 0;
 	}
+	
 	/**
-	 * obtiene el numero de veces que se ha vendido un producto en un mes
+	 * Obtiene el numero de veces que se ha vendido un producto en un mes
 	 * @param anyo  el año  del que queremos obtener dicho dato
 	 * @param mes el mes  del que queremos obtener dicho dato
 	 * @param prod el producto del cual queremos obtener los datos
 	 * @return la cantidad de productos vendidos
 	 */
-	
 	public static int cantProdEnUnMes(String anyo, String mes, String prod) {
 		long fecha1 = parsear(anyo, mes, "01");
 		long fecha2 = parsear(anyo, mes, "31");

@@ -46,11 +46,11 @@ public class VentanaProducto extends JFrame{
 	public VentanaProducto(Producto p)  {
 		inicializar(p);
 	}
+	
 	/**
 	 * Inicializa la ventana producto
 	 * @param p es el producto que utilizamos para inicializarlo
 	 */
-	
 	private void inicializar(Producto p) {
 		nombreProd= new JLabel("Nombre: " + p.getNomP());
 		precioProd= new JLabel("Precio: " + p.getPrecio());
@@ -94,7 +94,6 @@ public class VentanaProducto extends JFrame{
 		});
 		
 		//Botón para volver a la ventana previa, esto es, a la principal
-		
 		bvolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -136,17 +135,17 @@ public class VentanaProducto extends JFrame{
 		}
 		});
 	}
-	
-	public String  talla(){
+	/**
+	 * Método que da a escoger la talla de la prenda que queremos añadir a la cesta, solo si esta es de la clase Ropa
+	 */
+	public String talla(){
 			ImageIcon icono = new ImageIcon("");
-			String op = (String) JOptionPane.showInputDialog(null, "SELECCIONE SU TALLA",
-	                "OPCIONES DE ESTADÍSTICAS", JOptionPane.QUESTION_MESSAGE,
+			String op = (String) JOptionPane.showInputDialog(null, "SELECCIONE SU TALLA: ",
+	                "SELECCIÓN DE TALLA", JOptionPane.QUESTION_MESSAGE,
 	                icono, new Object[] { "XS","S", "M","L", "XL" },
 	                "M");
 			return(op);
-			
-			
-		}
+	}
 	
 	private static class JLabelAjustado extends JLabel {
 		/**
@@ -175,7 +174,6 @@ public class VentanaProducto extends JFrame{
 				this.tamY = imagen.getIconHeight();
 			}
 		}
-		
 		
 		/**
 		 * se encarga del re-pintado o re-dibujado de la interfaz en diferentes situaciones

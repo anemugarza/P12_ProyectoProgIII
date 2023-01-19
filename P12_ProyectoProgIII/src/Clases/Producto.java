@@ -10,7 +10,6 @@ public class Producto implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-
 	int codigoP;
 	static int cont=1;
 	String nomP;
@@ -67,14 +66,7 @@ public class Producto implements Serializable{
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-
 	
-	
-	@Override
-	public String toString() {
-		return "Producto [codigoP=" + codigoP + ", nomP=" + nomP + ", precio=" + precio + "]";
-	}
-
 	public String getFoto() {
 		return foto;
 	}
@@ -82,6 +74,9 @@ public class Producto implements Serializable{
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Producto [codigoP=" + codigoP + ", nomP=" + nomP + ", precio=" + precio + "]";
+	}
 }

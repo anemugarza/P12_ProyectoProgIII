@@ -16,6 +16,7 @@ public class VentanaLoading extends JFrame{
 	private JPanel pTitulo,pCentro;
 	private JLabel lblTitulo;
 	private JProgressBar pb;
+	
 	/**
 	 * Genera la ventana loading
 	 * @param va es la JFrame creada a base de la ventanaLogin
@@ -38,11 +39,11 @@ public class VentanaLoading extends JFrame{
 		pb.setValue(0);
 		pCentro.add(pb);
 		Runnable r = new Runnable() {
-		/**
-		 * Este metodo  constituye el cuerpo del hilo que necesitamos 
-		 * 		para que la progressbar funcione, en ejecución.
-		 */
-
+		
+			/**
+			 * Este metodo constituye el cuerpo del hilo que necesitamos 
+			 * para que la progressbar funcione, en ejecución.
+			 */
 			@Override
 			public void run() {
 				for(int i=0;i<100;i++) {
@@ -60,6 +61,5 @@ public class VentanaLoading extends JFrame{
 		};
 		Thread t =  new Thread(r);
 		t.start();
-	}
-	
+	}	
 }

@@ -14,6 +14,7 @@ public class LogicaTest {
 	@Before
 	public void setUp() throws Exception {
 		BaseDeDatos.abrirConexion("MiBD.db", false);
+		Logica.cargarProductos("Productos.dat");
 	}
 
 	@After

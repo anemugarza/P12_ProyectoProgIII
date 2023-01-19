@@ -44,12 +44,12 @@ public class VentanaPrincipalAdmin extends JFrame{
 	private static JPanel pCentral;
 	private JPanel pbotonera;
 	private JScrollPane scroll;
+	
 	//Genera la ventana
 	public VentanaPrincipalAdmin()  {
 		inicializar();
 	}
 	
-
 	//Inicializa la ventana principal con todos los productos disponibles en tienda
 	private void inicializar() {
 		// TODO Auto-generated method stub
@@ -89,7 +89,6 @@ public class VentanaPrincipalAdmin extends JFrame{
 		 *  Seleccionado alguna de las tres opciones para filtrar los productos, la ventana se volverá a 
 		 *  cargar solo con productos de dicha categoria.
 		 */
-		
 		seleccion.addActionListener(new ActionListener() {
 		
 			@Override
@@ -130,7 +129,6 @@ public class VentanaPrincipalAdmin extends JFrame{
 		 * Al pulsar este botón se nos dará la opción de elegir entre los tres tipos de estadisticas dispoibles, 
 		 * al elegir alguno de estos se abrirá la ventana de estadisticas con la opcion elegida.
 		 */
-
 		bestadistica.addActionListener(new ActionListener() {
 		
 			@Override
@@ -151,10 +149,10 @@ public class VentanaPrincipalAdmin extends JFrame{
 				} 
 			}
 		});
+		
 		/**
 		 * Botón para abrir la ventana de añadir productos
 		 */
-		
 		banyadirProd.addActionListener(new ActionListener() {
 			
 			@Override
@@ -165,6 +163,7 @@ public class VentanaPrincipalAdmin extends JFrame{
 		});
 		
 	}
+	
 	/**
 	 * Crea una JPanel para un producto 
 	 * @param p es el producto con el que se creará la JPanel
@@ -172,7 +171,6 @@ public class VentanaPrincipalAdmin extends JFrame{
 	 * Clickando encima de este una vez y pulsando la tecla control se eliminará el producto seleccionado
 	 * tanto de productos historicos como de la ventana en sí.
 	 */
-	
 	public static void crearVentana(Producto p) {
 		JPanel pProducto = new JPanel();
 		JPanel pfoto = new JPanel();

@@ -70,7 +70,7 @@ public class Comprador extends Usuario {
 	public void anyadirWL(Producto p) {
 		wl.add(p);
 	}
-	//para añadir un producto a la wish list
+	//para añadir un producto a la cesta
 	public void anyadirCesta(Producto p) {
 		cesta.add(p);
 	}

@@ -129,15 +129,15 @@ public class VentanaLogIn extends JFrame{
 					getContentPane().setLayout(new FlowLayout());
 				}
 			});
+			
 			/**
-			 * para entrar a la pagina web con la direccion de correo indicada y su correspondiente contraseña
+			 * Para entrar a la pagina web con la direccion de correo indicada y su correspondiente contraseña
 			 * para ello comprobará que se cumplan ciertas condiciones; como que tanto el email como la contraseña no estén vacias, 
 			 * que el correo indicado exista en la base de datos y que la contraseñan sea la correspondiente al email. 
 			 * En caso de no cumplir alguna nos devolverá error.
 			 * Una vez cumplidas estas condiciones, se comprobará si el coreo pertenece a un comprador o administrador, y tras abrir 
 			 * la ventana loading se abrirá la ventana principal acorde con el tipo de usuario.
 			 */
-			
 			entrar.addActionListener(new ActionListener() {
 				//si es admin entre a la ventana del admin
 				@Override
@@ -162,13 +162,13 @@ public class VentanaLogIn extends JFrame{
 					txtcontrasenya.setText("");
 				}
 			});
+			
 			/**
 			 * Guarda los datos de registro ( email y contraseña ) en la base de datos.
 			 * No se podrán guardar los datos si la dirección de correo ha sido ya registrada.
 			 * Si no escribimos nada donde pide la dirección de  correo o la contraseña para acceder a ella no se podrán guardar los datos.
 			 * La dirección de correo tendrá que tener cierto fomato, sino tampoco se podrá guardar.
 			 */
-			
 			guardarDatos.addActionListener(new ActionListener() {
 
 				@Override
@@ -202,5 +202,4 @@ public class VentanaLogIn extends JFrame{
 			});
 			setVisible(true);
 		}
-		
 }

@@ -98,6 +98,7 @@ public class VentanaAnyadirP extends JFrame{
 				dispose();
 			}
 		});
+		
 		// Para cancelar el proceso de añadir un nuevo producto
 		bcancelar.addActionListener(new ActionListener() {
 			@Override
@@ -105,6 +106,7 @@ public class VentanaAnyadirP extends JFrame{
 				dispose();	
 			}
 		});
+		
 		/**
 		 * Para guardar los datos del nuevo productos en la base de datos.
 		 * En caso de no haber rellenado todos los campos no se podrán guardar los datos.

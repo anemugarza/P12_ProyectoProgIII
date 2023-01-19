@@ -1,14 +1,10 @@
 package Clases;
-
-import java.util.HashMap;
-import java.util.Map;
 /**
  * Clase para la gestión de usuarios administradores
  */
 public class Administrador extends Usuario {
 	int salario;
 	
-
 	/**
 	 * 
 	 * @param nomUsuario mombre del usuario administrador

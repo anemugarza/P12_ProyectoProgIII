@@ -60,7 +60,5 @@ public abstract class Usuario {
 	public String toString() {
 		return "Usuario [codigoUsuario=" + codigoUsuario + ", nomUsuario=" + nomUsuario + ", email=" + email
 				+ ", contrasenya=" + contrasenya + "]";
-	}
-	
-	
+	}	
 }

@@ -112,7 +112,6 @@ public class VentanaEstadistica extends JFrame{
 		pCentral.setLayout(new GridLayout(2,1));
 		pCentral.add(pNorte);
 		pCentral.add( pResultado, BorderLayout.CENTER );
-		
 		this.add(pCentral, BorderLayout.CENTER);
 		
 		setSize(650,300);
@@ -126,6 +125,7 @@ public class VentanaEstadistica extends JFrame{
 				System.exit(0);
 			}
 		});
+		
 		//Para retroceder a la página principal
 		bvolver.addActionListener(new ActionListener() {
 			@Override
@@ -161,6 +161,7 @@ public class VentanaEstadistica extends JFrame{
 				}
 			}
 		});
+		
 		//Para que muestre por pantalla otra estadistica del tipo que hayamos escogido nosotros en la OptionPane.
 		bnuevaE.addActionListener(new ActionListener() {
 			@Override

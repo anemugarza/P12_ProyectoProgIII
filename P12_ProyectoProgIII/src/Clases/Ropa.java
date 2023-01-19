@@ -43,6 +43,4 @@ public class Ropa extends Producto{
 	public String toString() {
 		return "Ropa [descripcion=" + descripcion + ", talla=" + talla + "precio= " + precio +" € ]";
 	}
-	
-	
 }

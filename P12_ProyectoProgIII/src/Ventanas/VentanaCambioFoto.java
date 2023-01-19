@@ -32,7 +32,6 @@ public class VentanaCambioFoto extends JFrame implements VentanaCambio{
 		inicializar(p);
 	}
 	
-	
 	public void inicializar(Producto p) {
 		//Inicializamos elementos 
 		fotoN= new JLabel("Introduzca el nombre del archivo de la nueva foto: ");
@@ -72,7 +71,7 @@ public class VentanaCambioFoto extends JFrame implements VentanaCambio{
 		});
 		
 		//Para registrar el cambio en el fichero de productos.
-		//También retrocede a la página anterior.Esto es, la ventana para modificar productos.
+		//También retrocede a la página anterior, es decir, la ventana para modificar productos.
 		bguardarDatos.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

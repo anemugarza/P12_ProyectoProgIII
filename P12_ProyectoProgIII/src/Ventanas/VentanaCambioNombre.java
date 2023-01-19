@@ -72,6 +72,7 @@ public class VentanaCambioNombre extends JFrame implements VentanaCambio{
 					dispose();
 				}
 			});
+			
 			//Para cancelar la acción de cambio de nombre
 			bcancelar.addActionListener(new ActionListener() {
 				@Override
@@ -81,7 +82,7 @@ public class VentanaCambioNombre extends JFrame implements VentanaCambio{
 			});
 			
 			//Para registrar el cambio en el fichero de productos.
-			//También retrocede a la página anterior.Esto es, la ventana para modificar productos.
+			//También retrocede a la página anterior, es decir, la ventana para modificar productos.
 			bguardarDatos.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -92,7 +93,5 @@ public class VentanaCambioNombre extends JFrame implements VentanaCambio{
 					dispose();	
 				}
 			});
-	
 		}
-		
 }
