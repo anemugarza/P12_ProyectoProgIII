@@ -13,7 +13,8 @@ import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 public class VentanaInicial extends JFrame{
 
 	/**
-	 * 
+	 * Ventana en la que  además de abrir la conexión con la base de datos se nos muestra 
+	 * un video como entrada a la página web.  Una vez terminado el video, se abrirá la ventana login. 
 	 */
 	private static final long serialVersionUID = 1L;
 	EmbeddedMediaPlayerComponent comp;
@@ -47,7 +48,10 @@ public class VentanaInicial extends JFrame{
 				// TODO Auto-generated method stub
 				
 			}
-			
+			/**
+			 * En caso de no querer esperar a que el video se termine podremos pulsar la barra de espacio.
+			 * @param e el evento de teclado.
+			 */
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub

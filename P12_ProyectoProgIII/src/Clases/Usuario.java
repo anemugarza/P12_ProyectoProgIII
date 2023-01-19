@@ -1,12 +1,21 @@
 package Clases;
-
+/**
+ * Clase para la gestión de usuarios de la tienda.
+ *
+ */
 public abstract class Usuario {
 	int codigoUsuario =0;
 	String nomUsuario;
 	String email;
 	String contrasenya;
 	int admin;
-	
+	/**
+	 * 
+	 * @param nomUsuario nombre del usuario
+	 * @param email direccion de correo del usuario
+	 * @param contrasenya codigo con el que el usuario accede a su cuenta
+	 * @param admin parametro con el que indicamos de que tipo de usuario se trata, de comprador(0) o administrador(1).
+	 */
 	public Usuario(String nomUsuario, String email, String contrasenya, int admin) {
 		super();
 		this.nomUsuario = nomUsuario;

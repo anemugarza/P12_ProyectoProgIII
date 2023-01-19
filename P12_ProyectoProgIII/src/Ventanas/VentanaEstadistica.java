@@ -28,9 +28,7 @@ import Logica.Logica;
 
 
 public class VentanaEstadistica extends JFrame{
-	/**
-	 * 
-	 */
+	//Componentes de la ventana
 	private static final long serialVersionUID = 1L;
 	private JButton bvolver;
 	private JButton bnuevaE;
@@ -50,11 +48,16 @@ public class VentanaEstadistica extends JFrame{
 	private JComboBox<String> jcbProd;
 	DecimalFormat df = new DecimalFormat("#.00");
 
-                               
+    //Inicio de ventana
 	public VentanaEstadistica(String op) throws ParseException  {
 		inicializar(op);
 	}
-
+	 /**
+     * Para inicializar la ventana                   
+     * @param op parametro con el que indicaremos que tipo de estadística 
+     * queremos que se nos muestre por pantalla.
+     * @throws ParseException señala que se ha producido un error inesperado durante el análisis.
+     */
 	private void inicializar(String op) throws ParseException {
 		// Atributos generales
 		bvolver = new JButton("VOLVER");
@@ -92,6 +95,7 @@ public class VentanaEstadistica extends JFrame{
 			for(Producto p : Logica.productosHistoricos) jcbProd.addItem(p.getNomP());
 			break;
 		}
+		//Se añaden los componentes a los paneles
 		this.add(bvolver, BorderLayout.NORTH);
 		this.add(bnuevaE, BorderLayout.SOUTH);
 		pfechas.add(atr1);
@@ -122,7 +126,7 @@ public class VentanaEstadistica extends JFrame{
 				System.exit(0);
 			}
 		});
-		
+		//Para retroceder a la página principal
 		bvolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -131,6 +135,9 @@ public class VentanaEstadistica extends JFrame{
 			}
 		});
 		
+		//Para mostrar un tipo de  estadistica de entre los tres que hay
+		//(producto más vendido entre dos fechas, gasto medio de clientes en un mes y la cantidad vendida de un prod en un mes) 
+		//según el op indicado en el metodo inicializar().
 		bcrearEstadis.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -154,7 +161,7 @@ public class VentanaEstadistica extends JFrame{
 				}
 			}
 		});
-		
+		//Para que muestre por pantalla otra estadistica del tipo que hayamos escogido nosotros en la OptionPane.
 		bnuevaE.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

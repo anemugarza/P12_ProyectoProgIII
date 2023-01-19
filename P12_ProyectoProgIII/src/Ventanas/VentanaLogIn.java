@@ -113,7 +113,7 @@ public class VentanaLogIn extends JFrame{
 					System.exit(0);
 				}
 			});
-			
+			//Para registrarse con los datos indicados.
 			registrarse.addActionListener(new ActionListener() {
 
 				@Override
@@ -129,6 +129,14 @@ public class VentanaLogIn extends JFrame{
 					getContentPane().setLayout(new FlowLayout());
 				}
 			});
+			/**
+			 * para entrar a la pagina web con la direccion de correo indicada y su correspondiente contraseña
+			 * para ello comprobará que se cumplan ciertas condiciones; como que tanto el email como la contraseña no estén vacias, 
+			 * que el correo indicado exista en la base de datos y que la contraseñan sea la correspondiente al email. 
+			 * En caso de no cumplir alguna nos devolverá error.
+			 * Una vez cumplidas estas condiciones, se comprobará si el coreo pertenece a un comprador o administrador, y tras abrir 
+			 * la ventana loading se abrirá la ventana principal acorde con el tipo de usuario.
+			 */
 			
 			entrar.addActionListener(new ActionListener() {
 				//si es admin entre a la ventana del admin

@@ -20,7 +20,7 @@ import Logica.Logica;
 public class VentanaCambioFoto extends JFrame implements VentanaCambio{
 	private static final long serialVersionUID = 1L;
 	
-	//Componentes de la ventanaCambioFoto
+	//Componentes de la ventana
 	private JLabel fotoN;
 	private JTextField txtfoto;
 	private JButton bcancelar;
@@ -71,8 +71,8 @@ public class VentanaCambioFoto extends JFrame implements VentanaCambio{
 			}
 		});
 		
-		//Para guardar los cambios realizados a la foto y abrir la ventana anterior, esto es, la ventana para modificar el producto en general.
-		
+		//Para registrar el cambio en el fichero de productos.
+		//También retrocede a la página anterior.Esto es, la ventana para modificar productos.
 		bguardarDatos.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

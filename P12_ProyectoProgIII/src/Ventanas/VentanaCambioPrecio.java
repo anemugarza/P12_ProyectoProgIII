@@ -21,7 +21,7 @@ public class VentanaCambioPrecio extends JFrame implements VentanaCambio{
 	
 	private static final long serialVersionUID = 1L;
 	
-	//Componentes del Log In
+	//Componentes de la ventana
 	private JLabel precioN;
 	private JTextField txtPrecio;
 	private JButton bcancelar;
@@ -62,14 +62,15 @@ public class VentanaCambioPrecio extends JFrame implements VentanaCambio{
 				dispose();
 			}
 		});
-		
+		//Para cancelar la acción de cambio de precio
 		bcancelar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();	
 			}
 		});
-		
+		//Para registrar el cambio en el fichero de productos.
+		//También retrocede a la página anterior.Esto es, la ventana para modificar productos.
 		bguardarDatos.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

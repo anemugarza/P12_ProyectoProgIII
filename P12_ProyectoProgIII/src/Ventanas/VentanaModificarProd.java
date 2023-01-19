@@ -87,7 +87,9 @@ public class VentanaModificarProd extends JFrame{
 			
 			
 		});
-		// Botón para volver a la ventana anterior, est es, la ventana principal del administrador.
+		/**
+		 * para volver a la ventana anterior, est es, la ventana principal del administrador.
+		 */
 		bvolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -96,14 +98,18 @@ public class VentanaModificarProd extends JFrame{
 			}
 		});
 		
-		//Botón para modificar el nombre, abriendo la ventana para ello.
+		/*
+		 * para modificar el nombre, abriendo la ventana para ello.
+		 */
 		bNombre.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VentanaCambioNombre vn= new VentanaCambioNombre(p); 
 			}
 		});
-		///Botón para modificar el precio, abriendo la ventana para ello.
+		/**
+		 * para modificar el precio, abriendo la ventana para ello.
+		 */
 		bPrecio.addActionListener(new ActionListener() {
 			
 			@Override
@@ -112,7 +118,9 @@ public class VentanaModificarProd extends JFrame{
 			}
 		});
 		
-		//Botón para modificar la foto, abriendo la ventana para ello.
+		/**
+		 * para modificar la foto, abriendo la ventana para ello.
+		 */
 		bFoto.addActionListener(new ActionListener() {
 					
 			@Override
@@ -150,6 +158,10 @@ public class VentanaModificarProd extends JFrame{
 				this.tamY = imagen.getIconHeight();
 			}
 		}
+		/**
+		 * se encarga del re-pintado o re-dibujado de la interfaz en diferentes situaciones
+		 */
+		 
 		protected void paintComponent(Graphics g) {
 			Graphics2D g2 = (Graphics2D) g;  // El Graphics realmente es Graphics2D
 			g2.setColor( Color.WHITE );

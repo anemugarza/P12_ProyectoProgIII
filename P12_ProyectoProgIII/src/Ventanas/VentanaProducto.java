@@ -27,7 +27,7 @@ import Logica.Logica;
 public class VentanaProducto extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
-	//Componentes del Log In
+	//Componentes de la ventana
 	private JLabel nombreProd;
 	private JLabel precioProd;
 	private ImageIcon foto;
@@ -158,7 +158,9 @@ public class VentanaProducto extends JFrame{
 		}
 		
 		
-		
+		/**
+		 * se encarga del re-pintado o re-dibujado de la interfaz en diferentes situaciones
+		 */
 		protected void paintComponent(Graphics g) {
 			Graphics2D g2 = (Graphics2D) g;  // El Graphics realmente es Graphics2D
 			g2.setColor( Color.WHITE );

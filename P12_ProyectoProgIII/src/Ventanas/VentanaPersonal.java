@@ -54,9 +54,11 @@ public class VentanaPersonal extends JFrame {
 	private boolean tipolista; //false es wl y true es cesta
 	
 	
-	//
+	//Genera un comprador
 	Comprador c1 = (Comprador) Logica.getUsuario();
+	//Crea un vector con las cabeceras  del panel de productos
 	Vector <String> cabecera = new Vector <String> (Arrays.asList("NOMBRE","CÓDIDO","TIPO PRODUCTO", "PRECIO", "CANTIDAD"));
+	//Se crea la tabla de productos
 	private DefaultTableModel mProductos = new DefaultTableModel(new Vector<Vector<Object>>(), cabecera);
 	private JTable tproductos;
 	
@@ -114,7 +116,9 @@ public class VentanaPersonal extends JFrame {
 				System.exit(0);
 			}
 		});
-		//Botón para volver a la página anterior, esto es , la ventana principal.
+		/**
+		 * para volver a la página anterior, esto es , la ventana principal.
+		 */
 		bvolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -122,7 +126,9 @@ public class VentanaPersonal extends JFrame {
 				dispose();	
 			}
 		});
-		//Botón para que la ventana muestre los productos en cesta y el precio total de esta.
+		/**
+		 * para que la ventana muestre los productos en cesta y el precio total de esta.
+		 */
 		bcesta.addActionListener(new ActionListener() {
 
 			@Override
@@ -134,7 +140,9 @@ public class VentanaPersonal extends JFrame {
 				tipolista = true;
 			}
 		});
-		//Botón para que la ventana muestre los productos de la wishlist y el precio total de esta.
+		/**
+		 * para que la ventana muestre los productos de la wishlist y el precio total de esta.
+		 */
 		
 		bwl.addActionListener(new ActionListener() {
 
@@ -211,6 +219,10 @@ public class VentanaPersonal extends JFrame {
 			}
 		};
 		tproductos.addKeyListener( kl );
+		/**
+		 * Renderer con el que si clickamos un producto marcará de verde los que tengan un precion menor o igual a este.
+		 * Asimismo, marcará de rojo los que tengan el coste superior.
+		 */
 
 		tproductos.addMouseListener( new MouseAdapter() {
 			@Override
@@ -230,7 +242,7 @@ public class VentanaPersonal extends JFrame {
 					    	String v2 =  (String) value;
 							v2 = v2.replace("€", "");
 					    	double valorv2 = Double.parseDouble(v2);
-					        if(valorv2 >= valorPrecio) {
+					        if(valorv2 > valorPrecio) {
 					            this.setBackground(Color.RED);
 					        } else {
 					            this.setBackground(Color.GREEN);

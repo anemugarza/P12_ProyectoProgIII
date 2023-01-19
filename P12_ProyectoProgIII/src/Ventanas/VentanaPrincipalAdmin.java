@@ -37,22 +37,20 @@ public class VentanaPrincipalAdmin extends JFrame{
 	*/
 	private static final long serialVersionUID = 1L;
 	
+	//Componentes de la ventana
 	private JComboBox<TipoProducto> seleccion;
 	private JButton banyadirProd;
 	private JButton bestadistica;
 	private static JPanel pCentral;
 	private JPanel pbotonera;
 	private JScrollPane scroll;
-
+	//Genera la ventana
 	public VentanaPrincipalAdmin()  {
 		inicializar();
 	}
 	
 
-	/**
-	 * Inicializa la ventana principal con todos los productos disponibles en tienda
-	 */
-	
+	//Inicializa la ventana principal con todos los productos disponibles en tienda
 	private void inicializar() {
 		// TODO Auto-generated method stub
 		seleccion = new JComboBox<>();
@@ -237,6 +235,9 @@ public class VentanaPrincipalAdmin extends JFrame{
 				this.tamY = imagen.getIconHeight();
 			}
 		}
+		/**
+		 * Se encarga del re-pintado o re-dibujado de la interfaz en diferentes situaciones
+		 */
 		protected void paintComponent(Graphics g) {
 			Graphics2D g2 = (Graphics2D) g;  // El Graphics realmente es Graphics2D
 			g2.setColor( Color.WHITE );

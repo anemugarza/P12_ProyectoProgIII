@@ -1,12 +1,17 @@
 package Clases;
-
+/**
+ * Clase para la gestión de productos que pertenecen al apartado de ropa
+ */
 public class Ropa extends Producto{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	String descripcion;
 	Talla talla;
+	/**
+	 * 
+	 * @param descripcion breve descripción de la prenda
+	 * @param talla la talla de la prenda
+	 */
 	
 	public Ropa(String nomP, double precio, String descripcion, Talla talla,String foto) {
 		super(nomP, precio, foto);

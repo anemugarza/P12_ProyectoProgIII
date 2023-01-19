@@ -43,6 +43,7 @@ public class VentanaPrincipal extends JFrame {
 	*/
 	private static final long serialVersionUID = 1L;
 	
+	//Componentes de la ventana
 	private JComboBox<TipoProducto> seleccion;
 	private JButton bpersonal;
 	private JButton brecursiva;
@@ -313,6 +314,9 @@ public class VentanaPrincipal extends JFrame {
 				this.tamY = imagen.getIconHeight();
 			}
 		}
+		/**
+		 * se encarga del re-pintado o re-dibujado de la interfaz en diferentes situaciones
+		 */
 		protected void paintComponent(Graphics g) {
 			Graphics2D g2 = (Graphics2D) g;  // El Graphics realmente es Graphics2D
 			g2.setColor( Color.WHITE );

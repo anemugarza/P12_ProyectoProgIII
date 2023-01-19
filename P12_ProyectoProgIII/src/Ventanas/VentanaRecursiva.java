@@ -26,9 +26,8 @@ import Logica.BaseDeDatos;
 import Logica.Logica;
 
 public class VentanaRecursiva extends JFrame{
-	/**
-	 * 
-	 */
+	
+	// Componentes de la ventana 
 	private static final long serialVersionUID = 1L;
 	private JLabel info;
 	private JButton banterior;
@@ -46,7 +45,7 @@ public class VentanaRecursiva extends JFrame{
 	Comprador c1 = (Comprador) Logica.getUsuario();
 
 	/**
-	 * 
+	 * Constructor de la ventana
 	 * @param saldo dinero del que dispone para las diferentes opciones de compra que se le ofrecen al comprador
 	 * @param lPuedoComprar lista de productos que se pueden comprar con el saldo disponible
 	 * @param saldos lista de diferentes saldos restantes

@@ -1,7 +1,9 @@
 package Clases;
 
 import java.io.Serializable;
-
+/**
+ * Clase para la gestión de los productos en tienda
+ */
 public class Producto implements Serializable{
 	/**
 	 * 
@@ -15,7 +17,12 @@ public class Producto implements Serializable{
 	double precio;
 	private String foto;
 	
-
+	/**
+	 * 
+	 * @param nomP nombre del producto
+	 * @param precio el precio al que se vende
+	 * @param foto una imagen del producto
+	 */
 	public Producto(String nomP, double precio, String foto) {
 		super();
 		this.codigoP = cont++;

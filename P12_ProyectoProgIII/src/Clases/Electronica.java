@@ -1,9 +1,10 @@
 package Clases;
 
+/**
+ * Clase para la gestión de productos electronicos
+ */
 public class Electronica extends Producto {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	String descripcion;
 
@@ -11,7 +12,7 @@ public class Electronica extends Producto {
 		super(nomP, precio, foto);
 		this.descripcion = descripcion;
 	}
-
+	
 	public Electronica(String nomP, double precio, String foto) {
 		super(nomP, precio, foto);
 	}

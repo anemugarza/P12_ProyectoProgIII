@@ -10,12 +10,16 @@ import javax.swing.JProgressBar;
 
 public class VentanaLoading extends JFrame{
 	/**
-	 * 
+	 * Ventana en la que se nos mostrará una progressbar indicando que la página web se esta cargando.
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel pTitulo,pCentro;
 	private JLabel lblTitulo;
 	private JProgressBar pb;
+	/**
+	 * Genera la ventana loading
+	 * @param va es la JFrame creada a base de la ventanaLogin
+	 */
 	public VentanaLoading(JFrame va) {
 		super();
 		setBounds(va.getX()+10,va.getY()+10,200, 100);
@@ -34,7 +38,11 @@ public class VentanaLoading extends JFrame{
 		pb.setValue(0);
 		pCentro.add(pb);
 		Runnable r = new Runnable() {
-			
+		/**
+		 * Este metodo  constituye el cuerpo del hilo que necesitamos 
+		 * 		para que la progressbar funcione, en ejecución.
+		 */
+
 			@Override
 			public void run() {
 				for(int i=0;i<100;i++) {

@@ -2,17 +2,19 @@ package Clases;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Clase para la gestión de usuarios administradores
+ */
 public class Administrador extends Usuario {
 	int salario;
-	Map<Long, Analisis> analisis = new HashMap<>();
+	
 
 	/**
 	 * 
-	 * @param nomUsuario 
-	 * @param email
-	 * @param contrasenya
-	 * @param salario
+	 * @param nomUsuario mombre del usuario administrador
+	 * @param email direccion de correo del usuario administrador
+	 * @param contrasenya codigo con el que el usuario accede a su cuenta
+	 * @param salario dinero que gana al mes como administrador
 	 */
 	public Administrador(String nomUsuario, String email, String contrasenya, int salario) {
 		super(nomUsuario, email, contrasenya, 1);
@@ -23,10 +25,7 @@ public class Administrador extends Usuario {
 		super(nomUsuario, email, contrasenya, 1);
 	}
 
-	/**
-	 * 
-	 * @return salario
-	 */
+	
 	public int getSalario() {
 		return salario;
 	}
@@ -35,17 +34,10 @@ public class Administrador extends Usuario {
 		this.salario = salario;
 	}
 
-	public Map<Long, Analisis> getAnalisis() {
-		return analisis;
-	}
-
-	public void setAnalisis(HashMap<Long, Analisis> analisis) {
-		this.analisis = analisis;
-	}
 
 	@Override
 	public String toString() {
-		return "Administrador [salario=" + salario + ", analisis=" + analisis + "]";
+		return "Administrador [salario=" + salario + "]";
 	}
 	
 	
