@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
@@ -20,7 +21,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import Clases.Comprador;
+import Clases.Electronica;
 import Clases.Producto;
+import Clases.Ropa;
+import Clases.TipoProducto;
 import Logica.BaseDeDatos;
 import Logica.Logica;
 
@@ -105,6 +109,9 @@ public class VentanaProducto extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				c1.anyadirCesta(p);
 				try {
+					if(p instanceof Ropa) {
+					talla();
+					}
 					BaseDeDatos.añadirProducto(c1.getCodigoUsuario(), p.getCodigoP(), 1);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -129,6 +136,18 @@ public class VentanaProducto extends JFrame{
 		}
 		});
 	}
+	
+	public String  talla(){
+			ImageIcon icono = new ImageIcon("");
+			String op = (String) JOptionPane.showInputDialog(null, "SELECCIONE SU TALLA",
+	                "OPCIONES DE ESTADÍSTICAS", JOptionPane.QUESTION_MESSAGE,
+	                icono, new Object[] { "XS","S", "M","L", "XL" },
+	                "M");
+			return(op);
+			
+			
+		}
+	
 	private static class JLabelAjustado extends JLabel {
 		/**
 		 * 
