@@ -77,14 +77,5 @@ public class BaseDeDatosTest {
 		assertNotEquals(0, BaseDeDatos.añadirCompra(1, System.currentTimeMillis(), 1));
 	}
 
-	@Test
-	public void testAñadirCompraP() {
-		
-	}
-
-	@Test
-	public void testGetCompras() {
-		
-	}
-
+	
 }
