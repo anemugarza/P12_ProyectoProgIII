@@ -41,22 +41,6 @@ public class BaseDeDatosTest {
 	}
 
 	@Test
-	public void testAñadirUsuario() {
-		/*int numUsu = BaseDeDatos.getUsuarios().keySet().size();
-		BaseDeDatos.añadirUsuario("prueba", "prueba@prueba.com", "prueba");
-		assertTrue(BaseDeDatos.getUsuarios().keySet().size() == numUsu+1);
-		*/
-	}
-
-	@Test
-	public void testAñadirAdmin() {
-		/*int numUsu = BaseDeDatos.getUsuarios().keySet().size();
-		BaseDeDatos.añadirAdmin("prueba", "prueba@prueba.com", "prueba");
-		assertTrue(BaseDeDatos.getUsuarios().keySet().size() == numUsu+1);
-		*/
-	}
-
-	@Test
 	public void testGetWLoCesta() {
 		assertTrue(BaseDeDatos.getWLoCesta(99, 0).size() == 0);
 		assertTrue(BaseDeDatos.getWLoCesta(99, 1).size() == 0);
